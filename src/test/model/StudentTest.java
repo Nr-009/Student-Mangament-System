@@ -285,4 +285,41 @@ public class StudentTest {
         //does not find it
         assertEquals(nicolas.getIndexOfClass("MATH302"), -1);
     }
+
+    @Test
+    public void testArrayForClasses() {
+        Student michael= new Student(9082, "Michael", "Jackson", "Beatit");
+        //TestForAnEmptyArray
+        Object[][] resulArray= michael.arrayGrades();
+        assertTrue( resulArray[0][0].equals("Class"));
+        assertTrue(resulArray[0][1].equals("Grade"));
+        assertTrue(resulArray[0][2].equals("Absences"));
+    }
+
+    @Test
+    public void testForClassesOtherCases() {
+        Student michael= new Student(9083, "Michael", "Jackson", "Beatit");
+        michael.addClass(phil220);
+        michael.setGradeForClass("PHIL220", 77);
+        //testForOneClass:
+        Object[][] resultArray= michael.arrayGrades();
+        int x = 90;
+        assertEquals("PHIL220", resultArray[1][0]);
+        assertEquals(77.0, resultArray[1][1]);
+        assertEquals(0, resultArray[1][2]);
+        assertEquals(resultArray.length, 2);
+        //Test for more than one class
+        michael.addClass(cpsc210);
+        michael.setGradeForClass("CPSC210", 34);
+        michael.incrementAbsecences("CPSC210");
+        michael.incrementAbsecences("CPSC210");
+        michael.incrementAbsecences("CPSC210");
+        Object[][] resultArray2= michael.arrayGrades();
+        assertEquals(resultArray2[2][0], "CPSC210");
+        assertEquals(resultArray2[2][1], 34.0);
+        assertEquals(resultArray2[2][2], 3);
+        assertEquals(resultArray2.length, 3);
+
+
+    }
 }

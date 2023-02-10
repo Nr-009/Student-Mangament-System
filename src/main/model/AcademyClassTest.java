@@ -22,10 +22,10 @@ public class AcademyClassTest {
         eulogio = new Teacher("Eulogio", "Garcia", 90, "fisica11");
         mickelsen = new Teacher("Mickelsen", "Ramirez", 100, "geometria8");
         math100 = new AcademyClass("MATH100", null, "2020W");
-        cpsc110 = new AcademyClass("CPSC110", mickelsen,"2021W");
+        cpsc110 = new AcademyClass("CPSC110", mickelsen, "2021W");
         cpsc210 = new AcademyClass("CPSC210", eulogio, "2022W");
         cpsc121 = new AcademyClass("CPSC121", null, "2021S");
-        nicolas = new Student(20,"Nicolas", "Rubiano", "conoseeuir");
+        nicolas = new Student(20, "Nicolas", "Rubiano", "conoseeuir");
         gyunay = new Student(22, "Gynay", "kadirov", "Athena");
         carlitos = new Student(23, "Carlos", "Garcia", "Pokemon");
 
@@ -44,18 +44,24 @@ public class AcademyClassTest {
 
     @Test
     public void testSetandGetAverageGrade() {
-        math100.setAverageGrade(100);
-        assertEquals(100, math100.getAverageGrade());
-        cpsc210.setAverageGrade(89);
-        assertEquals(89, cpsc210.getAverageGrade());
-        cpsc121.setAverageGrade(87);
-        cpsc121.setAverageGrade(-1);
-        assertEquals(87, cpsc121.getAverageGrade());
-        cpsc121.setAverageGrade(0);
-        assertEquals(0, cpsc121.getAverageGrade());
-        cpsc121.setAverageGrade(1);
-        assertEquals(1, cpsc121.getAverageGrade());
-
+        Student murcia = new Student(978782, "Sebastian", "Murica", "drugs");
+        Student garcia = new Student(27628, "Juan", "Garcia", "Futbol");
+        Student gabo2 = new Student(178178, "Gabriel", "Granados", "Millos");
+        //Zero students so the average grade should be zero
+        assertEquals(math100.getAverageGrade(), 0);
+        //One student so the average grade should be just his grade
+        gabo2.addClass(math100);
+        math100.addStudent(gabo2);
+        gabo2.setGradeForClass("MATH100", 89);
+        assertEquals(math100.getAverageGrade(), 89);
+        //Two or more student so the average grade should now be the average
+        garcia.addClass(math100);
+        math100.addStudent(garcia);
+        garcia.setGradeForClass("MATH100", 46);
+        murcia.addClass(math100);
+        math100.addStudent(murcia);
+        murcia.setGradeForClass("MATH100", 67);
+        assertEquals(math100.getAverageGrade(), 67);
     }
 
     @Test
@@ -104,7 +110,7 @@ public class AcademyClassTest {
         //null case
         assertFalse(math100.addStudent(null));
         //Add one student
-        Student ana = new Student(198250, "Ana", "Flavia","psycology");
+        Student ana = new Student(198250, "Ana", "Flavia", "psycology");
         Student clara = new Student(190190, "Clara", "Flavia", "comunism");
         Student dj = new Student(19080, "D", "j", "Peru");
         assertTrue(math100.addStudent(ana));
@@ -131,7 +137,7 @@ public class AcademyClassTest {
         assertFalse(math100.setGradeStudent(9909090, 90));
         assertEquals(math100.getGradeStudent(90909090), -1);
         //The student Exists but the grade is less than zero
-        assertFalse(math100.setGradeStudent(gyunay.getID(),-1));
+        assertFalse(math100.setGradeStudent(gyunay.getID(), -1));
         //The student exist and the grade is more equal to zero
         assertTrue(math100.setGradeStudent(gyunay.getID(), 0));
         assertEquals(math100.getGradeStudent(gyunay.getID()), 0);
@@ -177,7 +183,7 @@ public class AcademyClassTest {
 
     @Test
     public void testDeleteStudent() {
-        Student valentina = new Student(1898, "Valentina", "Ramirez","kokok");
+        Student valentina = new Student(1898, "Valentina", "Ramirez", "kokok");
         Student laura = new Student(192862, "Laura", "liliana", "hola");
         Student giorno = new Student(18178, "Giono", "Giovanna", "deusxmachina");
         //Requires clause
@@ -193,7 +199,7 @@ public class AcademyClassTest {
         //Safely deletes one correct student
         assertTrue(math100.deleteStudent(valentina.getID()));
         valentina.removeClass("MATH100");
-        assertEquals(math100.getNumOfStudents(),2);
+        assertEquals(math100.getNumOfStudents(), 2);
         assertFalse(valentina.hasClass("MATH100"));
         //Safely deletes another student
         assertTrue(math100.deleteStudent(giorno.getID()));
@@ -202,10 +208,45 @@ public class AcademyClassTest {
         assertFalse(giorno.hasClass("MATH100"));
     }
 
+    @Test
+    public void testArrayOfGradeslastwoCases() {
+        Student samir = new Student(28298921, "Samir", "Kush", "kokklao");
+        Student survi = new Student(28902836, "Survi", "I", "ksksl");
+        Object[][] testArray = new Object[3][3];
+        //array with one student
+        math100.addStudent(samir);
+        samir.addClass(math100);
+        samir.setGradeForClass("MATH100", 89);
+        testArray[1][0] = samir.getID();
+        testArray[1][1] = 89.0;
+        Object[][] resultArray2 = math100.gradesforClass();
+        assertEquals(testArray[1][0], resultArray2[1][0]);
+        assertEquals(2, resultArray2.length);
+        assertEquals(testArray[1][1], resultArray2[1][1]);
+        //array with more than one student
+        math100.addStudent(survi);
+        survi.addClass(math100);
+        survi.setGradeForClass("MATH100", 76);
+        testArray[2][0] = survi.getID();
+        testArray[2][1] = 76.0;
+        Object[][] resultArray3 = math100.gradesforClass();
+        assertEquals(testArray[2][0], resultArray3[2][0]);
+        assertEquals(3, resultArray3.length);
+        assertEquals(testArray[2][1], resultArray3[2][1]);
 
 
+    }
 
+    @Test
+    public void testforthefirsArrayFirstCase() {
+        //array with zero students
+        Object[][] testArray = new Object[3][3];
+        testArray[0][0] = "Students";
+        testArray[0][1] = "Grade";
+        Object[][] resultArray = math100.gradesforClass();
+        assertEquals(testArray[0][0], resultArray[0][0]);
+        assertEquals(testArray[0][1], resultArray[0][1]);
+        assertEquals(1, resultArray.length);
+    }
 
-
-    
 }

@@ -5,8 +5,7 @@ import java.util.List;
 
 public class AcademyClass {
     private String name;
-    private int averageGrade;
-    private Teacher  teacher;
+    private Teacher teacher;
     private List<Student> students = new ArrayList<>();
     private String sesion;
     private int numOfStudents;
@@ -18,23 +17,22 @@ public class AcademyClass {
         this.teacher = t;
         this.sesion = sesion;
     }
-    //Modifies: This
-    //Effects: changes the average grade to be given one if greater than 0 and less than 100 otherwise does not change
-
-    public void setAverageGrade(int x) {
-        if (x >= 0 && x <= 100) {
-            this.averageGrade = x;
-        }
-
-    }
 
     public String getName() {
         return name;
     }
 
-    public int getAverageGrade() {
-        return averageGrade;
 
+    //Effects: Produces the average grade of a class based on the students present
+    public double getAverageGrade() {
+        if (numOfStudents == 0) {
+            return 0;
+        }
+        int total = 0;
+        for (Student s : students) {
+            total = total + (int) s.gradeInClass(this.name);
+        }
+        return total / numOfStudents;
     }
 
 
@@ -45,7 +43,7 @@ public class AcademyClass {
             this.teacher = t;
             teacher.addClass(this);
             return true;
-        }  else {
+        } else {
             return false;
         }
 
@@ -57,7 +55,7 @@ public class AcademyClass {
 
     //Effects: Produces true if the class has a student with the given id, otherwise false
     public boolean hasStudent(int id) {
-        for (Student i: students) {
+        for (Student i : students) {
             if (i.getID() == id) {
                 return true;
             }
@@ -124,7 +122,7 @@ public class AcademyClass {
 
     //Effects: Gives the index of the student if found on the database otherwise produces -1
     public int getIndexStudent(int id) {
-        for (Student s: students) {
+        for (Student s : students) {
             if (s.getID() == id) {
                 return students.indexOf(s);
             }
@@ -146,6 +144,24 @@ public class AcademyClass {
             return false;
         }
 
+    }
+
+    public Object[][] gradesforClass() {
+        Object[][] myArray = new Object[numOfStudents + 1][2];
+        myArray[0][0] = "Students";
+        myArray[0][1] = "Grade";
+        int row = 1;
+        for (Student s: students) {
+            myArray[row][0] = s.getID();
+            row = row + 1;
+        }
+        row = 1;
+        for (Student s: students) {
+            myArray[row][1] = s.gradeInClass(this.name);
+            row = row + 1;
+        }
+
+        return myArray;
     }
 
 }

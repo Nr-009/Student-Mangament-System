@@ -86,6 +86,7 @@ public class Student {
             listOfClasses.add(s);
             listOfGrades.add(0);
             listOfAbscences.add(0);
+            numOfClasses++;
             return true;
         }
         return false;
@@ -190,6 +191,7 @@ public class Student {
             listOfAbscences.remove(index);
             listOfClasses.remove(index);
             listOfGrades.remove(index);
+            numOfClasses--;
             return true;
 
         }
@@ -198,7 +200,7 @@ public class Student {
     }
 
     public int getNumOfClasses() {
-        return listOfClasses.size();
+        return numOfClasses;
     }
 
     //Effects: if id is found produces true otherwise false
@@ -216,6 +218,34 @@ public class Student {
         return -1;
 
     }
+
+    //Effects: Produces the array with all the classes, grades and absences for a given student;
+    public Object[][] arrayGrades() {
+        Object[][] arrayOfGrades = new  Object[numOfClasses + 1][3];
+        arrayOfGrades[0][0] = "Class";
+        arrayOfGrades[0][1] = "Grade";
+        arrayOfGrades[0][2] = "Absences";
+        int row = 1;
+        for (AcademyClass a : listOfClasses) {
+            arrayOfGrades[row][0] = a.getName();
+            row = row + 1;
+        }
+        row = 1;
+        for (double a :listOfGrades) {
+            arrayOfGrades[row][1] = a;
+            row = row + 1;
+
+        }
+        row = 1;
+        for (int b: listOfAbscences) {
+            arrayOfGrades[row][2] = b;
+            row = row + 1;
+        }
+
+
+        return arrayOfGrades;
+    }
+
 
 
 }
