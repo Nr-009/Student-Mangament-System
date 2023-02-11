@@ -5,6 +5,10 @@ import java.util.List;
 
 public class AcademyClass {
     private String name;
+    private int id;//TODO
+    private static int counter = 0; //TODO
+    public static List<AcademyClass> allclasses = new ArrayList<>(); //TODO
+    public static List<Integer> allIds = new ArrayList<>();
     private Teacher teacher;
     private List<Student> students = new ArrayList<>();
     private String sesion;
@@ -15,8 +19,13 @@ public class AcademyClass {
     public AcademyClass(String name, Teacher t, String sesion) {
         this.name = name;
         this.teacher = t;
+        this.id = counter;
         this.sesion = sesion;
+        counter++;
+        allclasses.add(this);
+        allIds.add(this.id);
     }
+
 
     public String getName() {
         return name;
@@ -33,6 +42,11 @@ public class AcademyClass {
             total = total + (int) s.gradeInClass(this.name);
         }
         return total / numOfStudents;
+    }
+    //Efects: returns the current id
+
+    public int getId() {
+        return this.id;
     }
 
 
@@ -163,5 +177,48 @@ public class AcademyClass {
 
         return myArray;
     }
+
+
+    //Effects: Gives an array for all the classes with the number of students, teacher name, and average grade
+    public static  Object[][] informationDisplay() {
+        Object[][] arrayResult = new Object[counter + 1][5];
+        arrayResult[0][0] = "Class";
+        arrayResult[0][1] = "Teacher";
+        arrayResult[0][2] = "Average Grade";
+        arrayResult[0][3] = "NumberOfStudents";
+        arrayResult[0][4] = "Id of the Class";
+        int row = 1;
+        for (AcademyClass s : allclasses) {
+            arrayResult[row][0] = s.getName();
+            if (s.getTeacher() == null) {
+                arrayResult[row][1] = "No teacher at the moment";
+            } else {
+                arrayResult[row][1] = s.getTeacher().getFn();
+            }
+
+            arrayResult[row][2] = s.getAverageGrade();
+            arrayResult[row][3] = s.getNumOfStudents();
+            arrayResult[row][4] = s.getId();
+            row++;
+        }
+        return arrayResult;
+    }
+
+    //Effects: Produces the class if found otherwise null;
+    public static AcademyClass findClass(int id) {
+        if (id >= counter || id < 0) {
+            return null;
+        } else {
+            return allclasses.get(id);
+        }
+    }
+
+    public static boolean doesThisClassExist(int id) {
+        return allIds.contains(id);
+    }
+
+
+
+
 
 }

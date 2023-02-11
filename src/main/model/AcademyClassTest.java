@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AcademyClassTest {
@@ -43,7 +45,7 @@ public class AcademyClassTest {
     }
 
     @Test
-    public void testSetandGetAverageGrade() {
+    public void testGetAverageGrade() {
         Student murcia = new Student(978782, "Sebastian", "Murica", "drugs");
         Student garcia = new Student(27628, "Juan", "Garcia", "Futbol");
         Student gabo2 = new Student(178178, "Gabriel", "Granados", "Millos");
@@ -248,5 +250,19 @@ public class AcademyClassTest {
         assertEquals(testArray[0][1], resultArray[0][1]);
         assertEquals(1, resultArray.length);
     }
+
+    @Test
+    public void testIfAClassExist() {
+        //Negative id
+        assertFalse(AcademyClass.doesThisClassExist(-9));
+        //First class created
+        assertTrue(AcademyClass.doesThisClassExist(0));
+        //Some class later
+        assertTrue(AcademyClass.doesThisClassExist(2));
+        //Id non existing
+        assertFalse(AcademyClass.doesThisClassExist(1000));
+    }
+
+
 
 }
