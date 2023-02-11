@@ -5,10 +5,10 @@ import java.util.List;
 
 public class AcademyClass {
     private String name;
-    private int id;//TODO
-    private static int counter = 0; //TODO
-    public static List<AcademyClass> allclasses = new ArrayList<>(); //TODO
-    public static List<Integer> allIds = new ArrayList<>();
+    private int id;
+    private static int counter = 0;
+    private static List<AcademyClass> allClasses = new ArrayList<>();
+    private static List<Integer> allIds = new ArrayList<>();
     private Teacher teacher;
     private List<Student> students = new ArrayList<>();
     private String sesion;
@@ -22,7 +22,7 @@ public class AcademyClass {
         this.id = counter;
         this.sesion = sesion;
         counter++;
-        allclasses.add(this);
+        allClasses.add(this);
         allIds.add(this.id);
     }
 
@@ -188,7 +188,7 @@ public class AcademyClass {
         arrayResult[0][3] = "NumberOfStudents";
         arrayResult[0][4] = "Id of the Class";
         int row = 1;
-        for (AcademyClass s : allclasses) {
+        for (AcademyClass s : allClasses) {
             arrayResult[row][0] = s.getName();
             if (s.getTeacher() == null) {
                 arrayResult[row][1] = "No teacher at the moment";
@@ -209,7 +209,7 @@ public class AcademyClass {
         if (id >= counter || id < 0) {
             return null;
         } else {
-            return allclasses.get(id);
+            return allClasses.get(id);
         }
     }
 
