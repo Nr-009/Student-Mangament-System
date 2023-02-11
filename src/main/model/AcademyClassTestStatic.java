@@ -36,14 +36,19 @@ public class AcademyClassTestStatic {
     }
 
     @Test
-    public void testFindClass() {
-        //Testing for an empty Array
+    public void testingForTheArrayFirstCase() {
         Object[][] resultArray = AcademyClass.informationDisplay();
         assertEquals(resultArray[0][0], "Class");
         assertEquals(resultArray[0][1], "Teacher");
         assertEquals(resultArray[0][2], "Average Grade");
         assertEquals(resultArray[0][3], "NumberOfStudents");
         assertEquals(resultArray[0][4], "Id of the Class");
+    }
+
+    @Test
+    public void testFindClass() {
+        //Testing for an empty Array
+        Object[][] resultArray = AcademyClass.informationDisplay();
         AcademyClass testClass;
         //Tries to find a class where there is no classes
         assertNull(AcademyClass.findClass(290));
