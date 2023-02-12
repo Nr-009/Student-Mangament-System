@@ -162,7 +162,7 @@ public class AcademyClass {
 
     public Object[][] gradesforClass() {
         Object[][] myArray = new Object[numOfStudents + 1][2];
-        myArray[0][0] = "Students";
+        myArray[0][0] = "Id of the Student";
         myArray[0][1] = "Grade";
         int row = 1;
         for (Student s: students) {

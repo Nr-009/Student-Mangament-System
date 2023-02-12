@@ -243,7 +243,7 @@ public class AcademyClassTest {
     public void testforthefirsArrayFirstCase() {
         //array with zero students
         Object[][] testArray = new Object[3][3];
-        testArray[0][0] = "Students";
+        testArray[0][0] = "Id of the Student";
         testArray[0][1] = "Grade";
         Object[][] resultArray = math100.gradesforClass();
         assertEquals(testArray[0][0], resultArray[0][0]);

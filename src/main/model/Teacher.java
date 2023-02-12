@@ -49,6 +49,11 @@ public class Teacher {
         return ln;
 
     }
+
+    //TODO: finish test with this one
+    public int getId() {
+        return id;
+    }
     //Modifies:This
     //Effects: Produces true and modifies the password of the teacher if
     // his or her last password is correct and the new passworld is not empty
@@ -70,7 +75,7 @@ public class Teacher {
     public static boolean checkLogin(int id, String password) {
         if (allId.contains(id)) {
             int index = allId.indexOf(id);
-            return allPassworld.get(index) == password;
+            return allPassworld.get(index).equals(password);
         } else {
             return false;
         }
@@ -102,7 +107,7 @@ public class Teacher {
 
     public boolean isTeacherTeaching(String s) {
         for (AcademyClass each : allClasses) {
-            if (each.getName() == s) {
+            if (each.getName().equals(s)) {
                 return true;
             }
         }
@@ -142,7 +147,7 @@ public class Teacher {
     public int indexOfClass(String s) {
         if (isTeacherTeaching(s)) {
             for (AcademyClass c : allClasses) {
-                if (c.getName() == s) {
+                if (c.getName().equals(s)) {
                     return allClasses.indexOf(c);
                 }
             }
@@ -150,6 +155,20 @@ public class Teacher {
             return -1;
         }
         return -1;
+    }
+
+
+    public Object[][] listOfClassesId() {
+        Object[][] arrayofClasses = new Object[numClasses + 1][2];
+        arrayofClasses[0][0] = "Class Name";
+        arrayofClasses[0][1] = "Class Id";
+        int row = 1;
+        for (AcademyClass c : allClasses) {
+            arrayofClasses[row][0] = c.getName();
+            arrayofClasses[row][1] = c.getId();
+            row = row + 1;
+        }
+        return arrayofClasses;
     }
 
 

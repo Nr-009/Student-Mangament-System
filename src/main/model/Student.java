@@ -68,7 +68,7 @@ public class Student {
     //Effects:If provided the correct lasPassword, it changes it to a new one, otherwise
     //it produces false
     public boolean changePassword(String currentPassword, String newPassword) {
-        if (currentPassword == this.password && newPassword != "") {
+        if (currentPassword.equals(this.password) && newPassword != "") {
             int index = listOfPassword.indexOf(currentPassword);
             this.password = newPassword;
             listOfPassword.set(index, newPassword);
@@ -107,7 +107,7 @@ public class Student {
 
     public boolean hasClass(String s) {
         for (AcademyClass c : listOfClasses) {
-            if (c.getName() == s) {
+            if (c.getName().equals(s)) {
                 return true;
             }
         }
@@ -151,7 +151,7 @@ public class Student {
     public static boolean checkLogin(int id, String password) {
         if (hasId(id)) {
             int index = listOfId.indexOf(id);
-            if (password == listOfPassword.get(index)) {
+            if (password.equals(listOfPassword.get(index))) {
                 return true;
             }
         }
@@ -210,7 +210,7 @@ public class Student {
 
     public int getIndexOfClass(String s) {
         for (AcademyClass c : listOfClasses) {
-            if (c.getName() == s) {
+            if (c.getName().equals(s)) {
                 int index = listOfClasses.indexOf(c);
                 return index;
             }

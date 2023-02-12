@@ -1,5 +1,6 @@
 package model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,6 +34,11 @@ public class AcademyClassTestStatic {
 
         dsci100 = new AcademyClass("DSCI100", null, "Winter2022");
         phil220 = new AcademyClass("PHIL220", null, "Summer2021");
+    }
+
+    @BeforeEach
+    public void setup2() {
+        int x = 10;
     }
 
     @Test

@@ -23,10 +23,10 @@ class TeacherTest {
         eulogio = new Teacher("Eulogio", "Garcia", 809, "fisica11");
         mickelsen = new Teacher("mickelsen", "Macias", 90, "geometria8");
         orjuela = new Teacher("Edgar", "Orjuela", 800, "Matematicas");
-        MATH100 = new AcademyClass("Math100", null, "2020W");
+
         COMP110 = new AcademyClass("COMP110", mickelsen, "2021W");
         COMP121 = new AcademyClass("COMP121", mickelsen, "2021W");
-        COMP210 = new AcademyClass("COMP210", null, "2021W");
+
 
     }
 
@@ -164,6 +164,31 @@ class TeacherTest {
         assertEquals(mickelsen.indexOfClass("COMP121"), 0);
         //searches and finds it in the second index
         assertEquals(mickelsen.indexOfClass("COMP110"), 1);
+    }
+
+    @Test
+    public void testingforArrayOfIds(){
+        MATH100 = new AcademyClass("Math100", null, "2020W");
+        COMP210 = new AcademyClass("COMP210", null, "2021W");
+        Teacher andres = new Teacher("Andres", "R", 18172, "carros");
+        //Test for a teacher with no classes
+        Object[][] resultArray = andres.listOfClassesId();
+        assertEquals(resultArray[0][0], "Class Name");
+        assertEquals(resultArray[0][1], "Class Id");
+        assertEquals(resultArray.length, 1);
+        //Testing for a teacher with one class
+        COMP210.setTeacher(andres);
+        Object[][] resultArray2 = andres.listOfClassesId();
+        assertEquals(resultArray2[1][0], "COMP210");
+        assertEquals(resultArray2[1][1], COMP210.getId());
+        assertEquals(resultArray2.length, 2);
+        //Testing for a teacher with more than one class
+        MATH100.setTeacher(andres);
+        Object[][] resultArray3 = andres.listOfClassesId();
+        assertEquals(resultArray3[2][0], "Math100");
+        assertEquals(resultArray3[2][1], MATH100.getId());
+        assertEquals(resultArray3.length, 3);
+
     }
 
 
