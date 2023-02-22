@@ -1,5 +1,8 @@
-package model;
+package test;
 
+import model.AcademyClass;
+import model.Student;
+import model.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,32 +39,32 @@ public class StudentTest {
         Student angel = new Student(909089, "angel", "Quiroga", "noanime");
         Student gabo = new Student(7854356, "Samuel", "Abuchaive", "babucha");
         //Checking the constructor works
-        assertEquals(angel.getID(), 909089);
-        assertEquals(angel.getFn(), "angel");
-        assertEquals(angel.getLn(), "Quiroga");
-        assertEquals(angel.getNumOfClasses(), 0);
+        assertEquals(909089, angel.getID());
+        assertEquals("angel",angel.getFn());
+        assertEquals("Quiroga",angel.getLn());
+        assertEquals(0, angel.getNumOfClasses());
         //Checking the basic setters and getters
         gabo.setFn("Jose");
         gabo.setLn("Mendieta");
-        assertEquals(gabo.getFn(), "Jose");
-        assertEquals(gabo.getLn(), "Mendieta");
-        assertEquals(gabo.getID(), 7854356);
+        assertEquals("Jose",gabo.getFn());
+        assertEquals("Mendieta",gabo.getLn());
+        assertEquals(7854356,gabo.getID());
         //Deal with duplications
         pizzarro= new Student(909089, "David","Pizzarro", "matemosalmartin");
-        assertNotEquals(pizzarro.getID(), 9090);
-        assertNotEquals(pizzarro.getFn(), "David");
-        assertNotEquals(pizzarro.getLn(), "Pizzarro");
-        assertEquals(pizzarro.getID(), 626);
+        assertNotEquals(9090,pizzarro.getID());
+        assertNotEquals("David",pizzarro.getFn());
+        assertNotEquals("Pizzarro",pizzarro.getLn());
+        assertEquals(626,pizzarro.getID());
     }
 
     @Test
-    public void testChangePassworld(){
+    public void testChangePassword(){
         Student Piedra = new Student(69422, "Santiago", "Piedrahita","cocteles");
-        //incorret pastPassworld
+        //incorrect pastPassword
         assertFalse(Piedra.changePassword("lolololo", ""));
-        //correctpast Passworld but new password is empty
+        //correct Password but new password is empty
         assertFalse(Piedra.changePassword("cocteles", ""));
-        //correct cahnge of passworld
+        //correct change of password
         assertTrue(Piedra.changePassword("cocteles", "anime"));
     }
 
@@ -75,7 +78,7 @@ public class StudentTest {
         //has one class but it is not teh correct one
         nicolas.addClass(phil220);
         assertFalse(nicolas.hasClass("MATH220"));
-        //has one class but misppeles the name
+        //has one class but misspells the name
         assertFalse(nicolas.hasClass("PJIL220"));
         //has the class and is the correct name
         assertTrue(nicolas.hasClass("PHIL220"));
@@ -90,20 +93,20 @@ public class StudentTest {
     @Test
     public void testForSetGrade() {
         //the class does not exist and the grade is less than zero
-        assertEquals(nicolas.getNumOfClasses(), 0);
+        assertEquals(0, nicolas.getNumOfClasses());
         assertFalse(nicolas.setGradeForClass("MATH100", -11));
         //the class exist but the grade is less than zero
         nicolas.addClass(phil220);
         assertFalse(nicolas.setGradeForClass("PHIL220",-1));
         //the class exit and the grade is zero
         assertTrue(nicolas.setGradeForClass("PHIL220", 0));
-        assertEquals(nicolas.gradeInClass("PHIL220"), 0);
+        assertEquals(0, nicolas.gradeInClass("PHIL220"));
         //the class exit and the grade is one
         assertTrue(nicolas.setGradeForClass("PHIL220", 1));
-        assertEquals(nicolas.gradeInClass("PHIL220"), 1);
+        assertEquals(1,nicolas.gradeInClass("PHIL220"));
         //the class exit and grade is greater than
         assertTrue(nicolas.setGradeForClass("PHIL220", 12));
-        assertEquals(nicolas.gradeInClass("PHIL220"), 12);
+        assertEquals(12,nicolas.gradeInClass("PHIL220"));
 
 
     }
@@ -111,43 +114,43 @@ public class StudentTest {
     @Test
     public void testForSetGradeUpperBoundary(){
         //the class exists but is at the end of the list
-       assertEquals( nicolas.getNumOfClasses(), 0);
-       nicolas.addClass(dsci100);
-       nicolas.addClass(cpsc210);
+        assertEquals( 0, nicolas.getNumOfClasses());
+        nicolas.addClass(dsci100);
+        nicolas.addClass(cpsc210);
         assertTrue(nicolas.setGradeForClass("CPSC210", 11));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 11);
+        assertEquals(11, nicolas.gradeInClass("CPSC210"));
         //The class exist and the grade is 99
         assertTrue(nicolas.setGradeForClass("CPSC210", 99));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 99);
+        assertEquals(99, nicolas.gradeInClass("CPSC210"));
         //The class exist and the grade is 100
         assertTrue(nicolas.setGradeForClass("CPSC210", 100));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 100);
+        assertEquals(100, nicolas.gradeInClass("CPSC210"));
         //The class exits but the grades is greater than 100;
         assertFalse(nicolas.setGradeForClass("CPSC210", 101));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 100);
+        assertEquals(100, nicolas.gradeInClass("CPSC210"));
         //The class exist but the garde is far more than 100
         assertFalse(nicolas.setGradeForClass( "CPSC210", 1111));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 100);
+        assertEquals(100,nicolas.gradeInClass("CPSC210"));
     }
 
     @Test
     public void testForGradeInClass(){
 
         //the student is not register for any class
-        assertEquals(nicolas.gradeInClass("CPSC210"), -1);
+        assertEquals(-1, nicolas.gradeInClass("CPSC210"));
         //the student is register for one class but is not the one correct
         nicolas.addClass(cpsc210);
-        assertEquals(nicolas.gradeInClass("CPSC313"), -1);
+        assertEquals(-1,nicolas.gradeInClass("CPSC313"));
         //the student is register for the class and is the correct one
         nicolas.setGradeForClass("CPSC210", 90);
-        assertEquals(nicolas.gradeInClass("CPSC210"), 90);
+        assertEquals(90, nicolas.gradeInClass("CPSC210"));
         //The student is register for the class but is not the first class
         nicolas.addClass(dsci100);
         nicolas.setGradeForClass("DSCI100",76);
-        assertEquals(nicolas.gradeInClass("DSCI100"), 76);
+        assertEquals(76, nicolas.gradeInClass("DSCI100"));
         //the student is not register for the class and is the las one.
         nicolas.addClass(phil220);
-        assertEquals(nicolas.gradeInClass("MATH302"),-1);
+        assertEquals(-1,nicolas.gradeInClass("MATH302"));
 
     }
 
@@ -159,15 +162,15 @@ public class StudentTest {
         assertNull(Student.getStudent(90));
         //the id is valid and is the first one
         pizzarro= Student.getStudent(9090);
-        assertEquals(pizzarro, bonilla);
+        assertEquals( bonilla,pizzarro);
         //the if is valid and is the last one
         pizzarro = Student.getStudent(78543);
-        assertEquals(pizzarro, abucha);
+        assertEquals(abucha, pizzarro);
     }
 
     @Test
     public void testCheckLogin(){
-        //the id does not exits
+        //the id does not exit
         assertFalse(Student.checkLogin(9090,"mom"));
         //the id exits but the password is wrong
         assertFalse(Student.checkLogin(1701, "mom"));
@@ -180,42 +183,42 @@ public class StudentTest {
     }
 
     @Test
-    public void testincrementAbsences(){
+    public void testIncrementAbsences(){
         nicolas.addClass(phil220);
         nicolas.addClass(dsci100);
         //the student is not register in the subject
-        assertFalse(nicolas.incrementAbsecences("PHIL222"));
-        assertEquals(nicolas.checkAbsence("PHIL220"), 0);
+        assertFalse(nicolas.incrementAbsences("PHIL222"));
+        assertEquals(0, nicolas.checkAbsence("PHIL220"));
         //the student is register on the class
-        assertTrue(nicolas.incrementAbsecences("PHIL220"));
-        assertEquals(nicolas.checkAbsence("PHIL220"), 1);
+        assertTrue(nicolas.incrementAbsences("PHIL220"));
+        assertEquals(1, nicolas.checkAbsence("PHIL220"));
         cubillos.addClass(dsci100);
-        cubillos.incrementAbsecences("DSCI100");
-        cubillos.incrementAbsecences("DSCI100");
-        assertEquals(cubillos.checkAbsence("DSCI100"), 2);
+        cubillos.incrementAbsences("DSCI100");
+        cubillos.incrementAbsences("DSCI100");
+        assertEquals(2, cubillos.checkAbsence("DSCI100"));
     }
 
     @Test
     public void testNumberOfClasses(){
-        assertEquals(nicolas.getNumOfClasses(), 0);
+        assertEquals(0, nicolas.getNumOfClasses());
         nicolas.addClass(dsci100);
-        assertEquals(nicolas.getNumOfClasses(), 1);
+        assertEquals(1, nicolas.getNumOfClasses());
         nicolas.addClass(dsci100);
-        assertEquals(nicolas.getNumOfClasses(), 1);
+        assertEquals(1, nicolas.getNumOfClasses());
         nicolas.addClass(phil220);
         nicolas.addClass(cpsc210);
-        assertEquals(nicolas.getNumOfClasses(), 3);
+        assertEquals(3, nicolas.getNumOfClasses());
     }
 
-    public void setUpforRemoveClass(){
+    public void setUpForRemoveClass(){
         nicolas.addClass(phil220);
         nicolas.setGradeForClass("PHIL220", 90);
-        nicolas.incrementAbsecences("PHIL220");
+        nicolas.incrementAbsences("PHIL220");
         phil220.addStudent(nicolas);
         nicolas.addClass(dsci100);
         nicolas.setGradeForClass("DSCI100", 45);
-        nicolas.incrementAbsecences("DSCI100");
-        nicolas.incrementAbsecences("DSCI100");
+        nicolas.incrementAbsences("DSCI100");
+        nicolas.incrementAbsences("DSCI100");
         dsci100.addStudent(nicolas);
         nicolas.addClass(cpsc210);
         nicolas.setGradeForClass("CPSC210", 87);
@@ -224,43 +227,43 @@ public class StudentTest {
 
     @Test
     public void removeClass(){
-        setUpforRemoveClass();
+        setUpForRemoveClass();
         //tries to remove a class that does not belong to the student
         assertFalse(nicolas.removeClass("JAPN100"));
-        //Removes Sucesfully the first Class from the student view
+        //Removes Successfully the first Class from the student view
         assertTrue(nicolas.removeClass("PHIL220"));
         assertTrue(phil220.deleteStudent(nicolas.getID()));
         assertFalse(phil220.hasStudent(nicolas.getID()));
-        assertEquals(nicolas.getNumOfClasses(), 2);
+        assertEquals(2, nicolas.getNumOfClasses());
         assertTrue(nicolas.hasClass("DSCI100"));
-        assertEquals(nicolas.gradeInClass("DSCI100"), 45);
-        assertEquals(nicolas.checkAbsence("DSCI100"), 2);
+        assertEquals(45, nicolas.gradeInClass("DSCI100"));
+        assertEquals(2, nicolas.checkAbsence("DSCI100"));
         assertTrue(nicolas.hasClass("CPSC210"));
-        assertEquals(nicolas.gradeInClass("CPSC210"), 87);
-        assertEquals(nicolas.checkAbsence("CPSC210"), 0);
-        //Sucessfully removes the second class
+        assertEquals(87,nicolas.gradeInClass("CPSC210"));
+        assertEquals(0, nicolas.checkAbsence("CPSC210"));
+        //Successfully removes the second class
         assertTrue(nicolas.removeClass("CPSC210"));
         assertTrue(cpsc210.deleteStudent(nicolas.getID()));
         assertFalse(cpsc210.hasStudent(nicolas.getID()));
-        assertEquals(nicolas.getNumOfClasses(), 1);
+        assertEquals(1, nicolas.getNumOfClasses());
         assertTrue(nicolas.hasClass("DSCI100"));
-        assertEquals(nicolas.gradeInClass("DSCI100"), 45);
-        assertEquals(nicolas.checkAbsence("DSCI100"), 2);
+        assertEquals(45,nicolas.gradeInClass("DSCI100"));
+        assertEquals(2, nicolas.checkAbsence("DSCI100"));
 
 
     }
 
     @Test
-    public void testForSettingandGettingAdress() {
-        nicolas.setAdress("1701 burnaby st");
-        assertEquals(nicolas.getAdress(), "1701 burnaby st");
-        gyunay.setAdress("cr 57 #119a-60");
-        assertEquals(gyunay.getAdress(), "cr 57 #119a-60");
+    public void testForSettingAndGettingAddress() {
+        nicolas.setAddress("1701 burnaby st");
+        assertEquals("1701 burnaby st", nicolas.getAddress());
+        gyunay.setAddress("cr 57 #119a-60");
+        assertEquals("cr 57 #119a-60", gyunay.getAddress());
     }
 
     @Test
     public void testHasId() {
-        //tries to find a non existent id
+        //tries to find a non-existent id
         assertFalse(Student.hasId(190190190));
         //find the id on the first position
         assertTrue(Student.hasId(1701));
@@ -271,19 +274,19 @@ public class StudentTest {
     @Test
     public void testGetIndexOfClass() {
         //Tries to find in an empty list for a class
-        assertEquals(nicolas.getIndexOfClass("PHIL220"), -1);
+        assertEquals(-1,nicolas.getIndexOfClass("PHIL220"));
         //tries to find for the empty string
-        assertEquals(nicolas.getIndexOfClass(""), -1);
+        assertEquals(-1, nicolas.getIndexOfClass(""));
         //tries to find and finds it on the first index, in a list with size 1
         nicolas.addClass(phil220);
-        assertEquals(nicolas.getIndexOfClass("PHIL220"), 0);
+        assertEquals(0, nicolas.getIndexOfClass("PHIL220"));
         //find the class and is on the end of the list
         nicolas.addClass(dsci100);
         nicolas.addClass(cpsc210);
         nicolas.addClass(japn100);
-        assertEquals(nicolas.getIndexOfClass("JAPN100"), 3);
+        assertEquals(3, nicolas.getIndexOfClass("JAPN100"));
         //does not find it
-        assertEquals(nicolas.getIndexOfClass("MATH302"), -1);
+        assertEquals(-1, nicolas.getIndexOfClass("MATH302"));
     }
 
     @Test
@@ -307,18 +310,18 @@ public class StudentTest {
         assertEquals("PHIL220", resultArray[1][0]);
         assertEquals(77.0, resultArray[1][1]);
         assertEquals(0, resultArray[1][2]);
-        assertEquals(resultArray.length, 2);
+        assertEquals(2, resultArray.length);
         //Test for more than one class
         michael.addClass(cpsc210);
         michael.setGradeForClass("CPSC210", 34);
-        michael.incrementAbsecences("CPSC210");
-        michael.incrementAbsecences("CPSC210");
-        michael.incrementAbsecences("CPSC210");
+        michael.incrementAbsences("CPSC210");
+        michael.incrementAbsences("CPSC210");
+        michael.incrementAbsences("CPSC210");
         Object[][] resultArray2= michael.arrayGrades();
-        assertEquals(resultArray2[2][0], "CPSC210");
-        assertEquals(resultArray2[2][1], 34.0);
-        assertEquals(resultArray2[2][2], 3);
-        assertEquals(resultArray2.length, 3);
+        assertEquals("CPSC210", resultArray2[2][0]);
+        assertEquals(34.0, resultArray2[2][1]);
+        assertEquals(3,resultArray2[2][2]);
+        assertEquals(3,resultArray2.length);
 
 
     }

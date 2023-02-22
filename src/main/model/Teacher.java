@@ -1,3 +1,8 @@
+/* A class represent a teacher with given id, first name, last name, and password. The teacher also has a field to
+represents all the classes it has. The class three static field where all the id, password and teachers are stored
+ */
+
+
 package model;
 
 import java.util.ArrayList;
@@ -16,7 +21,7 @@ public class Teacher {
 
     //Effects:If the id is not present,
     //Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
-    //null values
+    //null values, and id of 626.
     public Teacher(String fn, String ln, int id, String password) {
         if (!allId.contains(id)) {
             this.fn = fn;
@@ -27,37 +32,45 @@ public class Teacher {
             allId.add(this.id);
             allPassworld.add(this.password);
             numClasses = 0;
+        } else {
+            this.id = 626;
         }
     }
 
-    public void setfn(String fn) {
+    //Modifies: This
+    //Effects: changes the last name of the current Teacher
+    public void setFn(String fn) {
         this.fn = fn;
 
     }
 
+    //Effects: returns the first name of the given teacher
     public String getFn() {
         return fn;
 
     }
 
+    //Modifies: This
+    //Effects: sets the last name for the given Teacher
     public void setLn(String ln) {
         this.ln = ln;
 
     }
 
+    //Effects: returns the last name of the current Teacher
     public String getLn() {
         return ln;
 
     }
 
-    //TODO: finish test with this one
+    //Effects: returns the given id of the teacher
     public int getId() {
         return id;
     }
     //Modifies:This
     //Effects: Produces true and modifies the password of the teacher if
-    // his or her last password is correct and the new passworld is not empty
-    // , otherwise produces false
+    // his or her last password is correct and the new password is not empty
+    // , otherwise produces false and does not change the password
 
     public boolean setPassword(String lastP, String newP) {
         if (password.equals(lastP) && newP != "") {
@@ -70,8 +83,7 @@ public class Teacher {
         }
     }
 
-    //Effects: Produces true if the given id matches the correct passworld, otherwise false
-
+    //Effects: Produces true if the given id matches the correct password, otherwise false
     public static boolean checkLogin(int id, String password) {
         if (allId.contains(id)) {
             int index = allId.indexOf(id);
@@ -81,16 +93,15 @@ public class Teacher {
         }
 
     }
-    //Effects:Produces true if the id of teacher is on the system, otherwise false
 
+    //Effects:Produces true if the id of teacher is on the system, otherwise false
     public static boolean containsTeacher(int id) {
         return allId.contains(id);
 
     }
-    //Requires: Id to be in the system
+
     //Effects: Produces the reference to the teacher given the id if the id does not exit
     //produces null
-
     public static Teacher returnsTeacher(int id) {
         if (allId.contains(id)) {
             int index = allId.indexOf(id);
@@ -104,7 +115,6 @@ public class Teacher {
     }
 
     //Effects: Produces true if the teacher is teaching the class otherwise false
-
     public boolean isTeacherTeaching(String s) {
         for (AcademyClass each : allClasses) {
             if (each.getName().equals(s)) {
@@ -114,19 +124,18 @@ public class Teacher {
         return false;
     }
 
-    //Effects: if the class is not there and the class has the same teacher
+    //Effects: if the class is not there and the class
     // adds it to the classes the teacher is teaching
     public void addClass(AcademyClass s) {
         if (!allClasses.contains(s)) {
             if (s != null) {
-                if (s.getTeacher() == this) {
-                    allClasses.add(s);
-                    numClasses++;
-                }
+                allClasses.add(s);
+                numClasses++;
             }
         }
     }
 
+    //Effects: returns the number of classes the teacher has
     public int getNumClasses() {
         return numClasses;
     }
@@ -157,19 +166,73 @@ public class Teacher {
         return -1;
     }
 
-
+    //Effects: produces the array with all the classes and the id of the class for a given teacher
     public Object[][] listOfClassesId() {
-        Object[][] arrayofClasses = new Object[numClasses + 1][2];
-        arrayofClasses[0][0] = "Class Name";
-        arrayofClasses[0][1] = "Class Id";
+        Object[][] arrayClasses = new Object[numClasses + 1][5];
+        arrayClasses[0][0] = "Class Name";
+        arrayClasses[0][1] = "Class Id";
+        arrayClasses[0][2] = "Number of Students";
+        arrayClasses[0][3] = "Average Grade";
+        arrayClasses[0][4] = "Session";
         int row = 1;
         for (AcademyClass c : allClasses) {
-            arrayofClasses[row][0] = c.getName();
-            arrayofClasses[row][1] = c.getId();
+            arrayClasses[row][0] = c.getName();
+            arrayClasses[row][1] = c.getId();
+            arrayClasses[row][2] = c.getNumOfStudents();
+            arrayClasses[row][3] = c.getAverageGrade();
+            arrayClasses[row][4] = c.getSession();
             row = row + 1;
         }
-        return arrayofClasses;
+        return arrayClasses;
     }
+
+    //Modifies: This
+    //Effects: if the id is valid it deletes the teacher and all the classes he was teaching set the teacher field to
+    //null
+    public static boolean  removeTeacher(int id) {
+        if (!Teacher.containsTeacher(id)) {
+            return false;
+        }
+        Teacher currentTeacher = Teacher.returnsTeacher(id);
+        List<AcademyClass> currentClasses = currentTeacher.allClasses;
+        if (!currentClasses.isEmpty()) {
+            for (AcademyClass s : currentClasses) {
+                s.setTeacher(null);
+            }
+        }
+        int indexOfTeacher = allId.indexOf(id);
+        allId.remove(indexOfTeacher);
+        allPassworld.remove(indexOfTeacher);
+        allTeachers.remove(indexOfTeacher);
+        return true;
+    }
+
+    public static Object[][] displayAllTeachers() {
+        int size = allTeachers.size() + 1;
+        Object[][] resultArray = new Object[size][4];
+        resultArray[0][0] = "First Name";
+        resultArray[0][1] = "Last Name";
+        resultArray[0][2] = "Id";
+        resultArray[0][3] = "NumberOfClasses";
+        int row = 1;
+        for (Teacher t :allTeachers) {
+            resultArray[row][0] = t.getFn();
+            resultArray[row][1] = t.getLn();
+            resultArray[row][2] = t.getId();
+            resultArray[row][3] = t.allClasses.size();
+            row++;
+        }
+
+        return resultArray;
+    }
+
+    //Todo: debug the shit out of the new options
+
+
+
+
+
+
 
 
 

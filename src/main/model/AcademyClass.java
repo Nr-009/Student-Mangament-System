@@ -1,3 +1,9 @@
+/* AcademyClass represent each class offer by the Academy, it has a name, id, a teacher, a list of students,
+a number of students and a session where you can register. The class has three static fields, a counter that assigns
+the id to avoid repetition, a list of all the classes and a list of all ids
+ */
+
+
 package model;
 
 import java.util.ArrayList;
@@ -14,19 +20,21 @@ public class AcademyClass {
     private String sesion;
     private int numOfStudents;
 
-    //Constructs a class with a given name teacher and sesion.
-    // It initializes the list of Students as empty
-    public AcademyClass(String name, Teacher t, String sesion) {
+    //Effects: Constructs a class with a given name teacher and session. It initializes the list of Students as empty
+    public AcademyClass(String name, Teacher t, String session) {
         this.name = name;
         this.teacher = t;
+        if (t != null) {
+            t.addClass(this);
+        }
         this.id = counter;
-        this.sesion = sesion;
+        this.sesion = session;
         counter++;
         allClasses.add(this);
         allIds.add(this.id);
     }
 
-
+    //Effects: returns the current name
     public String getName() {
         return name;
     }
@@ -43,26 +51,26 @@ public class AcademyClass {
         }
         return total / numOfStudents;
     }
-    //Efects: returns the current id
 
+    //Effects: returns the current id
     public int getId() {
         return this.id;
     }
 
 
     //Modifies: This
-    //Effects: If teacher is not null changes the teacher, also adds the reference to the teacher class
+    //Effects: Sets the teacher for the given class
     public boolean setTeacher(Teacher t) {
-        if (t != null) {
-            this.teacher = t;
-            teacher.addClass(this);
-            return true;
+        if (t == null) {
+            this.teacher = null;
         } else {
-            return false;
+            this.teacher = t;
+            return true;
         }
-
+        return true;
     }
 
+    //Effects: returns the teacher of teh given class
     public Teacher getTeacher() {
         return teacher;
     }
@@ -75,11 +83,10 @@ public class AcademyClass {
             }
         }
         return false;
-
     }
+
     //Effects: Produces the grade of a given student if he is register for the given clas,
     //otherwise produces -1
-
     public int getGradeStudent(int id) {
         if (hasStudent(id)) {
             int index = getIndexStudent(id);
@@ -91,7 +98,7 @@ public class AcademyClass {
 
 
     }
-    //Effects:Sets the grade for a given student, if the student is not on the system, or teh grade is
+    //Effects:Sets the grade for a given student, if the student is not on the system, or the grade is
     // less than 0 or greater than 100 then it produces false
 
     public boolean setGradeStudent(int id, int grade) {
@@ -107,18 +114,19 @@ public class AcademyClass {
 
     }
 
-    public void setSesion(String s) {
+    //Effects: returns the session of the given class
+    public void setSession(String s) {
         this.sesion = s;
 
     }
 
+    //Effects: returns the given session
     public String getSession() {
         return sesion;
     }
 
-    //Requires: To work properly the student function for adding must be also used
-    //Effects:If the student is not null and the id is not inside it adds the given student
 
+    //Effects:If the student is not null and the id is not inside it adds the given student
     public boolean addStudent(Student s) {
         if (s != null && !hasStudent(s.getID())) {
             students.add(s);
@@ -129,6 +137,7 @@ public class AcademyClass {
 
     }
 
+    //Effects: returns the given number of students
     public int getNumOfStudents() {
         return numOfStudents;
 
@@ -143,8 +152,7 @@ public class AcademyClass {
         }
         return -1;
     }
-    //Requires: Student to have the register the class and the class to not be empty, to be working correctly
-    // the stduent function of deleting must also be used.
+
     //Effects: Deletes the student with the given id if found otherwise produces false
     //also takes the students reference
 
@@ -160,18 +168,21 @@ public class AcademyClass {
 
     }
 
-    public Object[][] gradesforClass() {
-        Object[][] myArray = new Object[numOfStudents + 1][2];
-        myArray[0][0] = "Id of the Student";
-        myArray[0][1] = "Grade";
+    //Effects: Prints the array of all the student with their given first name, last name, id and grade
+    public Object[][] gradesForClass() {
+        Object[][] myArray = new Object[numOfStudents + 1][3];
+        myArray[0][0] = "Id";
+        myArray[0][1] = "Name";
+        myArray[0][2] = "Grade";
         int row = 1;
         for (Student s: students) {
             myArray[row][0] = s.getID();
+            myArray[row][1] = s.getFn() + " " + s.getLn();
             row = row + 1;
         }
         row = 1;
         for (Student s: students) {
-            myArray[row][1] = s.gradeInClass(this.name);
+            myArray[row][2] = s.gradeInClass(this.name);
             row = row + 1;
         }
 
@@ -181,7 +192,7 @@ public class AcademyClass {
 
     //Effects: Gives an array for all the classes with the number of students, teacher name, and average grade
     public static  Object[][] informationDisplay() {
-        Object[][] arrayResult = new Object[counter + 1][5];
+        Object[][] arrayResult = new Object[allClasses.size() + 1][5];
         arrayResult[0][0] = "Class";
         arrayResult[0][1] = "Teacher";
         arrayResult[0][2] = "Average Grade";
@@ -206,17 +217,44 @@ public class AcademyClass {
 
     //Effects: Produces the class if found otherwise null;
     public static AcademyClass findClass(int id) {
-        if (id >= counter || id < 0) {
-            return null;
-        } else {
-            return allClasses.get(id);
+        if (id < counter && id >= 0) {
+            for (AcademyClass s : allClasses) {
+                if (s.getId() == id) {
+                    return s;
+                }
+            }
+
         }
+        return null;
     }
 
+
+    //Effects: returns true if the class with the given id exist
     public static boolean doesThisClassExist(int id) {
         return allIds.contains(id);
     }
 
+
+    //Effects: if the class with the given id exist then it deletes it from the database,
+    //otherwise returns false
+    public static boolean removeClass(int id) {
+        if (!doesThisClassExist(id)) {
+            return false;
+        }
+        AcademyClass currentClass = AcademyClass.findClass(id);
+        Teacher currentTeacher = currentClass.getTeacher();
+        if (currentTeacher != null) {
+            currentTeacher.removeClass(currentClass.getName());
+        }
+        for (Student s: currentClass.students) {
+            s.removeClass(currentClass.getName());
+        }
+        int index = allClasses.indexOf(currentClass);
+        allIds.remove(index);
+        allClasses.remove(currentClass);
+        return true;
+
+    }
 
 
 

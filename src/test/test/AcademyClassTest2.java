@@ -1,12 +1,15 @@
-package model;
+package test;
 
+import model.AcademyClass;
+import model.Student;
+import model.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class AcademyClassTestStatic {
+public class AcademyClassTest2 {
 
     private AcademyClass cpsc110;
     private AcademyClass math100;
@@ -44,11 +47,11 @@ public class AcademyClassTestStatic {
     @Test
     public void testingForTheArrayFirstCase() {
         Object[][] resultArray = AcademyClass.informationDisplay();
-        assertEquals(resultArray[0][0], "Class");
-        assertEquals(resultArray[0][1], "Teacher");
-        assertEquals(resultArray[0][2], "Average Grade");
-        assertEquals(resultArray[0][3], "NumberOfStudents");
-        assertEquals(resultArray[0][4], "Id of the Class");
+        assertEquals("Class", resultArray[0][0]);
+        assertEquals("Teacher", resultArray[0][1]);
+        assertEquals("Average Grade", resultArray[0][2]);
+        assertEquals("NumberOfStudents", resultArray[0][3]);
+        assertEquals("Id of the Class",resultArray[0][4]);
     }
 
     @Test
@@ -61,28 +64,28 @@ public class AcademyClassTestStatic {
         setup();
         //Testing for ids:
         assertEquals(null, AcademyClass.findClass(-9));
-        assertEquals(cpsc110.getId(), 0);
-        assertEquals(phil220.getId(), 3);
+        assertEquals(0, cpsc110.getId());
+        assertEquals(3, phil220.getId());
         //Finds the class on the first position
         testClass = AcademyClass.findClass(0);
-        assertEquals(testClass, cpsc110);
+        assertEquals(cpsc110, testClass);
         //Find the class on the latter position
         testClass = AcademyClass.findClass(3);
-        assertEquals(testClass, phil220);
+        assertEquals(phil220, testClass);
         //Does not find the class in a big list
         assertEquals(null, AcademyClass.findClass(4));
         //Testing for an Array with multiple Classes
         resultArray = AcademyClass.informationDisplay();
-        assertEquals(resultArray[1][0],"CPSC110");
-        assertEquals(resultArray[1][1], "No teacher at the moment");
-        assertEquals(resultArray[1][2], 90.0);
-        assertEquals(resultArray[1][3], 1);
-        assertEquals(resultArray[1][4], 0);
-        assertEquals(resultArray[2][0],"MATH100");
-        assertEquals(resultArray[2][1], "Eulogio");
-        assertEquals(resultArray[2][2], 50.0);
-        assertEquals(resultArray[2][3], 2);
-        assertEquals(resultArray[2][4], 1);
+        assertEquals("CPSC110", resultArray[1][0]);
+        assertEquals("No teacher at the moment", resultArray[1][1]);
+        assertEquals(90.0, resultArray[1][2]);
+        assertEquals(1,resultArray[1][3]);
+        assertEquals(0, resultArray[1][4]);
+        assertEquals("MATH100",resultArray[2][0]);
+        assertEquals("Eulogio",resultArray[2][1]);
+        assertEquals(50.0,resultArray[2][2]);
+        assertEquals(2,resultArray[2][3]);
+        assertEquals(1,resultArray[2][4]);
     }
 
 
