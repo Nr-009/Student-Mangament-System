@@ -31,7 +31,7 @@ public class ManagmentSystem {
 
     //Modifies: This
     //Effects: Sets the nicolas field with initial grades and absences for the classes of CPSC110, CPSC121,
-    // CPSC210, AND DSCI 100. Also adds the address to the nicolas field
+    // CPSC210, AND DSCI 100. Also adds the addressTo edit your information Press E to the nicolas field
     public void setUpNicolas() {
         nicolas.addClass(cpsc110);
         cpsc110.addStudent(nicolas);
@@ -269,7 +269,7 @@ public class ManagmentSystem {
             } else if (option.equalsIgnoreCase("C")) {
                 condition = false;
                 editInformation(id);
-            } else if (option.equalsIgnoreCase("D")) {
+            } else {
                 condition = false;
                 runManagementSystem();
             }
