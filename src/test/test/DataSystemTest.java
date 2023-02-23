@@ -136,7 +136,7 @@ public class DataSystemTest {
     @Test
     public void hasTeacher(){
         //the id is invalid
-        assertNull(main.getStudent(9090));
+        assertNull(main.getTeacher(9090));
         //the id is valid and is the first one
         assertEquals("Jhonathan",main.getTeacher(jhonathanId).getFn());
         assertEquals("Ichikawa",main.getTeacher(jhonathanId).getLn());
@@ -217,6 +217,10 @@ public class DataSystemTest {
         assertTrue(main.getStudent(yotasId).hasClass("PHIL220"));
         assertNull(main.getAcademyClass(phil220Id).getTeacher());
         assertFalse(main.hasIDTeacher(jhonathanId));
+        //Deletes a Teacher with no classes
+        assertTrue(main.hasIDTeacher(mickelsenId));
+        assertTrue(main.removeTeacher(mickelsenId));
+        assertFalse(main.hasIDTeacher(mickelsenId));
 
     }
 
