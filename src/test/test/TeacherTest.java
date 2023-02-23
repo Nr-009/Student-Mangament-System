@@ -14,10 +14,9 @@ class TeacherTest {
     private Teacher eulogio;
     private Teacher mickelsen;
     private Teacher orjuela;
-    private Teacher nicolas;
-    private AcademyClass MATH100;
     private AcademyClass COMP110;
     private AcademyClass COMP121;
+    private AcademyClass MATH100;
     private AcademyClass COMP210;
 
     @BeforeEach
@@ -25,11 +24,8 @@ class TeacherTest {
         eulogio = new Teacher("Eulogio", "Garcia", 809, "fisica11");
         mickelsen = new Teacher("mickelsen", "Macias", 90, "geometria8");
         orjuela = new Teacher("Edgar", "Orjuela", 800, "Matematicas");
-
-        COMP110 = new AcademyClass("COMP110", mickelsen, "2021W");
-        COMP121 = new AcademyClass("COMP121", mickelsen, "2021W");
-
-
+        COMP110 = new AcademyClass(0,"COMP110", mickelsen, "2021W");
+        COMP121 = new AcademyClass(1,"COMP121", mickelsen, "2021W");
     }
 
     @Test
@@ -48,69 +44,14 @@ class TeacherTest {
         //Testing for the id
         assertEquals(90901123,ichikawa.getId());
         assertEquals(28928,anothony.getId());
-        //Testing for when somebody wants to create a user with an id alreayd created
-        nicolas = new Teacher("Nicolas", "Rubiano", 800, "anime");
-        assertNotEquals("Nicolas", nicolas.getFn());
-        assertNotEquals("Rubiano", nicolas.getLn());
     }
 
-    @Test
-    public void testForSetPassword() {
-        Teacher angela = new Teacher("Angela", "Sarmiento", 9092, "CAA");
-        Teacher tolosa = new Teacher("Fisica", "Tolosa", 7817, "fisica");
-        //puts the incorrect last password
-        assertFalse(angela.setPassword("mol", "fisica12"));
-        //puts the empty string as the password
-        assertFalse(angela.setPassword("CAA", ""));
-        //correctly changes the password
-        assertTrue(angela.setPassword("CAA", "fisica12"));
-        assertTrue(tolosa.setPassword("fisica", "geometria9"));
-        assertTrue(Teacher.checkLogin(9092, "fisica12"));
-        assertTrue(Teacher.checkLogin(7817, "geometria9"));
-    }
-
-    @Test
-    public void checkLogin() {
-        setUp();
-        assertFalse(Teacher.checkLogin(9090, "nicolas"));
-        assertFalse(Teacher.checkLogin(809, "fisica"));
-        assertTrue(Teacher.checkLogin(809, "fisica11"));
-
-    }
-
-    @Test
-    public void testContainsTeacher() {
-        setUp();
-        //searches for teachers that do exists
-        assertTrue(Teacher.containsTeacher(809));
-        assertTrue(Teacher.containsTeacher(90));
-        assertTrue(Teacher.containsTeacher(800));
-        //searches for teachers that do not exist
-        assertFalse(Teacher.containsTeacher(01));
-        assertFalse(Teacher.containsTeacher(1701));
-    }
-
-    @Test
-    public void testReturnTeacher() {
-        //Getting teachers based on valid ids
-        Teacher Euologio2;
-        Euologio2 = Teacher.returnsTeacher(809);
-        assertEquals(eulogio, Euologio2);
-        Teacher Mickelsen2;
-        Mickelsen2 = Teacher.returnsTeacher(90);
-        assertEquals(mickelsen, Mickelsen2);
-        assertNotEquals(orjuela, Mickelsen2);
-        //Getting null based on and not existing id
-        Teacher Nicolas;
-        Nicolas = Teacher.returnsTeacher(110);
-        assertEquals(null, Nicolas);
-    }
 
     @Test
     public void testTeacherIsTeachingAndAddClass() {
         Teacher gyunay = new Teacher("Gyunay", "Kadirov", 1902829, "chess");
-        AcademyClass DSCI200 = new AcademyClass("DSCI200", null, "2022S");
-        AcademyClass DSCI203 = new AcademyClass("DSCI203", null, "2022S");
+        AcademyClass DSCI200 = new AcademyClass(2,"DSCI200", null, "2022S");
+        AcademyClass DSCI203 = new AcademyClass(3,"DSCI203", null, "2022S");
         //check for empty string
         assertFalse(gyunay.isTeacherTeaching(""));
         //tries to add null
@@ -157,8 +98,8 @@ class TeacherTest {
     @Test
     public void testIndexOfClass() {
         Teacher athena = new Teacher("Athena", "J", 1019920, "gyunay");
-        AcademyClass web101 = new AcademyClass("web101",null, "2022S");
-        AcademyClass web102 = new AcademyClass("web102", null, "2022S");
+        AcademyClass web101 = new AcademyClass(6,"web101",null, "2022S");
+        AcademyClass web102 = new AcademyClass(7,"web102", null, "2022S");
         athena.addClass(web101);
         athena.addClass(web102);
         //tries to search for a class that does not appear
@@ -171,10 +112,10 @@ class TeacherTest {
         assertEquals(1,athena.indexOfClass("web102"));
     }
 
-    @Test
+   @Test
     public void testingForArrayOfIds(){
-        MATH100 = new AcademyClass("Math100", null, "2020W");
-        COMP210 = new AcademyClass("COMP210", null, "2021W");
+        MATH100 = new AcademyClass(90,"Math100", null, "2020W");
+        COMP210 = new AcademyClass(189,"COMP210", null, "2021W");
         Teacher andres = new Teacher("Andres", "R", 18172, "carros");
         //Test for a teacher with no classes
         Object[][] resultArray = andres.listOfClassesId();
@@ -209,37 +150,7 @@ class TeacherTest {
 
     }
 
-    @Test
-    public void testRemoveTeachers() {
-        //fails to delete a teacher in a small list
-        assertFalse(Teacher.removeTeacher(190190));
-        //safely deletes from the front of the list
-        Teacher prof1 = new Teacher("Jadwiga", "R", 190190, "COMP132");
-        AcademyClass math126 = new AcademyClass("MATH126", prof1, "2020W");
-        math126.setTeacher(prof1);
-        assertTrue(Teacher.containsTeacher(prof1.getId()));
-        assertTrue(Teacher.removeTeacher(prof1.getId()));
-        assertFalse(Teacher.containsTeacher(190190));
-        //check the classes assign to the teacher are not null
-        assertNull(math126.getTeacher());
-        //safely deletes from the back of the list
-        Teacher dan = new Teacher("Dan", "Bergrud", 1901902, "MATH220");
-        Teacher mao = new Teacher("Mao", "Rubiano",91981, "Publicidad");
-        Teacher jiraiya = new Teacher("Joraiya", "N", 9090001, "Elelegido");
-        AcademyClass japn101 = new AcademyClass("JAPN101", jiraiya, "2022S");
-        AcademyClass wrds150 = new AcademyClass("WRDS150", jiraiya, "2022W");
-        AcademyClass engl161 = new AcademyClass("ENGL161", jiraiya, "2023W");
-        assertTrue(Teacher.containsTeacher(jiraiya.getId()));
-        assertTrue(Teacher.removeTeacher(jiraiya.getId()));
-        assertFalse(Teacher.containsTeacher(9090001));
-        //check the classes asign to the teacher are not null
-        assertNull(japn101.getTeacher());
-        assertNull(wrds150.getTeacher());
-        assertNull(engl161.getTeacher());
-        //fails to delete from a big list
-        assertFalse(Teacher.containsTeacher(190191092));
-        assertFalse(Teacher.removeTeacher(190191092));
-    }
+
 
 
 }

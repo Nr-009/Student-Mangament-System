@@ -6,6 +6,8 @@ import model.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -13,7 +15,6 @@ public class AcademyClassTest {
 
     private AcademyClass math100;
     private AcademyClass cpsc110;
-    private AcademyClass cpsc210;
     private AcademyClass cpsc121;
     private Student nicolas;
     private Student gyunay;
@@ -25,10 +26,9 @@ public class AcademyClassTest {
     public void setUp() {
         eulogio = new Teacher("Eulogio", "Garcia", 90, "fisica11");
         mickelsen = new Teacher("Mickelsen", "Ramirez", 100, "geometria8");
-        math100 = new AcademyClass("MATH100", null, "2020W");
-        cpsc110 = new AcademyClass("CPSC110", mickelsen, "2021W");
-        cpsc210 = new AcademyClass("CPSC210", eulogio, "2022W");
-        cpsc121 = new AcademyClass("CPSC121", null, "2021S");
+        math100 = new AcademyClass(0, "MATH100", null, "2020W");
+        cpsc110 = new AcademyClass(1,"CPSC110", mickelsen, "2021W");
+        cpsc121 = new AcademyClass(3, "CPSC121", null, "2021S");
         nicolas = new Student(20, "Nicolas", "Rubiano", "conoseeuir");
         gyunay = new Student(22, "Gynay", "kadirov", "Athena");
         carlitos = new Student(23, "Carlos", "Garcia", "Pokemon");
@@ -37,12 +37,15 @@ public class AcademyClassTest {
 
     @Test
     public void testConstructor() {
-        assertEquals( "MATH100", math100.getName());
-        assertEquals("CPSC110", cpsc110.getName() );
+        assertEquals(0,math100.getId());
+        assertEquals("MATH100", math100.getName());
         assertNull(math100.getTeacher());
-        assertEquals( mickelsen, cpsc110.getTeacher());
+        assertEquals("2020W", math100.getSession());
+        assertEquals(1,cpsc110.getId());
+        assertEquals("CPSC110", cpsc110.getName());
+        assertEquals(mickelsen,cpsc110.getTeacher());
         assertEquals("2021W", cpsc110.getSession());
-        assertEquals("2020W",math100.getSession());
+
 
     }
 
@@ -65,18 +68,12 @@ public class AcademyClassTest {
         murcia.addClass(math100);
         math100.addStudent(murcia);
         murcia.setGradeForClass("MATH100", 67);
-        assertEquals(67, math100.getAverageGrade());
+        assertEquals(67.333, math100.getAverageGrade(), 1);
     }
 
-    @Test
-    public void testSetSession() {
-        math100.setSession("2019W");
-        assertEquals("2019W", math100.getSession());
-        cpsc121.setSession("2022W");
-        assertEquals("2022W", cpsc121.getSession());
-    }
 
-    @Test
+
+   @Test
     public void testSetTeacherAndGetTeacher() {
         assertTrue(math100.setTeacher(eulogio));
         assertEquals(eulogio, math100.getTeacher());
@@ -104,32 +101,14 @@ public class AcademyClassTest {
         math100.addStudent(angel);
         math100.addStudent(gabo);
         assertFalse(math100.hasStudent(89));
-        //There is more than one student but it get it
-        assertTrue(math100.hasStudent(1908));
+       //There is more than one student but it get it
+       assertTrue(math100.hasStudent(1908));
     }
 
-    @Test
-    public void addStudent() {
-        //null case
-        assertFalse(math100.addStudent(null));
-        //Add one student
-        Student ana = new Student(198250, "Ana", "Flavia", "psycology");
-        Student clara = new Student(190190, "Clara", "Flavia", "comunism");
-        Student dj = new Student(19080, "D", "j", "Peru");
-        assertTrue(math100.addStudent(ana));
-        //Tries to add the same student more than once
-        assertEquals(1, math100.getNumOfStudents());
-        assertFalse(math100.addStudent(ana));
-        assertEquals(1, math100.getNumOfStudents());
-        //Adss more than one student succesfully;
-        assertTrue(math100.addStudent(clara));
-        assertEquals(2,math100.getNumOfStudents());
-        assertTrue(math100.addStudent(dj));
-        assertEquals(3, math100.getNumOfStudents());
-    }
+
 
     @Test
-    public void testSetGradeAndGetGrade() {
+    public void testSetGradeAndGetGradeStudent() {
         math100.addStudent(gyunay);
         gyunay.addClass(math100);
         math100.addStudent(nicolas);
@@ -166,7 +145,34 @@ public class AcademyClassTest {
     }
 
     @Test
-    public void testGetIndexOf() {
+    public void testSetSession() {
+        math100.setSession("2019W");
+        assertEquals("2019W", math100.getSession());
+        cpsc121.setSession("2022W");
+        assertEquals("2022W", cpsc121.getSession());
+    }
+    @Test
+    public void addStudent() {
+        //null case
+        assertFalse(math100.addStudent(null));
+        //Add one student
+        Student ana = new Student(198250, "Ana", "Flavia", "psycology");
+        Student clara = new Student(190190, "Clara", "Flavia", "comunism");
+        Student dj = new Student(19080, "D", "j", "Peru");
+        assertTrue(math100.addStudent(ana));
+        //Tries to add the same student more than once
+        assertEquals(1, math100.getNumOfStudents());
+        assertFalse(math100.addStudent(ana));
+        assertEquals(1, math100.getNumOfStudents());
+        //Adss more than one student succesfully;
+        assertTrue(math100.addStudent(clara));
+        assertEquals(2,math100.getNumOfStudents());
+        assertTrue(math100.addStudent(dj));
+        assertEquals(3, math100.getNumOfStudents());
+    }
+
+    @Test
+    public void testGetIndexOfStudent() {
         //tries to find a student when  the index does not exist and the database is empty
         assertEquals(-1, math100.getIndexStudent(90));
         //tries to find a student when the index is wrong but the data base is not empty
@@ -186,7 +192,7 @@ public class AcademyClassTest {
 
     @Test
     public void testDeleteStudent() {
-        Student valentina = new Student(1898, "Valentina", "Ramirez", "kokok");
+       Student valentina = new Student(1898, "Valentina", "Ramirez", "kokok");
         Student laura = new Student(192862, "Laura", "liliana", "hola");
         Student giorno = new Student(18178, "Giono", "Giovanna", "deusxmachina");
         //Requires clause
@@ -206,7 +212,7 @@ public class AcademyClassTest {
         assertFalse(valentina.hasClass("MATH100"));
         //Safely deletes another student
         assertTrue(math100.deleteStudent(giorno.getID()));
-        giorno.removeClass("MATH100");
+       giorno.removeClass("MATH100");
         assertEquals(1,math100.getNumOfStudents());
         assertFalse(giorno.hasClass("MATH100"));
     }
@@ -248,61 +254,25 @@ public class AcademyClassTest {
     }
 
     @Test
-    public void testIfAClassExist() {
-        //Negative id
-        assertFalse(AcademyClass.doesThisClassExist(-9));
-        //First class created
-        assertTrue(AcademyClass.doesThisClassExist(0));
-        //Some class later
-        assertTrue(AcademyClass.doesThisClassExist(2));
-        //Id non existing
-        assertFalse(AcademyClass.doesThisClassExist(1000));
+    public void testGetArrayOfStudents() {
+        //array is empty
+        List<Student> result =math100.getStudents();
+        assertEquals(0,result.size());
+        //array with one student
+        math100.addStudent(gyunay);
+        gyunay.addClass(math100);
+        result =math100.getStudents();
+        assertEquals(1,result.size());
+        assertEquals(gyunay,result.get(0));
+        //array with two students
+        math100.addStudent(nicolas);
+        nicolas.addClass(math100);
+        result = math100.getStudents();
+        assertEquals(2,result.size());
+        assertEquals(gyunay,result.get(0));
+        assertEquals(nicolas,result.get(1));
     }
 
-    @Test
-    public void testDeleteClassExist() {
-        AcademyClass newClass = new AcademyClass("CPSC221", null, "2023S");
-        //Tries to delete a class that does not exist
-        assertFalse(AcademyClass.removeClass(690));
-        assertFalse(AcademyClass.doesThisClassExist(690));
-        //Deletes a class safely from the start of  the classes
-        int idOfNewClass = newClass.getId();
-        assertTrue(AcademyClass.doesThisClassExist(newClass.getId()));
-        assertTrue(AcademyClass.removeClass(newClass.getId()));
-        assertFalse(AcademyClass.doesThisClassExist(idOfNewClass));
-
-
-
-    }
-
-    @Test
-    public void deleteClassesChecksStudentGrades() {
-        //Deletes a class from the back of the list of classes
-        Teacher piedra = new Teacher("Piedra", "E",91011111,"lokok");
-        AcademyClass cpsc213 = new AcademyClass("CPSC213", null, "2023S");
-        cpsc213.setTeacher(piedra);
-        piedra.addClass(cpsc213);
-        Student nicolas = new Student(190190, "Nicolas", "Rubiano", "anime");
-        Student andrea = new Student(10292082, "andrea", "b", "labiblia");
-        nicolas.addClass(cpsc213);
-        cpsc213.addStudent(nicolas);
-        andrea.addClass(cpsc213);
-        cpsc213.addStudent(andrea);
-        int idOf213 = cpsc213.getId();
-        assertTrue(AcademyClass.doesThisClassExist(cpsc213.getId()));
-        assertTrue(piedra.isTeacherTeaching("CPSC213"));
-        assertTrue(nicolas.hasClass("CPSC213"));
-        assertTrue(andrea.hasClass("CPSC213"));
-        assertTrue(AcademyClass.removeClass(cpsc213.getId()));
-        assertFalse(AcademyClass.doesThisClassExist(idOf213));
-        assertFalse(piedra.isTeacherTeaching("CPSC213"));
-        assertFalse(nicolas.hasClass("CPSC213"));
-        assertFalse(andrea.hasClass("CPSC213"));
-        //Fails to delete a class with a list big
-        assertFalse(AcademyClass.doesThisClassExist(90290));
-        assertFalse(AcademyClass.removeClass(90290));
-
-    }
 
 
 

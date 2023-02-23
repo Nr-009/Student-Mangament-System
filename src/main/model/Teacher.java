@@ -13,9 +13,6 @@ public class Teacher {
     private String fn;
     private String ln;
     private String password;
-    private static List<Teacher> allTeachers = new ArrayList<>();
-    private static List<Integer> allId = new ArrayList<>();
-    private static List<String> allPassworld = new ArrayList<>();
     private List<AcademyClass> allClasses = new ArrayList<>();
     private int numClasses;
 
@@ -23,18 +20,12 @@ public class Teacher {
     //Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
     //null values, and id of 626.
     public Teacher(String fn, String ln, int id, String password) {
-        if (!allId.contains(id)) {
-            this.fn = fn;
-            this.ln = ln;
-            this.id = id;
-            this.password = password;
-            allTeachers.add(this);
-            allId.add(this.id);
-            allPassworld.add(this.password);
-            numClasses = 0;
-        } else {
-            this.id = 626;
-        }
+        this.fn = fn;
+        this.ln = ln;
+        this.id = id;
+        this.password = password;
+        numClasses = 0;
+
     }
 
     //Modifies: This
@@ -67,52 +58,21 @@ public class Teacher {
     public int getId() {
         return id;
     }
-    //Modifies:This
-    //Effects: Produces true and modifies the password of the teacher if
-    // his or her last password is correct and the new password is not empty
-    // , otherwise produces false and does not change the password
 
-    public boolean setPassword(String lastP, String newP) {
-        if (password.equals(lastP) && newP != "") {
-            this.password = newP;
-            int index = allPassworld.indexOf(lastP);
-            allPassworld.set(index, newP);
-            return true;
-        } else {
-            return false;
-        }
+
+    //Effects: returns teh current password
+    public String getPassword() {
+        return password;
     }
 
-    //Effects: Produces true if the given id matches the correct password, otherwise false
-    public static boolean checkLogin(int id, String password) {
-        if (allId.contains(id)) {
-            int index = allId.indexOf(id);
-            return allPassworld.get(index).equals(password);
-        } else {
-            return false;
-        }
 
+    //Modifies: This
+    //Effects: Changes the current Password for the teacher
+    public boolean setPassword(String newP) {
+        this.password = newP;
+        return true;
     }
 
-    //Effects:Produces true if the id of teacher is on the system, otherwise false
-    public static boolean containsTeacher(int id) {
-        return allId.contains(id);
-
-    }
-
-    //Effects: Produces the reference to the teacher given the id if the id does not exit
-    //produces null
-    public static Teacher returnsTeacher(int id) {
-        if (allId.contains(id)) {
-            int index = allId.indexOf(id);
-            Teacher newTeacher = allTeachers.get(index);
-            return newTeacher;
-        } else {
-            return null;
-        }
-
-
-    }
 
     //Effects: Produces true if the teacher is teaching the class otherwise false
     public boolean isTeacherTeaching(String s) {
@@ -186,54 +146,16 @@ public class Teacher {
         return arrayClasses;
     }
 
-    //Modifies: This
-    //Effects: if the id is valid it deletes the teacher and all the classes he was teaching set the teacher field to
-    //null
-    public static boolean  removeTeacher(int id) {
-        if (!Teacher.containsTeacher(id)) {
-            return false;
-        }
-        Teacher currentTeacher = Teacher.returnsTeacher(id);
-        List<AcademyClass> currentClasses = currentTeacher.allClasses;
-        if (!currentClasses.isEmpty()) {
-            for (AcademyClass s : currentClasses) {
-                s.setTeacher(null);
-            }
-        }
-        int indexOfTeacher = allId.indexOf(id);
-        allId.remove(indexOfTeacher);
-        allPassworld.remove(indexOfTeacher);
-        allTeachers.remove(indexOfTeacher);
-        return true;
+    public List<AcademyClass> getAllClasses() {
+        return allClasses;
     }
 
-    public static Object[][] displayAllTeachers() {
-        int size = allTeachers.size() + 1;
-        Object[][] resultArray = new Object[size][4];
-        resultArray[0][0] = "First Name";
-        resultArray[0][1] = "Last Name";
-        resultArray[0][2] = "Id";
-        resultArray[0][3] = "NumberOfClasses";
-        int row = 1;
-        for (Teacher t :allTeachers) {
-            resultArray[row][0] = t.getFn();
-            resultArray[row][1] = t.getLn();
-            resultArray[row][2] = t.getId();
-            resultArray[row][3] = t.allClasses.size();
-            row++;
-        }
 
-        return resultArray;
-    }
-
-    //Todo: debug the shit out of the new options
-
-
-
-
-
-
-
+    //Todo: Change the whole test suite for the Students
+    //Todo: Change the whole test suite for the Teachers
+    //Todo: Change teh whole test suite for the AcademyClass
+    //Todo: Create a test suite for the Data System
+    //Todo: Change the whole Ui
 
 
 
