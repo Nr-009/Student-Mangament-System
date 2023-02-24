@@ -16,5 +16,7 @@ this starting academies have a **reliable**, **free** and **easy** system to tra
 - As a student I want to see my grades and drop one of my classes
 - As a student I want to edit my information and edit my address
 - As a teacher I want to assign a grade to a specific student
+- As a teacher I want to be able to save the changes I have done to my classes.
+- As a student I want to be able to load the previous changes of my registration 
 
 <img alt="Photo of the Academy" height="250" src="https://greekreporter.com/wp-content/uploads/2018/11/knowledge-e1542040512810.jpg" width="500"/>

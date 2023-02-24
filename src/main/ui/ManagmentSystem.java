@@ -266,7 +266,7 @@ public class ManagmentSystem {
         setUpCarlitos();
         setUpYotas();
         setUpYotas2();
-        //runManagementSystem();
+        runManagementSystem();
 
     }
 
@@ -445,6 +445,7 @@ public class ManagmentSystem {
             if (option2 != "") {
                 studentMenu(id);
             }
+
         }
 
     }
@@ -858,6 +859,12 @@ public class ManagmentSystem {
 
     }
 
+    //Effects: prints a message for the final setting grade method
+    public void miniMessageFinalSettingGrade() {
+        System.out.println("Please enter G for setting the grade or enter A for absences");
+        System.out.println("Any other key will send you back");
+    }
+
     //Modifies: This
     //Effects: Sets the correct grade for the student
     public void finalSettingGrade(int idOfTeacher, int idOfStudent, int isOfClass) {
@@ -865,8 +872,7 @@ public class ManagmentSystem {
         Student currentStudent = alldata.getStudent(idOfStudent);
         AcademyClass currentClass = alldata.getAcademyClass(isOfClass);
         lineDivider();
-        System.out.println("Please enter G for setting the grade or enter A for absences");
-        System.out.println("Any other key will send you back");
+        miniMessageFinalSettingGrade();
         String option = myScanner.next();
         if (option.equalsIgnoreCase("G")) {
             System.out.println("Please input the grade");
@@ -882,7 +888,8 @@ public class ManagmentSystem {
             }
             System.out.println("Absences Set");
             goBackToIncrementAbsencesOrSetGrade(idOfTeacher);
-
+        } else {
+            setGradeOrIncrementAbsencesForStudent(idOfTeacher);
         }
     }
 
@@ -1077,9 +1084,9 @@ public class ManagmentSystem {
             System.out.println("Please insert the session for teh Class");
             String session = myScanner.next();
             int idOfNewClass = alldata.addAcademyClass(name,validTeacher,session);
+            connectClassAndTeacher(id,idOfNewClass);
             System.out.println("Class Created");
-            System.out.println("Class has the id of " + idOfNewClass);
-            System.out.println("Press any key to go back");
+            System.out.println("Class has the id of " + idOfNewClass + "\n Press any key to go back");
             String option4 = myScanner.next();
             teacherMenu(id);
         } else {
@@ -1110,6 +1117,7 @@ public class ManagmentSystem {
         }
     }
 
+
     //Effects: returns a teacher id that is valid to assign to the new class
     public int getAGoodIdTeacher() {
         boolean condition = true;
@@ -1126,21 +1134,18 @@ public class ManagmentSystem {
         return 0;
     }
 
-    //Effects: returns a teacher id that is valid to assign to the new class
-    public int getAGoodIdTeacher2() {
-        boolean condition = true;
-        while (condition) {
-            int x = gettingAInt();
-            if (x >= 0 && !alldata.hasIDTeacher(x)) {
-                return x;
-            } else if (alldata.hasIdStudent(x)) {
-                System.out.println("The id is already taken please try again");
-            } else {
-                System.out.println("Please try again");
-            }
+    //Modifies: This
+    //Effects: connects teh references of the teacher and the class
+    public void connectClassAndTeacher(int idTeacher, int idClass) {
+        Teacher currentTeacher = alldata.getTeacher(idTeacher);
+        AcademyClass currentClass = alldata.getAcademyClass(idClass);
+        currentClass.setTeacher(currentTeacher);
+        if (currentTeacher != null) {
+            currentTeacher.addClass(currentClass);
         }
-        return 0;
+
     }
+
 
     //Section: Delete Class
     //Modifies: This
