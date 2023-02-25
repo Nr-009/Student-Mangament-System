@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ public class FileReader {
     //Effects: reads source file as string and return it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-        try (Stream<String> streamOfString = Files.lines(Path.of(source), StandardCharsets.UTF_8)) {
+        try (Stream<String> streamOfString = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             streamOfString.forEach(s -> contentBuilder.append(s));
         }
 
