@@ -8,17 +8,21 @@ for the students
 
 package model;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Student {
 
     private int id;
     private List<AcademyClass> listOfClasses = new ArrayList<>(); //classes;
+    private List<Integer> allIDOfClasses = new ArrayList<>();
     private String fn;
     private String ln;
     private String password;
-    private String adress;
+    private String address;
     private List<Integer> listOfGrades = new ArrayList<>();
     private List<Integer> listOfAbscences = new ArrayList<>();
     private int numOfClasses = 0;
@@ -39,12 +43,12 @@ public class Student {
     //Modifies: This
     //Effects: changes the address of the given student
     public void setAddress(String s) {
-        this.adress = s;
+        this.address = s;
     }
 
     //Effects: returns the address of the given student
     public String getAddress() {
-        return this.adress;
+        return this.address;
     }
 
     //Modifies: This
@@ -219,5 +223,64 @@ public class Student {
         return arrayOfGrades;
     }
 
+    //Todo:Implements test for this
+    //Effects: Sets the ids of classes
+    public void setAllIDOfClasses(List<Integer> s) {
+        this.allIDOfClasses = s;
+    }
 
+    //Todo: implement test for this
+    //Modifies: This
+    //Effects: returns the id of all teh classes
+    public List<Integer> getAllIDOfClasses() {
+        return allIDOfClasses;
+    }
+
+    //Todo: implement test for this
+    //Effects: returns a List with all the id of the current Classes;
+    private List<Integer> allClassesTransformToJason() {
+        List<Integer> resultList = new ArrayList<>();
+        for (AcademyClass a: listOfClasses) {
+            resultList.add(a.getId());
+        }
+        return resultList;
+    }
+
+    //Todo: implement test for this
+    public JSONObject toJson() {
+        JSONObject currentStudent = new JSONObject();
+        currentStudent.put("id",id);
+        currentStudent.put("ListOfAllIdOfClasses",allClassesTransformToJason());
+        currentStudent.put("fn",fn);
+        currentStudent.put("ln",ln);
+        currentStudent.put("password",password);
+        currentStudent.put("address", address);
+        currentStudent.put("listOfGrades",listOfGrades);
+        currentStudent.put("listOfAbsences",listOfAbscences);
+        currentStudent.put("numberOfClasses",numOfClasses);
+        return currentStudent;
+
+    }
+
+    public Student(int id,String fn,String ln, String password,List<Integer> lg, List<Integer> la) {
+        this.id = id;
+        this.fn = fn;
+        this.ln = ln;
+        this.password = password;
+        this.listOfGrades = lg;
+        this.listOfAbscences = la;
+    }
+
+    public List<Integer> getListOfGrades() {
+        return Collections.unmodifiableList(listOfGrades);
+    }
+
+    public List<Integer> getListOfAbscences() {
+        return Collections.unmodifiableList(listOfAbscences);
+    }
+
+    public void addClasForReading(AcademyClass s) {
+        listOfClasses.add(s);
+        numOfClasses++;
+    }
 }

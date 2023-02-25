@@ -5,16 +5,20 @@ represents all the classes it has. The class three static field where all the id
 
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Teacher {
+public class Teacher  {
     private int id;
     private String fn;
     private String ln;
     private String password;
     private List<AcademyClass> allClasses = new ArrayList<>();
     private int numClasses;
+    private List<Integer> allIdsOfTheCurrentClasses = new ArrayList<>();
 
     //Effects:If the id is not present,
     //Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
@@ -146,16 +150,46 @@ public class Teacher {
         return arrayClasses;
     }
 
+    //TODO: test this method
+    //Effects: changes the allClasses List with a list with only the id of the classes
+    private List<Integer> allClassesTransformToJason() {
+        List<Integer> resultList = new ArrayList<>();
+        for (AcademyClass a: allClasses) {
+            resultList.add(a.getId());
+        }
+        return resultList;
+    }
+
     public List<AcademyClass> getAllClasses() {
         return allClasses;
     }
 
+    //TODO: test this method
+    public JSONObject toJson() {
+        JSONObject currentTeacher = new JSONObject();
+        currentTeacher.put("fn",fn);
+        currentTeacher.put("ln",ln);
+        currentTeacher.put("id",id);
+        currentTeacher.put("password",password);
+        currentTeacher.put("numClasses",numClasses);
+        JSONArray allClasses = new JSONArray(allClassesTransformToJason());
+        currentTeacher.put("allIdsOfTheCurrentClasses",allClasses);
+        return currentTeacher;
+    }
 
-    //Todo: Change the whole test suite for the Students
-    //Todo: Change the whole test suite for the Teachers
-    //Todo: Change teh whole test suite for the AcademyClass
-    //Todo: Create a test suite for the Data System
-    //Todo: Change the whole Ui
+    //Todo: Test this method
+    //Modifies: This
+    //Effects: Set a list with all the id that the teacher had
+    public void setAllClassesIds(List<Integer> s) {
+        this.allIdsOfTheCurrentClasses = s;
+
+    }
+
+    //Todo: test this method
+    //Effects: Returns a list with all the ids that the teacher had
+    public List<Integer> getAllClassesIds() {
+        return allIdsOfTheCurrentClasses;
+    }
 
 
 

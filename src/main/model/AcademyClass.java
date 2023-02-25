@@ -6,6 +6,9 @@ the id to avoid repetition, a list of all the classes and a list of all ids
 
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +16,12 @@ public class AcademyClass {
     private String name;
     private int id;
     private Teacher teacher;
+    private int idOfTeacher;
     private List<Student> students = new ArrayList<>();
+    private List<Integer> allIdStudent = new ArrayList<>();
     private String sesion;
     private int numOfStudents;
+
 
     //Effects: Constructs a class with a given name teacher and session. It initializes the list of Students as empty
     public AcademyClass(int id,String name, Teacher t, String session) {
@@ -180,19 +186,61 @@ public class AcademyClass {
         return myArray;
     }
 
+    //Todo: test this method
+    //Effects: return a list with all the Ids of the student used for ToJSON method
+    private List<Integer> allStudentsTransformToJson() {
+        List<Integer> resultList =  new ArrayList<>();
+        for (Student  s: students) {
+            resultList.add(s.getID());
+        }
+        return resultList;
+    }
+
     public List<Student> getStudents() {
         return this.students;
     }
 
+    //Todo:Test this method
+    public JSONObject toJson() {
+        JSONObject currentAcademyClass = new JSONObject();
+        currentAcademyClass.put("name",name);
+        currentAcademyClass.put("id",id);
+        int idOfTeacher = -2;
+        if (teacher != null) {
+            idOfTeacher = teacher.getId();
+        } else {
+            idOfTeacher = -1;
+        }
+        currentAcademyClass.put("IdTeacher",idOfTeacher);
+        JSONArray allStudent =  new JSONArray(allStudentsTransformToJson());
+        currentAcademyClass.put("IdsOfAllStudents",allStudent);
+        currentAcademyClass.put("session",sesion);
+        currentAcademyClass.put("numOfStudents",numOfStudents);
+        return currentAcademyClass;
 
+    }
 
+    //Todo: test this method
+    //Modifies: This
+    //Effects: Sets all the Id Students
+    public void setAllIdStudent(List<Integer> s) {
+        this.allIdStudent = s;
+    }
 
+    //Todo: test this method
+    //Effects: returns teh list of all the id of students
+    public List<Integer> getAllIdStudent() {
+        return this.allIdStudent;
+    }
 
+    //Modifies: This
+    // Effects: sets the id of the teacher
+    public void setIdOfTeacher(int idOfTeacher) {
+        this.idOfTeacher = idOfTeacher;
+    }
 
-
-
-
-
-
-
+    //Effects: sets the id of the teacher
+    public int getIdOfTeacher() {
+        return idOfTeacher;
+    }
 }

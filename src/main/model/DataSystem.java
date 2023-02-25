@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -274,6 +277,92 @@ public class DataSystem {
         }
         return resultArray;
     }
+
+    public JSONObject toJson() {
+        JSONObject currentDataSystem = new JSONObject();
+        //students
+        currentDataSystem.put("ListOfAllStudents",studentsToJson());
+
+        JSONArray listOfIDStudents2 = new JSONArray(listOfIdStudents);
+        currentDataSystem.put("ListOfIDStudents",listOfIDStudents2);
+
+        JSONArray listOfPasswordStudents2 = new JSONArray(listOfPasswordStudents);
+        currentDataSystem.put("listOfPasswordStudents",listOfPasswordStudents2);
+
+        currentDataSystem.put("counterStudents",counterStudents);
+
+        //Classes
+        currentDataSystem.put("listOfAllClasses",classesToJson());
+
+        JSONArray listOfAllIdClasses2 = new JSONArray(listOfAllIdClasses);
+        currentDataSystem.put("listOfAllIdClasses",listOfAllIdClasses2);
+
+        currentDataSystem.put("counterAcademyClasses",counterAcademyClasses);
+
+        //Teachers
+        currentDataSystem.put("listOfAllTeachers",teacherToJson());
+
+        JSONArray listOfAllIdTeacher2 = new JSONArray(listOfAllIdTeacher);
+        currentDataSystem.put("listOfAllIdTeacher",listOfAllIdTeacher2);
+
+        JSONArray listOfAllPasswordTeachers2 = new JSONArray(listOfAllPasswordTeachers);
+        currentDataSystem.put("listOfAllPasswordTeachers",listOfAllPasswordTeachers2);
+
+        currentDataSystem.put("counterTeacher",counterTeacher);
+
+        //return statements
+        return currentDataSystem;
+    }
+
+    public JSONArray studentsToJson() {
+        JSONArray resultArray = new JSONArray();
+        for (Student s: listOfStudents) {
+            resultArray.put(s.toJson());
+        }
+        return resultArray;
+    }
+
+    public JSONArray teacherToJson() {
+        JSONArray resultArray = new JSONArray();
+        for (Teacher t: listOfAllTeachers) {
+            resultArray.put(t.toJson());
+        }
+        return resultArray;
+    }
+
+    public JSONArray classesToJson() {
+        JSONArray resultArray = new JSONArray();
+        for (AcademyClass a: listOfAllClasses) {
+            resultArray.put(a.toJson());
+        }
+        return resultArray;
+    }
+
+    public DataSystem(List<Student> listOfStudents,
+                      List<Integer> listOfIdStudents,
+                      List<String> listOfPasswordStudents,
+                      int counterStudents,
+                      List<AcademyClass> listOfAllClasses,
+                      List<Integer> listOfAllIdClasses,
+                      int counterAcademyClasses,
+                      List<Teacher> listOfAllTeachers,
+                      List<Integer> listOfAllIdTeacher,
+                      List<String> listOfAllPasswordTeachers,
+                      int counterTeacher
+                      ) {
+        this.listOfStudents = listOfStudents;
+        this.listOfIdStudents = listOfIdStudents;
+        this.listOfPasswordStudents = listOfPasswordStudents;
+        this.counterStudents = counterStudents;
+        this.listOfAllClasses = listOfAllClasses;
+        this.listOfAllIdClasses = listOfAllIdClasses;
+        this.counterAcademyClasses = counterAcademyClasses;
+        this.listOfAllTeachers = listOfAllTeachers;
+        this.listOfAllIdTeacher = listOfAllIdTeacher;
+        this.listOfAllPasswordTeachers = listOfAllPasswordTeachers;
+        this.counterTeacher = counterTeacher;
+    }
+
 
 
 
