@@ -118,8 +118,6 @@ public class DataSystem {
         return counterAcademyClasses - 1;
     }
 
-
-
     //Effects: returns the reference to teh academy class if the given id exits
     public AcademyClass getAcademyClass(int id) {
         for (AcademyClass a : listOfAllClasses) {
@@ -261,6 +259,7 @@ public class DataSystem {
         return true;
     }
 
+    //Effects: produces the array of all the teachers currently in the system
     public Object[][] arrayAllTeachers() {
         Object[][] resultArray = new Object[listOfAllTeachers.size() + 1][4];
         resultArray[0][0] = "First Name";
@@ -278,6 +277,7 @@ public class DataSystem {
         return resultArray;
     }
 
+    //Effects: Produces the correct jason object based on the current DataSystem
     public JSONObject toJson() {
         JSONObject currentDataSystem = new JSONObject();
         //students
@@ -314,6 +314,7 @@ public class DataSystem {
         return currentDataSystem;
     }
 
+    //Effects: Produce teh JSONArray of all the students in the system
     public JSONArray studentsToJson() {
         JSONArray resultArray = new JSONArray();
         for (Student s: listOfStudents) {
@@ -322,6 +323,7 @@ public class DataSystem {
         return resultArray;
     }
 
+    //Effects: Produces the JSONArray of all teachers in the system
     public JSONArray teacherToJson() {
         JSONArray resultArray = new JSONArray();
         for (Teacher t: listOfAllTeachers) {
@@ -330,6 +332,7 @@ public class DataSystem {
         return resultArray;
     }
 
+    //Effects: produces the JSONArray of all the currentClasses in the system
     public JSONArray classesToJson() {
         JSONArray resultArray = new JSONArray();
         for (AcademyClass a: listOfAllClasses) {
@@ -338,6 +341,8 @@ public class DataSystem {
         return resultArray;
     }
 
+    //Modifies: This
+    //Effects: Creates a new DataSystem for when reading and writing JSONObject
     public DataSystem(List<Student> listOfStudents,
                       List<Integer> listOfIdStudents,
                       List<String> listOfPasswordStudents,

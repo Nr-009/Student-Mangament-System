@@ -95,9 +95,9 @@ public class AcademyClass {
 
 
     }
+
     //Effects:Sets the grade for a given student, if the student is not on the system, or the grade is
     // less than 0 or greater than 100 then it produces false
-
     public boolean setGradeStudent(int id, int grade) {
         if (hasStudent(id) && grade >= 0 && grade <= 100) {
             int index = getIndexStudent(id);
@@ -186,8 +186,8 @@ public class AcademyClass {
         return myArray;
     }
 
-    //Todo: test this method
-    //Effects: return a list with all the Ids of the student used for ToJSON method
+
+    //Effects: return a list of students with all the Ids of the student used for ToJSON method
     private List<Integer> allStudentsTransformToJson() {
         List<Integer> resultList =  new ArrayList<>();
         for (Student  s: students) {
@@ -196,11 +196,12 @@ public class AcademyClass {
         return resultList;
     }
 
+    //Effects: returns the list of all students
     public List<Student> getStudents() {
         return this.students;
     }
 
-    //Todo:Test this method
+    //Effects:Returns the the current Student as a jason Object
     public JSONObject toJson() {
         JSONObject currentAcademyClass = new JSONObject();
         currentAcademyClass.put("name",name);
@@ -228,7 +229,7 @@ public class AcademyClass {
     }
 
     //Todo: test this method
-    //Effects: returns teh list of all the id of students
+    //Effects: returns the list of all the id of students
     public List<Integer> getAllIdStudent() {
         return this.allIdStudent;
     }

@@ -126,6 +126,9 @@ public class ManagmentSystem {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the nicolas field with initial grades and absences for the classes of CPSC110, CPSC121,
+    // CPSC210, AND DSCI 100. Also adds the addressTo edit your information Press E to the nicolas field
     public void setupNicolas2() {
         Student nicolas = alldata.getStudent(nicolasStudentId);
         AcademyClass cpsc210 = alldata.getAcademyClass(cpsc210AcademyClassId);
@@ -235,6 +238,9 @@ public class ManagmentSystem {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the Yotas field with initial grades and absences for the classes of CPSC121, CPSC210,
+    // MATH101, DSCI100 and PHIL100.
     public void setUpYotas2() {
         Student yotas = alldata.getStudent(yotasStudentId);
         AcademyClass dsci100 = alldata.getAcademyClass(dsci100AcademyClassId);
@@ -483,6 +489,7 @@ public class ManagmentSystem {
     public void droppingAClass(int id) {
         Student currentStudent = alldata.getStudent(id);
         lineDivider();
+        printingAnArray(currentStudent.arrayGrades());
         System.out.println("Please enter the id of the class you wanna drop");
         int classId = gettingAInt();
         AcademyClass currentClass = alldata.getAcademyClass(classId);
@@ -629,6 +636,7 @@ public class ManagmentSystem {
         choosingAnOption(id);
     }
 
+    //Effects: send teh Teacher to the given menu based on the option they choose
     public void choosingAnOption(int id) {
         Scanner myScanner = new Scanner(System.in);
         String option = myScanner.next();

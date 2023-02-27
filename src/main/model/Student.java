@@ -223,20 +223,18 @@ public class Student {
         return arrayOfGrades;
     }
 
-    //Todo:Implements test for this
     //Effects: Sets the ids of classes
     public void setAllIDOfClasses(List<Integer> s) {
         this.allIDOfClasses = s;
     }
 
-    //Todo: implement test for this
     //Modifies: This
     //Effects: returns the id of all teh classes
     public List<Integer> getAllIDOfClasses() {
         return allIDOfClasses;
     }
 
-    //Todo: implement test for this
+
     //Effects: returns a List with all the id of the current Classes;
     private List<Integer> allClassesTransformToJason() {
         List<Integer> resultList = new ArrayList<>();
@@ -247,6 +245,7 @@ public class Student {
     }
 
     //Todo: implement test for this
+    //Effects: returns the jason objects based on the currentDataSystem
     public JSONObject toJson() {
         JSONObject currentStudent = new JSONObject();
         currentStudent.put("id",id);
@@ -262,6 +261,9 @@ public class Student {
 
     }
 
+    //Requires: Cna not be used to add a student normally apart from reading and writing a jeason file
+    //Modifies: This
+    //Effects: Creates a new student and adds it to the system
     public Student(int id,String fn,String ln, String password,List<Integer> lg, List<Integer> la) {
         this.id = id;
         this.fn = fn;
@@ -271,14 +273,19 @@ public class Student {
         this.listOfAbscences = la;
     }
 
+    //Effects: returns the list of grades of the current Students
     public List<Integer> getListOfGrades() {
         return Collections.unmodifiableList(listOfGrades);
     }
 
+    //Effects: returns the list of absences
     public List<Integer> getListOfAbscences() {
         return Collections.unmodifiableList(listOfAbscences);
     }
 
+    //Requires it is not teh correct way to add a class during the ui, apart from teh jason files
+    //Modifies: This
+    //Effects: adds a class when reading and writting a jason Class
     public void addClasForReading(AcademyClass s) {
         listOfClasses.add(s);
         numOfClasses++;
