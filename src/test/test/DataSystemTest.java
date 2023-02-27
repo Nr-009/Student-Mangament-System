@@ -224,7 +224,6 @@ public class DataSystemTest {
 
     }
 
-    //Todo: deleteTeacher Method
     //Section: AcademyClass
 
     @Test

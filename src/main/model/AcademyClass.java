@@ -221,14 +221,14 @@ public class AcademyClass {
 
     }
 
-    //Todo: test this method
+
     //Modifies: This
     //Effects: Sets all the Id Students
     public void setAllIdStudent(List<Integer> s) {
         this.allIdStudent = s;
     }
 
-    //Todo: test this method
+
     //Effects: returns the list of all the id of students
     public List<Integer> getAllIdStudent() {
         return this.allIdStudent;

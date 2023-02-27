@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DataSystem {
@@ -368,7 +369,20 @@ public class DataSystem {
         this.counterTeacher = counterTeacher;
     }
 
+    //Effects: returns an unmodifiable list of all the students in the DataSystem
+    public List getListOfStudents() {
+        return Collections.unmodifiableList(listOfStudents);
+    }
 
+    //Effects: returns an unmodifiable list of all the teachers in the DataSystem
+    public List getListOfTeacher() {
+        return Collections.unmodifiableList(listOfAllTeachers);
+    }
+
+    //Effects: returns an unmodifiable list of all the classes in the DataSystem
+    public List getListOfClasses() {
+        return Collections.unmodifiableList(listOfAllClasses);
+    }
 
 
 

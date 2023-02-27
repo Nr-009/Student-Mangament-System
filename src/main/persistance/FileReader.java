@@ -114,6 +114,7 @@ public class FileReader {
 
     }
 
+    //Effects: returns a data system based on the JSONObjects description given
     @SuppressWarnings("methodlength")
     private DataSystem parseToDataSystem(JSONObject dataObject) {
         List<Student> allStudents = readStudentsList(dataObject.getJSONArray("ListOfAllStudents"));
@@ -152,6 +153,8 @@ public class FileReader {
         return result;
     }
 
+    //Modifies: DataSystem
+    //Effects: Matches all the references for given student to its respective class
     private void setReferencesStudents(Student student, DataSystem dataSystem) {
         for (int classId: student.getAllIDOfClasses()) {
             student.addClasForReading(dataSystem.getAcademyClass(classId));
@@ -160,7 +163,9 @@ public class FileReader {
         student.setAllIDOfClasses(newListOfIds);
     }
 
-
+    //Modifies: DataSystem
+    //Effects: matches all the references for the given class to each student they have and their given teacher if
+    // it exits
     private void setReferencesAcademyClass(AcademyClass academyClass, DataSystem dataSystem) {
         for (int studentsId: academyClass.getAllIdStudent()) {
             academyClass.addStudent(dataSystem.getStudent(studentsId));
@@ -175,6 +180,8 @@ public class FileReader {
         academyClass.setAllIdStudent(newListOfIds);
     }
 
+    //Modifies: dataSystem
+    //Effects: matches all the references of the teacher to the given classes
     private void setReferencesTeacher(Teacher teacher, DataSystem dataSystem) {
         for (int classId: teacher.getAllClassesIds()) {
             teacher.addClass(dataSystem.getAcademyClass(classId));
@@ -183,7 +190,7 @@ public class FileReader {
         teacher.setAllClassesIds(newListOfIds);
     }
 
-
+    //Effects: returns a list with all the students based on the JSONArray
     private List<Student> readStudentsList(JSONArray s) {
         List<Student> result = new ArrayList<>();
         for (Object jason : s) {
@@ -193,6 +200,7 @@ public class FileReader {
         return result;
     }
 
+    //Effects: returns a list with all the Teacher based on the JSONArray
     private List<Teacher> readTeacherList(JSONArray jsonArray) {
         List<Teacher> result = new ArrayList<>();
         for (Object o : jsonArray) {
@@ -202,6 +210,7 @@ public class FileReader {
         return result;
     }
 
+    //Effects: returns a list with all the AcademyClasses based on the JSONArray
     private List<AcademyClass> readAcademyClassList(JSONArray jsonArray) {
         List<AcademyClass> result = new ArrayList<>();
         for (Object o : jsonArray) {
@@ -211,6 +220,7 @@ public class FileReader {
         return result;
     }
 
+    //Effects: returns a list with all the strings based on the JSONArray
     private List<String> toStringList(JSONArray jsonArray) {
         List<String> result = new ArrayList<>();
         for (Object o : jsonArray) {

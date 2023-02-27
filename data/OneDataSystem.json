@@ -1,1 +1,135 @@
-{"ListOfIDStudents":[0,1,2],"ListOfAllStudents":[{"listOfAbsences":[0],"ln":"Rubiano","password":"Anime","listOfGrades":[50],"ListOfAllIdOfClasses":[0],"fn":"Nicolas","numberOfClasses":1,"id":0},{"listOfAbsences":[1,1],"ln":"Pizarro","password":"Medicina","listOfGrades":[70,90],"ListOfAllIdOfClasses":[0,1],"fn":"David","numberOfClasses":2,"id":1},{"listOfAbsences":[4,0,0],"ln":"Piedrahita","password":"juliana","listOfGrades":[80,99,100],"ListOfAllIdOfClasses":[0,1,2],"fn":"Santiago","numberOfClasses":3,"id":2}],"counterAcademyClasses":3,"counterTeacher":2,"listOfAllPasswordTeachers":["math","computer"],"listOfPasswordStudents":["Anime","Medicina","juliana"],"listOfAllIdClasses":[0,1,2],"listOfAllClasses":[{"numOfStudents":3,"IdTeacher":0,"IdsOfAllStudents":[0,1,2],"session":"2022S","name":"MATH200","id":0},{"numOfStudents":2,"IdTeacher":0,"IdsOfAllStudents":[1,2],"session":"2022S","name":"MATH220","id":1},{"numOfStudents":1,"IdTeacher":1,"IdsOfAllStudents":[2],"session":"2022S","name":"CPSC221","id":2}],"listOfAllIdTeacher":[0,1],"counterStudents":3,"listOfAllTeachers":[{"allIdsOfTheCurrentClasses":[0,1],"ln":"Young-Heon","password":"math","fn":"Kim","id":0,"numClasses":2},{"allIdsOfTheCurrentClasses":[2],"ln":"Heeran","password":"computer","fn":"Cindy","id":1,"numClasses":1}]}
+{
+    "ListOfIDStudents": [
+        0,
+        1,
+        2
+    ],
+    "ListOfAllStudents": [
+        {
+            "listOfAbsences": [0],
+            "ln": "Rubiano",
+            "password": "Anime",
+            "listOfGrades": [50],
+            "ListOfAllIdOfClasses": [0],
+            "fn": "Nicolas",
+            "numberOfClasses": 1,
+            "id": 0
+        },
+        {
+            "listOfAbsences": [
+                1,
+                1
+            ],
+            "ln": "Pizarro",
+            "password": "Medicina",
+            "listOfGrades": [
+                70,
+                90
+            ],
+            "ListOfAllIdOfClasses": [
+                0,
+                1
+            ],
+            "fn": "David",
+            "numberOfClasses": 2,
+            "id": 1
+        },
+        {
+            "listOfAbsences": [
+                4,
+                0,
+                0
+            ],
+            "ln": "Piedrahita",
+            "password": "juliana",
+            "listOfGrades": [
+                80,
+                99,
+                100
+            ],
+            "ListOfAllIdOfClasses": [
+                0,
+                1,
+                2
+            ],
+            "fn": "Santiago",
+            "numberOfClasses": 3,
+            "id": 2
+        }
+    ],
+    "counterAcademyClasses": 3,
+    "counterTeacher": 2,
+    "listOfAllPasswordTeachers": [
+        "math",
+        "computer"
+    ],
+    "listOfPasswordStudents": [
+        "Anime",
+        "Medicina",
+        "juliana"
+    ],
+    "listOfAllIdClasses": [
+        0,
+        1,
+        2
+    ],
+    "listOfAllClasses": [
+        {
+            "numOfStudents": 3,
+            "IdTeacher": 0,
+            "IdsOfAllStudents": [
+                0,
+                1,
+                2
+            ],
+            "session": "2022S",
+            "name": "MATH200",
+            "id": 0
+        },
+        {
+            "numOfStudents": 2,
+            "IdTeacher": 0,
+            "IdsOfAllStudents": [
+                1,
+                2
+            ],
+            "session": "2022S",
+            "name": "MATH220",
+            "id": 1
+        },
+        {
+            "numOfStudents": 1,
+            "IdTeacher": 1,
+            "IdsOfAllStudents": [2],
+            "session": "2022S",
+            "name": "CPSC221",
+            "id": 2
+        }
+    ],
+    "listOfAllIdTeacher": [
+        0,
+        1
+    ],
+    "counterStudents": 3,
+    "listOfAllTeachers": [
+        {
+            "allIdsOfTheCurrentClasses": [
+                0,
+                1
+            ],
+            "ln": "Young-Heon",
+            "password": "math",
+            "fn": "Kim",
+            "id": 0,
+            "numClasses": 2
+        },
+        {
+            "allIdsOfTheCurrentClasses": [2],
+            "ln": "Heeran",
+            "password": "computer",
+            "fn": "Cindy",
+            "id": 1,
+            "numClasses": 1
+        }
+    ]
+}

@@ -150,7 +150,7 @@ public class Teacher  {
         return arrayClasses;
     }
 
-    //TODO: test this method
+
     //Effects: changes the allClasses List with a list with only the id of the classes
     private List<Integer> allClassesTransformToJason() {
         List<Integer> resultList = new ArrayList<>();
@@ -164,7 +164,7 @@ public class Teacher  {
         return allClasses;
     }
 
-    //TODO: test this method
+
     public JSONObject toJson() {
         JSONObject currentTeacher = new JSONObject();
         currentTeacher.put("fn",fn);
@@ -177,7 +177,7 @@ public class Teacher  {
         return currentTeacher;
     }
 
-    //Todo: Test this method
+
     //Modifies: This
     //Effects: Set a list with all the id that the teacher had
     public void setAllClassesIds(List<Integer> s) {
@@ -185,7 +185,7 @@ public class Teacher  {
 
     }
 
-    //Todo: test this method
+
     //Effects: Returns a list with all the ids that the teacher had
     public List<Integer> getAllClassesIds() {
         return allIdsOfTheCurrentClasses;

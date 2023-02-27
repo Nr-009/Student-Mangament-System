@@ -1,1 +1,11 @@
-{"numOfStudents":2,"IdTeacher":-1,"IdsOfAllStudents":[9,20],"session":"2022S","name":"CPSC110","id":190}
+{
+    "numOfStudents": 2,
+    "IdTeacher": -1,
+    "IdsOfAllStudents": [
+        9,
+        20
+    ],
+    "session": "2022S",
+    "name": "CPSC110",
+    "id": 190
+}

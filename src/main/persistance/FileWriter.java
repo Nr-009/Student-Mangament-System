@@ -42,7 +42,7 @@ public class FileWriter {
     public void write(Student s) {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
-        myWritter.print(currentJason.toString());
+        myWritter.print(currentJason.toString(SPACE));
     }
 
     //Modifies: This
@@ -50,7 +50,7 @@ public class FileWriter {
     public void write(Teacher s) {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
-        myWritter.print(currentJason.toString());
+        myWritter.print(currentJason.toString(SPACE));
     }
 
     //Modifies: This
@@ -58,7 +58,7 @@ public class FileWriter {
     public void write(AcademyClass s) {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
-        myWritter.print(currentJason.toString());
+        myWritter.write(currentJason.toString(SPACE));
     }
 
     //Modifies: This
@@ -66,7 +66,7 @@ public class FileWriter {
     public void write(DataSystem s) {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
-        myWritter.print(currentJason.toString());
+        myWritter.print(currentJason.toString(SPACE));
     }
 
 

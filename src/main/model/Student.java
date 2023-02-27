@@ -244,7 +244,6 @@ public class Student {
         return resultList;
     }
 
-    //Todo: implement test for this
     //Effects: returns the jason objects based on the currentDataSystem
     public JSONObject toJson() {
         JSONObject currentStudent = new JSONObject();

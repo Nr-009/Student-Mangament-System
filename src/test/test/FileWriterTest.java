@@ -82,59 +82,72 @@ public class FileWriterTest {
     }
 
     @Test
-    public void testingStudentMethods() throws IOException {
-        FileWriter myWritter = new FileWriter();
-        myWritter.setFileDestination("data/oneStudent.json");
-        myWritter.open();
-        myWritter.write(nicolas);
-        myWritter.close();
+    public void testingStudentMethods()  {
+        try {
+            FileWriter myWritter = new FileWriter();
+            myWritter.setFileDestination("data/oneStudent.json");
+            myWritter.open();
+            myWritter.write(nicolas);
+            myWritter.close();
 
-        FileReader myReader = new FileReader("data/oneStudent.json");
-        Student resultStudent = myReader.readStudent();
-        assertEquals("anime",resultStudent.getPassword());
-        assertEquals("Nicolas",resultStudent.getFn());
-        assertEquals("Rubiano",resultStudent.getLn());
-        assertEquals(90,resultStudent.getListOfGrades().get(0));
-        assertEquals(25,resultStudent.getListOfGrades().get(1));
-        assertEquals(1,resultStudent.getListOfAbscences().get(0));
-        assertEquals(0,resultStudent.getListOfAbscences().get(1));
-        assertEquals(190,resultStudent.getAllIDOfClasses().get(0));
-        assertEquals(109,resultStudent.getAllIDOfClasses().get(1));
+            FileReader myReader = new FileReader("data/oneStudent.json");
+            Student resultStudent = myReader.readStudent();
+            assertEquals("anime", resultStudent.getPassword());
+            assertEquals("Nicolas", resultStudent.getFn());
+            assertEquals("Rubiano", resultStudent.getLn());
+            assertEquals(90, resultStudent.getListOfGrades().get(0));
+            assertEquals(25, resultStudent.getListOfGrades().get(1));
+            assertEquals(1, resultStudent.getListOfAbscences().get(0));
+            assertEquals(0, resultStudent.getListOfAbscences().get(1));
+            assertEquals(190, resultStudent.getAllIDOfClasses().get(0));
+            assertEquals(109, resultStudent.getAllIDOfClasses().get(1));
+        } catch(IOException e) {
+            fail("IOException not expected here");
+        }
     }
 
     @Test
-    public void testOneAcademyClas() throws IOException {
-        FileWriter myWriter = new FileWriter();
-        myWriter.setFileDestination("data/oneClass.json");
-        myWriter.open();
-        myWriter.write(CPSC110);
-        myWriter.close();
+    public void testOneAcademyClas() {
+        try {
+            FileWriter myWriter = new FileWriter();
+            myWriter.setFileDestination("data/oneClass.json");
+            myWriter.open();
+            myWriter.write(CPSC110);
+            myWriter.close();
 
-        FileReader myReader = new FileReader("data/oneClass.json");
-        AcademyClass currentClass = myReader.readAcademyClass();
-        assertEquals("CPSC110", currentClass.getName());
-        assertEquals(190,currentClass.getId());
-        assertEquals(-1,currentClass.getIdOfTeacher());
-        assertEquals("2022S",currentClass.getSession());
-        assertEquals(9,currentClass.getAllIdStudent().get(0));
-        assertEquals(20,currentClass.getAllIdStudent().get(1));
+            FileReader myReader = new FileReader("data/oneClass.json");
+            AcademyClass currentClass = myReader.readAcademyClass();
+            assertEquals("CPSC110", currentClass.getName());
+            assertEquals(190, currentClass.getId());
+            assertEquals(-1, currentClass.getIdOfTeacher());
+            assertEquals("2022S", currentClass.getSession());
+            assertEquals(9, currentClass.getAllIdStudent().get(0));
+            assertEquals(20, currentClass.getAllIdStudent().get(1));
+        } catch(IOException e) {
+            fail("IOException not expected here");
+        }
     }
 
     @Test
-    public void testOneTeacher() throws IOException {
-        FileWriter myWriter = new FileWriter();
-        myWriter.setFileDestination("data/oneTeacher.json");
-        myWriter.open();
-        myWriter.write(steven);
-        myWriter.close();
-        FileReader myReader = new FileReader("data/oneTeacher.json");
-        Teacher currentTeacher = myReader.readTeacher();
-        assertEquals("Steven",currentTeacher.getFn());
-        assertEquals("Wolfram",currentTeacher.getLn());
-        assertEquals(101,currentTeacher.getId());
-        assertEquals("abstraction",currentTeacher.getPassword());
-        assertEquals(109,currentTeacher.getAllClassesIds().get(0));
-        assertEquals(100,currentTeacher.getAllClassesIds().get(1));
+    public void testOneTeacher()  {
+        try {
+            FileWriter myWriter = new FileWriter();
+            myWriter.setFileDestination("data/oneTeacher.json");
+            myWriter.open();
+            myWriter.write(steven);
+            myWriter.close();
+            FileReader myReader = new FileReader("data/oneTeacher.json");
+            Teacher currentTeacher = myReader.readTeacher();
+            assertEquals("Steven", currentTeacher.getFn());
+            assertEquals("Wolfram", currentTeacher.getLn());
+            assertEquals(101, currentTeacher.getId());
+            assertEquals("abstraction", currentTeacher.getPassword());
+            assertEquals(109, currentTeacher.getAllClassesIds().get(0));
+            assertEquals(100, currentTeacher.getAllClassesIds().get(1));
+        } catch (IOException e) {
+            fail("IOException not expected here");
+        }
+
     }
 
 
