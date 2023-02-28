@@ -1,4 +1,4 @@
-package persistance;
+package model;
 
 import model.AcademyClass;
 import model.DataSystem;

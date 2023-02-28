@@ -6,8 +6,8 @@ import model.Student;
 import model.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persistance.FileReader;
-import persistance.FileWriter;
+import model.FileReader;
+import model.FileWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -218,12 +218,12 @@ public class FileReaderTest {
         try {
             DataSystem emptyDataSystem = new DataSystem();
             FileWriter myWriter = new FileWriter();
-            myWriter.setFileDestination("data/EmptyDataSystem");
+            myWriter.setFileDestination("data/EmptyDataSystem.json");
             myWriter.open();
             myWriter.write(emptyDataSystem);
             myWriter.close();
 
-            FileReader myReader = new FileReader("data/EmptyDataSystem");
+            FileReader myReader = new FileReader("data/EmptyDataSystem.json");
             DataSystem resultDataSystem = myReader.readDataSystem();
             assertEquals(0,resultDataSystem.getListOfStudents().size());
             assertEquals(0,resultDataSystem.getListOfClasses().size());

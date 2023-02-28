@@ -5,10 +5,9 @@ import model.Student;
 import model.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persistance.FileReader;
-import persistance.FileWriter;
+import model.FileReader;
+import model.FileWriter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
