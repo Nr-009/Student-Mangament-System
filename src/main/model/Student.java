@@ -199,13 +199,15 @@ public class Student {
     //Effects: Produces the array with all the classes, grades and absences for a given student.
     // If the student does not have any od those produces an empty array
     public Object[][] arrayGrades() {
-        Object[][] arrayOfGrades = new Object[numOfClasses + 1][3];
+        Object[][] arrayOfGrades = new Object[numOfClasses + 1][4];
         arrayOfGrades[0][0] = "Class";
         arrayOfGrades[0][1] = "Grade";
         arrayOfGrades[0][2] = "Absences";
+        arrayOfGrades[0][3] = "Id";
         int row = 1;
         for (AcademyClass a : listOfClasses) {
             arrayOfGrades[row][0] = a.getName();
+            arrayOfGrades[row][3] = a.getId();
             row = row + 1;
         }
         row = 1;

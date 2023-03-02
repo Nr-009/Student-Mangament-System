@@ -240,6 +240,7 @@ public class StudentTest {
         assertEquals("PHIL220", resultArray[1][0]);
         assertEquals(77.0, resultArray[1][1]);
         assertEquals(0, resultArray[1][2]);
+        assertEquals(phil220.getId(),resultArray[1][3]);
         assertEquals(2, resultArray.length);
         //Test for more than one class
         michael.addClass(dsci100);
@@ -251,6 +252,7 @@ public class StudentTest {
         assertEquals("DSCI100", resultArray2[2][0]);
         assertEquals(34.0, resultArray2[2][1]);
         assertEquals(3,resultArray2[2][2]);
+        assertEquals(dsci100.getId(),resultArray2[2][3]);
         assertEquals(3,resultArray2.length);
 
 
