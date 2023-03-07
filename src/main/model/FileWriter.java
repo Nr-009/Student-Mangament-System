@@ -1,3 +1,9 @@
+/* This Class represent a fileWriter that writes a JSON file with the object provided.
+The object could be either a DataSystem, Student, Teacher or AcademyClass, depending on the method use.
+The structure of FileReader and writer is based on teh repo:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */
+
 package model;
 
 import model.AcademyClass;

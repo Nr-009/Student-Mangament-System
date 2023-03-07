@@ -17,9 +17,7 @@ public class ManagmentSystem {
     private DataSystem alldata;
 
 
-
     //SECTION: Setting all the basic fields
-
 
 
     //SECTION: Login page for the school management system
@@ -115,7 +113,6 @@ public class ManagmentSystem {
     }
 
 
-
     //Section: Student initial menu
 
     //Effects: Takes the user input to choose an option
@@ -159,7 +156,7 @@ public class ManagmentSystem {
     //Effects: Prints an array of objects
     //Sources: inspired from https://stackoverflow.com/questions/409784/whats-the-simplest-way-to-print-a-java-array
     public void printingAnArray(Object[][] currentArray) {
-        for (int i = 0; i < currentArray.length;i++) {
+        for (int i = 0; i < currentArray.length; i++) {
             for (int j = 0; j < currentArray[i].length; j++) {
                 String x = currentArray[i][j].toString();
                 System.out.print(x);
@@ -172,7 +169,7 @@ public class ManagmentSystem {
 
     //Effects: prints the number provided of white spaces
     public void printingWhiteSpaces(int n) {
-        for (int i = 0;i < n;i++) {
+        for (int i = 0; i < n; i++) {
             System.out.print(" ");
         }
     }
@@ -391,7 +388,7 @@ public class ManagmentSystem {
         String lastPassword = myScanner.next();
         System.out.println("Please insert your new Password");
         String newPassword = myScanner.next();
-        if (alldata.changePasswordStudent(id,lastPassword, newPassword)) {
+        if (alldata.changePasswordStudent(id, lastPassword, newPassword)) {
             System.out.println("Password changed");
             goBackToEdit(id);
         } else {
@@ -490,7 +487,7 @@ public class ManagmentSystem {
             editLastNameTeacher(id);
         } else if (option.equalsIgnoreCase("C")) {
             changePasswordTeacher(id);
-        }  else {
+        } else {
             System.out.println("Press any key to back");
             String option2 = myScanner.next();
             if (option2 != "") {
@@ -529,7 +526,7 @@ public class ManagmentSystem {
         String lastPassword = myScanner.next();
         System.out.println("Please insert your new Password");
         String newPassword = myScanner.next();
-        if (alldata.changePasswordTeacher(id,lastPassword, newPassword)) {
+        if (alldata.changePasswordTeacher(id, lastPassword, newPassword)) {
             System.out.println("Password changed");
             editInformationTeacher(id);
         } else {
@@ -613,7 +610,7 @@ public class ManagmentSystem {
         int idOfClass = gettingAInt();
         if (idOfClass == -1) {
             teacherMenu(id);
-        } else if (checkIfItHasId(arrayOfIdClasses,idOfClass)) {
+        } else if (checkIfItHasId(arrayOfIdClasses, idOfClass)) {
             settingGrade(id, idOfClass);
         } else {
             System.out.println("Sorry that was an invalid id");
@@ -690,7 +687,7 @@ public class ManagmentSystem {
         } else if (option.equalsIgnoreCase("A")) {
             System.out.println("Please input the number of absences ");
             int absences = gettingAGoodValue();
-            for (int i = 0;i < absences;i++) {
+            for (int i = 0; i < absences; i++) {
                 currentStudent.incrementAbsences(currentClass.getName());
             }
             System.out.println("Absences Set");
@@ -729,7 +726,7 @@ public class ManagmentSystem {
         int idOfClass = gettingAInt();
         if (idOfClass == -1) {
             teacherMenu(id);
-        } else if (checkIfItHasId(arrayOfIdClasses,idOfClass)) {
+        } else if (checkIfItHasId(arrayOfIdClasses, idOfClass)) {
             menuForSelectingDroppingOrAdding(id, idOfClass);
         } else {
             System.out.println("Sorry the index is not valid");
@@ -835,7 +832,7 @@ public class ManagmentSystem {
         System.out.println("Put the id of the class you wanna look statistics of");
         int indexOfClass = gettingAInt();
         lineDivider();
-        if (checkIfItHasId(arrayOfIdClasses,indexOfClass)) {
+        if (checkIfItHasId(arrayOfIdClasses, indexOfClass)) {
             AcademyClass s = alldata.getAcademyClass(indexOfClass);
             System.out.println("Class name: " + s.getName());
             System.out.println("Class id: " + s.getId());
@@ -854,7 +851,7 @@ public class ManagmentSystem {
     //Effects: returns true if the teacher has the given class based on its id
     public boolean checkIfItHasId(Object[][] array, int x) {
         for (int i = 0; i < array.length; i++) {
-            if ((Object)x == array[i][1]) {
+            if ((Object) x == array[i][1]) {
                 return true;
             }
         }
@@ -890,8 +887,8 @@ public class ManagmentSystem {
             Teacher validTeacher = choosingAGoodTeacher(id);
             System.out.println("Please insert the session for teh Class");
             String session = myScanner.next();
-            int idOfNewClass = alldata.addAcademyClass(name,validTeacher,session);
-            connectClassAndTeacher(id,idOfNewClass);
+            int idOfNewClass = alldata.addAcademyClass(name, validTeacher, session);
+            connectClassAndTeacher(validTeacher.getId(), idOfNewClass);
             System.out.println("Class Created");
             System.out.println("Class has the id of " + idOfNewClass + "\n Press any key to go back");
             String option4 = myScanner.next();
@@ -915,6 +912,7 @@ public class ManagmentSystem {
             System.out.println("Pres y for yes, any other for no");
             String option3 = myScanner.next();
             if (option3.equalsIgnoreCase("y")) {
+                System.out.println("Please insert the id of the teacher");
                 int id = getAGoodIdTeacher();
                 Teacher teacherWhoWillTeach = alldata.getTeacher(id);
                 return teacherWhoWillTeach;

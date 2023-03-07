@@ -1,3 +1,10 @@
+/* This Class represent a fileReader that reads JSON files and creates the object based on the given file.
+The object could be either a DataSystem, Student, Teacher or AcademyClass, depending on the method use
+The structure of FileReader and writer is based on teh repo:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+ */
+
+
 package model;
 
 import org.json.JSONArray;
@@ -19,6 +26,7 @@ public class FileReader {
     }
 
     //Effects: reads source file as string and return it
+    //Method copied from the repo mention in the description
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
         try (Stream<String> streamOfString = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
