@@ -17,8 +17,6 @@ public class ManagmentSystem {
     private DataSystem alldata;
 
 
-    //SECTION: Setting all the basic fields
-
 
     //SECTION: Login page for the school management system
     //Modifies: This

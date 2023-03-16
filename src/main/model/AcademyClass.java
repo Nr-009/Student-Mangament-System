@@ -10,7 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AcademyClass {
     private String name;
@@ -29,6 +31,7 @@ public class AcademyClass {
         this.name = name;
         this.teacher = t;
         this.sesion = session;
+
     }
 
     //Effects: returns the current name
