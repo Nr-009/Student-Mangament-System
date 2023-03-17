@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -33,186 +32,162 @@ public class TeacherMenu extends JFrame {
     private JLabel askUBC;
     private JLabel imageOfUBC2;
     private DataSystem myData;
+    private JLabel ubcTitle;
+    private JLabel labelTeacherCenter;
+    private JPanel upperPanel;
+    private JPanel secondBlueUpperPanel;
+    private JPanel greyUpperPannel;
+    private JPanel lowerBluePanel;
+    private JLabel lowerTitle;
 
     public static void main(String[] args) {
         TeacherMenu myTeacher = new TeacherMenu(0);
         myTeacher.setVisible(true);
     }
 
-
-    public TeacherMenu(int id) {
+    public void readData() {
         try {
             FileReader myReader = new FileReader("data/tempDataSystem.json");
             myData = myReader.readDataSystem();
         } catch (IOException e3) {
             System.out.println("Could not read the data");
         }
+    }
+
+
+    public TeacherMenu(int id) {
+        readData();
         Teacher currentTeacher = myData.getTeacher(id);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1076, 721);
+        setBounds(100, 100, 1076, 800);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        upperPanel = setUpperPanel();
+        contentPane.add(upperPanel);
+        upperPanel.setLayout(null);
 
-        JPanel blueBackgorund2 = new JPanel();
-        blueBackgorund2.setBackground(new Color(12, 35, 68));
-        blueBackgorund2.setBounds(0, 0, 1062, 107);
-        contentPane.add(blueBackgorund2);
-        blueBackgorund2.setLayout(null);
+        ubcTitle = setUpperTitle();
+        upperPanel.add(ubcTitle);
 
-        JLabel lblNewLabel = new JLabel("The University Of British Columbia");
-        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        lblNewLabel.setForeground(Color.WHITE);
-        lblNewLabel.setBackground(Color.WHITE);
-        lblNewLabel.setBounds(181, 10, 479, 50);
-        blueBackgorund2.add(lblNewLabel);
+        imageOfUbc = getImageOfUbc();
+        upperPanel.add(imageOfUbc);
 
-        imageOfUbc = new JLabel("");
+        secondBlueUpperPanel = seconUpperBluePanel();
+        contentPane.add(secondBlueUpperPanel);
+        secondBlueUpperPanel.setLayout(null);
+
+        labelTeacherCenter = labelTeacherCenter();
+        secondBlueUpperPanel.add(labelTeacherCenter);
+        constructorpart2(id);
+        constructor3();
+
+    }
+
+    public void constructorpart2(int id) {
+        name = setUpName(id);
+        secondBlueUpperPanel.add(name);
+
+        teacherId = setUpTeacherId(id);
+        secondBlueUpperPanel.add(teacherId);
+
+        greyUpperPannel = setGreyUpperPanel();
+        contentPane.add(greyUpperPannel);
+        greyUpperPannel.setLayout(null);
+
+        logout = setLougoutButton();
+        greyUpperPannel.add(logout);
+
+        createStudent = setUpCreateStudent();
+        greyUpperPannel.add(createStudent);
+
+        setGradeOrArbscence = getSetGradeOrArbscence();
+        greyUpperPannel.add(setGradeOrArbscence);
+
+        addOrDropStudents = getAddOrDropStudents();
+        greyUpperPannel.add(addOrDropStudents);
+
+        seeStats = setSeeStats();
+        greyUpperPannel.add(seeStats);
+
+        personalInfo = setPersonalInfo();
+        greyUpperPannel.add(personalInfo);
+
+        helloMessage = setHelloMessages(id);
+        contentPane.add(helloMessage);
+
+
+    }
+
+    public void constructor3() {
+        createOrDeleteTeacher = setCreateOrDeleteTeacher();
+        contentPane.add(createOrDeleteTeacher);
+
+        createOrDeleteClass = setCreateOrDeleteClass();
+        contentPane.add(createOrDeleteClass);
+
+        needHelp = setNeedHelp();
+        contentPane.add(needHelp);
+
+        videoTutorials = setVideoTutorials();
+        contentPane.add(videoTutorials);
+
+        thenicalSupport = setThenicalSupport();
+        contentPane.add(thenicalSupport);
+
+        askUBC = setUpAskUBC();
+        contentPane.add(askUBC);
+
+        lowerBluePanel = getLowerBluePanel();
+        contentPane.add(lowerBluePanel);
+
+        lowerTitle = setLowerTitle();
+        lowerBluePanel.add(lowerTitle);
+
+        imageOfUBC2 = setUpImageOfUbc2();
+        lowerBluePanel.add(imageOfUBC2);
+    }
+
+    public JLabel getImageOfUbc() {
+        JLabel imageOfUBC = new JLabel("");
         ImageIcon currentUBClogo = new ImageIcon("data/Ubcmodified.png");
-        imageOfUbc.setIcon(currentUBClogo);
-        imageOfUbc.setBounds(0, 0, 103, 107);
-        blueBackgorund2.add(imageOfUbc);
+        imageOfUBC.setIcon(currentUBClogo);
+        imageOfUBC.setBounds(0, 0, 103, 107);
+        return imageOfUBC;
+    }
 
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(new Color(51, 102, 153));
-        panel2.setBounds(0, 104, 1062, 69);
-        contentPane.add(panel2);
-        panel2.setLayout(null);
-
-        JLabel lblYeacherServiceCenter = new JLabel("Teacher Service Center");
-        lblYeacherServiceCenter.setForeground(Color.WHITE);
-        lblYeacherServiceCenter.setFont(new Font("Arial", Font.PLAIN, 27));
-        lblYeacherServiceCenter.setBackground(Color.WHITE);
-        lblYeacherServiceCenter.setBounds(10, 10, 297, 50);
-        panel2.add(lblYeacherServiceCenter);
-
-        name = new JLabel("Name: " + currentTeacher.getFn() + " " + currentTeacher.getLn());
+    public JLabel setUpName(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel name = new JLabel("Name: " + currentTeacher.getFn() + " " + currentTeacher.getLn());
         name.setForeground(Color.WHITE);
         name.setFont(new Font("Arial", Font.BOLD, 18));
         name.setBackground(Color.WHITE);
         name.setBounds(495, 12, 328, 50);
-        panel2.add(name);
+        return name;
+    }
 
-        teacherId = new JLabel("Teacher id#: " + currentTeacher.getId());
+    public JLabel setUpTeacherId(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel teacherId  = new JLabel("Teacher id#: " + currentTeacher.getId());
         teacherId.setForeground(Color.WHITE);
         teacherId.setFont(new Font("Arial", Font.BOLD, 18));
         teacherId.setBackground(Color.WHITE);
         teacherId.setBounds(825, 10, 227, 50);
-        panel2.add(teacherId);
+        return  teacherId;
+    }
 
-        JPanel greBackground = new JPanel();
-        greBackground.setBackground(SystemColor.controlHighlight);
-        greBackground.setBounds(0, 171, 1062, 69);
-        contentPane.add(greBackground);
-        greBackground.setLayout(null);
-
-        JButton logout = new JButton("Logout");
-        logout.setBackground(Color.RED);
-        logout.setForeground(Color.WHITE);
-        logout.setBounds(962, 40, 100, 29);
-        greBackground.add(logout);
-
-        createStudent = new JButton("Create Student");
+    public JButton setUpCreateStudent() {
+        JButton createStudent = new JButton("Create Student");
         createStudent.setForeground(new Color(12, 35, 68));
         createStudent.setBackground(SystemColor.controlHighlight);
         createStudent.setBounds(0, 0, 121, 34);
-        greBackground.add(createStudent);
+        return createStudent;
+    }
 
-        setGradeOrArbscence = new JButton("Set grade");
-        setGradeOrArbscence.setForeground(new Color(12, 35, 68));
-        setGradeOrArbscence.setBackground(SystemColor.controlHighlight);
-        setGradeOrArbscence.setBounds(119, 0, 150, 34);
-        greBackground.add(setGradeOrArbscence);
-
-        addOrDropStudents = new JButton("Add students");
-        addOrDropStudents.setForeground(new Color(12, 35, 68));
-        addOrDropStudents.setBackground(SystemColor.controlHighlight);
-        addOrDropStudents.setBounds(381, 0, 129, 34);
-        greBackground.add(addOrDropStudents);
-
-        seeStats = new JButton("See stats");
-        seeStats.setForeground(new Color(12, 35, 68));
-        seeStats.setBackground(SystemColor.controlHighlight);
-        seeStats.setBounds(506, 0, 129, 34);
-        greBackground.add(seeStats);
-
-        personalInfo = new JButton("Personal Info");
-        personalInfo.setForeground(new Color(12, 35, 68));
-        personalInfo.setBackground(SystemColor.controlHighlight);
-        personalInfo.setBounds(261, 0, 121, 34);
-        greBackground.add(personalInfo);
-
-        helloMessage = new JLabel("Hi " + currentTeacher.getFn() + " , Welcome to the Teacher Center");
-        helloMessage.setForeground(new Color(12, 35, 68));
-        helloMessage.setFont(new Font("Arial", Font.PLAIN, 27));
-        helloMessage.setBackground(Color.WHITE);
-        helloMessage.setBounds(10, 250, 654, 51);
-        contentPane.add(helloMessage);
-
-        createOrDeleteTeacher = new JButton("Create or Delete a Teacher");
-        createOrDeleteTeacher.setFont(new Font("Arial", Font.PLAIN, 20));
-        createOrDeleteTeacher.setForeground(SystemColor.window);
-        createOrDeleteTeacher.setBackground(new Color(12, 35, 68));
-        createOrDeleteTeacher.setBounds(20, 311, 375, 44);
-        contentPane.add(createOrDeleteTeacher);
-
-        createOrDeleteTeacher = new JButton("Create or Delete a Class");
-        createOrDeleteTeacher.setForeground(Color.WHITE);
-        createOrDeleteTeacher.setFont(new Font("Arial", Font.PLAIN, 20));
-        createOrDeleteTeacher.setBackground(new Color(12, 35, 68));
-        createOrDeleteTeacher.setBounds(20, 385, 375, 44);
-        contentPane.add(createOrDeleteTeacher);
-
-        needHelp = new JLabel("Need Help:");
-        //Source:https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing
-        needHelp.setForeground(new Color(12, 35, 68));
-        needHelp.setFont(new Font("Arial", Font.PLAIN, 22));
-        needHelp.setBackground(Color.WHITE);
-        needHelp.setBounds(10, 439, 654, 51);
-        contentPane.add(needHelp);
-
-
-        videoTutorials = new JLabel("Video Tutorials");
-        videoTutorials.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        videoTutorials.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.codejava.net/"
-                                    + "java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        videoTutorials.setForeground(new Color(12, 35, 68));
-        videoTutorials.setFont(new Font("Arial", Font.PLAIN, 18));
-        videoTutorials.setBounds(20, 485, 179, 24);
-        contentPane.add(videoTutorials);
-
-        thenicalSupport = new JLabel("Thechnical Support");
-        thenicalSupport.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        thenicalSupport.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.youtube.com/watch?v=DJ7ixkO2Gac"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        thenicalSupport.setForeground(new Color(12, 35, 68));
-        thenicalSupport.setFont(new Font("Arial", Font.PLAIN, 18));
-        thenicalSupport.setBounds(20, 519, 179, 24);
-        contentPane.add(thenicalSupport);
-
-        askUBC = new JLabel(" Ask Me @ UBC");
+    public JLabel setUpAskUBC() {
+        JLabel askUBC = new JLabel("Ask Me @ UBC");
         askUBC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         askUBC.addMouseListener(new MouseAdapter() {
             @Override
@@ -227,25 +202,195 @@ public class TeacherMenu extends JFrame {
         });
         askUBC.setForeground(new Color(12, 35, 68));
         askUBC.setFont(new Font("Arial", Font.PLAIN, 18));
-        askUBC.setBounds(20, 550, 179, 24);
-        contentPane.add(askUBC);
-
-        JPanel blueBakground = new JPanel();
-        blueBakground.setLayout(null);
-        blueBakground.setBackground(new Color(12, 35, 68));
-        blueBakground.setBounds(0, 584, 1062, 107);
-        contentPane.add(blueBakground);
-
-        JLabel ubcLogo = new JLabel("The University Of British Columbia");
-        ubcLogo.setForeground(Color.WHITE);
-        ubcLogo.setFont(new Font("Arial", Font.PLAIN, 25));
-        ubcLogo.setBackground(Color.WHITE);
-        ubcLogo.setBounds(113, 10, 444, 36);
-        blueBakground.add(ubcLogo);
-
-        imageOfUBC2 = new JLabel("");
-        imageOfUBC2.setIcon(currentUBClogo);
-        imageOfUBC2.setBounds(0, 0, 103, 107);
-        blueBakground.add(imageOfUBC2);
+        askUBC.setBounds(20, 610, 179, 24);
+        return askUBC;
     }
+
+    public JLabel setUpImageOfUbc2() {
+        JLabel imageOfUBC2 = new JLabel("");
+        ImageIcon ubc = new ImageIcon("data/Ubcmodified.png");
+        imageOfUBC2.setIcon(ubc);
+        imageOfUBC2.setBounds(0, 0, 103, 107);
+        return imageOfUBC2;
+    }
+
+    public JButton getSetGradeOrArbscence() {
+        JButton setGrade = new JButton("Set grade");
+        setGrade.setForeground(new Color(12, 35, 68));
+        setGrade.setBackground(SystemColor.controlHighlight);
+        setGrade.setBounds(119, 0, 150, 34);
+        return setGrade;
+    }
+
+    public JButton getAddOrDropStudents() {
+        JButton myButtton = new JButton("Add students");
+        myButtton.setForeground(new Color(12, 35, 68));
+        myButtton.setBackground(SystemColor.controlHighlight);
+        myButtton.setBounds(381, 0, 129, 34);
+        return myButtton;
+    }
+
+    public JButton setSeeStats() {
+        JButton seeStats = new JButton("See stats");
+        seeStats.setForeground(new Color(12, 35, 68));
+        seeStats.setBackground(SystemColor.controlHighlight);
+        seeStats.setBounds(506, 0, 129, 34);
+        return seeStats;
+    }
+
+    public JButton setPersonalInfo() {
+        JButton personalInfo =  new JButton("Personal Info");
+        personalInfo.setForeground(new Color(12, 35, 68));
+        personalInfo.setBackground(SystemColor.controlHighlight);
+        personalInfo.setBounds(261, 0, 121, 34);
+        return  personalInfo;
+    }
+
+    public JLabel setHelloMessages(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel helloMessage = new JLabel("Hi " + currentTeacher.getFn() + " , Welcome to the Teacher Center");
+        helloMessage.setForeground(new Color(12, 35, 68));
+        helloMessage.setFont(new Font("Arial", Font.PLAIN, 27));
+        helloMessage.setBackground(Color.WHITE);
+        helloMessage.setBounds(10, 248, 654, 51);
+        return helloMessage;
+    }
+
+    public JButton setCreateOrDeleteTeacher() {
+        JButton createOrDelete = new JButton("Create or Delete a Teacher");
+        createOrDelete.setFont(new Font("Arial", Font.PLAIN, 20));
+        createOrDelete.setForeground(SystemColor.window);
+        createOrDelete.setBackground(new Color(12, 35, 68));
+        createOrDelete.setBounds(20, 318, 375, 44);
+        return createOrDelete;
+    }
+
+    public JButton setCreateOrDeleteClass() {
+        JButton setCreateOrDeleteClass =  new JButton("Create or Delete a Class");
+        setCreateOrDeleteClass.setForeground(Color.WHITE);
+        setCreateOrDeleteClass.setFont(new Font("Arial", Font.PLAIN, 20));
+        setCreateOrDeleteClass.setBackground(new Color(12, 35, 68));
+        setCreateOrDeleteClass.setBounds(20, 398, 375, 44);
+        return setCreateOrDeleteClass;
+    }
+
+    public JLabel setNeedHelp() {
+        JLabel myLabel = new JLabel("Need Help:");
+        //Source:https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing
+        myLabel.setForeground(new Color(12, 35, 68));
+        myLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        myLabel.setBackground(Color.WHITE);
+        myLabel.setBounds(10, 481, 654, 51);
+        return myLabel;
+    }
+
+    public JLabel setVideoTutorials() {
+        JLabel videoTutrials = new JLabel("Video Tutorials");
+        videoTutrials.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        videoTutrials.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(
+                            new URI("https://www.codejava.net/"
+                                    + "java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing"));
+                } catch (Exception e4) {
+                    System.out.println("Exception when oppening the link");
+                }
+            }
+        });
+        videoTutrials.setForeground(new Color(12, 35, 68));
+        videoTutrials.setFont(new Font("Arial", Font.PLAIN, 18));
+        videoTutrials.setBounds(20, 542, 179, 24);
+        return videoTutrials;
+    }
+
+    public JLabel setThenicalSupport() {
+        JLabel mytechnical = new JLabel("Thechnical Support");
+        mytechnical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        mytechnical.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(
+                            new URI("https://www.youtube.com/watch?v=DJ7ixkO2Gac"));
+                } catch (Exception e4) {
+                    System.out.println("Exception when oppening the link");
+                }
+            }
+        });
+        mytechnical.setForeground(new Color(12, 35, 68));
+        mytechnical.setFont(new Font("Arial", Font.PLAIN, 18));
+        mytechnical.setBounds(20, 576, 179, 24);
+        return mytechnical;
+
+    }
+
+    public JPanel setUpperPanel() {
+        JPanel upperPanel = new JPanel();
+        upperPanel.setBackground(new Color(12, 35, 68));
+        upperPanel.setBounds(0, 0, 1062, 107);
+        return upperPanel;
+    }
+
+    public JLabel setUpperTitle() {
+        JLabel myLabel = new JLabel("The University Of British Columbia");
+        myLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        myLabel.setForeground(Color.WHITE);
+        myLabel.setBackground(Color.WHITE);
+        myLabel.setBounds(181, 10, 479, 50);
+        return myLabel;
+    }
+
+    public JPanel seconUpperBluePanel() {
+        JPanel myPannel = new JPanel();
+        myPannel.setBackground(new Color(51, 102, 153));
+        myPannel.setBounds(0, 104, 1062, 69);
+        return myPannel;
+    }
+
+    public JLabel labelTeacherCenter() {
+        JLabel currentPanel = new JLabel("Teacher Service Center");
+        currentPanel.setForeground(Color.WHITE);
+        currentPanel.setFont(new Font("Arial", Font.PLAIN, 27));
+        currentPanel.setBackground(Color.WHITE);
+        currentPanel.setBounds(10, 10, 297, 50);
+        return currentPanel;
+    }
+
+    public JPanel setGreyUpperPanel() {
+        JPanel currentPanel = new JPanel();
+        currentPanel.setBackground(SystemColor.controlHighlight);
+        currentPanel.setBounds(0, 171, 1062, 56);
+
+        return currentPanel;
+    }
+
+    public JButton setLougoutButton() {
+        JButton currentBotton = new JButton("Logout");
+        currentBotton.setBackground(Color.RED);
+        currentBotton.setForeground(Color.WHITE);
+        currentBotton.setBounds(962, 27, 100, 29);
+        return currentBotton;
+    }
+
+    public JPanel getLowerBluePanel() {
+        JPanel myPannel = new JPanel();
+        myPannel.setLayout(null);
+        myPannel.setBackground(new Color(12, 35, 68));
+        myPannel.setBounds(0, 656, 1062, 107);
+        return myPannel;
+    }
+
+    public JLabel setLowerTitle() {
+        JLabel currentLabel = new JLabel("The University Of British Columbia");
+        currentLabel.setForeground(Color.WHITE);
+        currentLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        currentLabel.setBackground(Color.WHITE);
+        currentLabel.setBounds(113, 10, 444, 36);
+        return currentLabel;
+    }
+
+
+
 }

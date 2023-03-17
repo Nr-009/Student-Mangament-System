@@ -23,7 +23,6 @@ public class StartFrame extends JFrame {
     private static FileWriter myWritter;
 
 
-
     public StartFrame() {
         setTitle("Selecting Version");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,12 +40,24 @@ public class StartFrame extends JFrame {
         contentPane.add(originalButtom);
         submitButtom = setUpSubmitButtom();
         contentPane.add(submitButtom);
+        setSubmitBotton();
+
+    }
+
+
+    public static void main(String[] args) {
+        StartFrame myframe = new StartFrame();
+        myframe.setVisible(true);
+
+    }
+
+    public void setSubmitBotton() {
         submitButtom.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (lastButtom.isSelected() && originalButtom.isSelected()) {
                     JOptionPane.showMessageDialog(StartFrame.this,
-                            "You can not select both options");
+                                                           "You can not select both options");
                 } else if (originalButtom.isSelected()) {
                     JOptionPane.showMessageDialog(StartFrame.this, "Selecting Original Version");
                     settingUpTheData("data/BaseDataSystem.json");
@@ -56,17 +67,10 @@ public class StartFrame extends JFrame {
                     JOptionPane.showMessageDialog(StartFrame.this, "Selecting Last Version");
                     settingUpTheData("data/SavedChangesDataSystem.json");
                     continueToLogin();
-                    }
                 }
             }
+        }
         );
-    }
-
-
-    public static void main(String[] args) {
-        StartFrame myframe = new StartFrame();
-        myframe.setVisible(true);
-
     }
 
     public JLabel setUpVersion() {
@@ -133,8 +137,6 @@ public class StartFrame extends JFrame {
 
     //TODO: logout Buttom
     //TODO: create Student
-
-
 
 
 }

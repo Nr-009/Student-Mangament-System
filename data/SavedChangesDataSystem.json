@@ -3,9 +3,7 @@
         0,
         1,
         2,
-        3,
-        4,
-        5
+        3
     ],
     "ListOfAllStudents": [
         {
@@ -107,82 +105,23 @@
             "fn": "Rodrigo",
             "numberOfClasses": 5,
             "id": 3
-        },
-        {
-            "listOfAbsences": [
-                1,
-                10,
-                1,
-                2,
-                3
-            ],
-            "ln": "Avila",
-            "password": "movii",
-            "listOfGrades": [
-                70,
-                92,
-                96,
-                100,
-                80
-            ],
-            "ListOfAllIdOfClasses": [
-                9,
-                10,
-                4,
-                5,
-                6
-            ],
-            "fn": "Liliana",
-            "numberOfClasses": 5,
-            "id": 4
-        },
-        {
-            "listOfAbsences": [
-                2,
-                1,
-                1,
-                2,
-                3
-            ],
-            "ln": "Rubiano",
-            "password": "prisma",
-            "listOfGrades": [
-                80,
-                78,
-                49,
-                98,
-                100
-            ],
-            "ListOfAllIdOfClasses": [
-                9,
-                10,
-                0,
-                3,
-                4
-            ],
-            "fn": "Andres",
-            "numberOfClasses": 5,
-            "id": 5
         }
     ],
-    "counterAcademyClasses": 11,
-    "counterTeacher": 7,
+    "counterAcademyClasses": 7,
+    "counterTeacher": 6,
     "listOfAllPasswordTeachers": [
         "fisica12",
         "logic",
         "naturalRecursion",
         "abstraction",
         "circuits",
-        "R",
-        "distribution"
+        "R"
     ],
     "listOfPasswordStudents": [
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300",
-        "movii",
-        "prisma"
+        "eliminaMartinez300"
     ],
     "listOfAllIdClasses": [
         0,
@@ -191,18 +130,13 @@
         3,
         4,
         5,
-        6,
-        9,
-        10
+        6
     ],
     "listOfAllClasses": [
         {
-            "numOfStudents": 2,
+            "numOfStudents": 1,
             "IdTeacher": 2,
-            "IdsOfAllStudents": [
-                0,
-                5
-            ],
+            "IdsOfAllStudents": [0],
             "session": "2022W",
             "name": "CPSC110",
             "id": 0
@@ -232,76 +166,47 @@
             "id": 2
         },
         {
-            "numOfStudents": 2,
+            "numOfStudents": 1,
             "IdTeacher": 0,
-            "IdsOfAllStudents": [
-                2,
-                5
-            ],
+            "IdsOfAllStudents": [2],
             "session": "2022W",
             "name": "MATH100",
             "id": 3
         },
         {
-            "numOfStudents": 5,
+            "numOfStudents": 3,
             "IdTeacher": 0,
             "IdsOfAllStudents": [
                 2,
                 1,
-                3,
-                5,
-                4
+                3
             ],
             "session": "2022W",
             "name": "MATH101",
             "id": 4
         },
         {
-            "numOfStudents": 4,
+            "numOfStudents": 3,
             "IdTeacher": 5,
             "IdsOfAllStudents": [
                 0,
                 1,
-                3,
-                4
+                3
             ],
             "session": "2022W",
             "name": "DSCI100",
             "id": 5
         },
         {
-            "numOfStudents": 3,
+            "numOfStudents": 2,
             "IdTeacher": 1,
             "IdsOfAllStudents": [
                 1,
-                3,
-                4
+                3
             ],
             "session": "2022W",
             "name": "PHIL100",
             "id": 6
-        },
-        {
-            "numOfStudents": 2,
-            "IdTeacher": 6,
-            "IdsOfAllStudents": [
-                4,
-                5
-            ],
-            "session": "2023S",
-            "name": "STAT251",
-            "id": 9
-        },
-        {
-            "numOfStudents": 2,
-            "IdTeacher": 6,
-            "IdsOfAllStudents": [
-                4,
-                5
-            ],
-            "session": "2023S",
-            "name": "STAT201",
-            "id": 10
         }
     ],
     "listOfAllIdTeacher": [
@@ -310,10 +215,9 @@
         2,
         3,
         4,
-        5,
-        6
+        5
     ],
-    "counterStudents": 6,
+    "counterStudents": 4,
     "listOfAllTeachers": [
         {
             "allIdsOfTheCurrentClasses": [
@@ -365,17 +269,6 @@
             "fn": "Anthony",
             "id": 5,
             "numClasses": 1
-        },
-        {
-            "allIdsOfTheCurrentClasses": [
-                9,
-                10
-            ],
-            "ln": "Wijendra",
-            "password": "distribution",
-            "fn": "Lasantha",
-            "id": 6,
-            "numClasses": 2
         }
     ]
 }
