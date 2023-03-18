@@ -871,6 +871,7 @@ public class ManagmentSystem {
     //Section creating a Class
     //Modifies: This
     //Effects: Creates a class and adds it to the system
+    @SuppressWarnings("methodlength")
     public void createAClass(int id) {
         lineDivider();
         Scanner myScanner = new Scanner(System.in);
@@ -886,7 +887,12 @@ public class ManagmentSystem {
             System.out.println("Please insert the session for teh Class");
             String session = myScanner.next();
             int idOfNewClass = alldata.addAcademyClass(name, validTeacher, session);
-            connectClassAndTeacher(validTeacher.getId(), idOfNewClass);
+            if (validTeacher == null) {
+                connectClassAndTeacher(-1, idOfNewClass);
+            } else {
+                connectClassAndTeacher(validTeacher.getId(), idOfNewClass);
+            }
+
             System.out.println("Class Created");
             System.out.println("Class has the id of " + idOfNewClass + "\n Press any key to go back");
             String option4 = myScanner.next();
@@ -940,11 +946,13 @@ public class ManagmentSystem {
     //Modifies: This
     //Effects: connects teh references of the teacher and the class
     public void connectClassAndTeacher(int idTeacher, int idClass) {
-        Teacher currentTeacher = alldata.getTeacher(idTeacher);
-        AcademyClass currentClass = alldata.getAcademyClass(idClass);
-        currentClass.setTeacher(currentTeacher);
-        if (currentTeacher != null) {
-            currentTeacher.addClass(currentClass);
+        if (idTeacher >= 0) {
+            Teacher currentTeacher = alldata.getTeacher(idTeacher);
+            AcademyClass currentClass = alldata.getAcademyClass(idClass);
+            currentClass.setTeacher(currentTeacher);
+            if (currentTeacher != null) {
+                currentTeacher.addClass(currentClass);
+            }
         }
 
     }

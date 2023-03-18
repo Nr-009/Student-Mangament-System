@@ -2,6 +2,7 @@ package ui;
 
 import model.DataSystem;
 import model.FileReader;
+import model.FileWriter;
 import model.Teacher;
 
 import javax.swing.*;
@@ -9,13 +10,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
+import java.util.ArrayList;
 
-public class TeacherMenu extends JFrame {
+public class AddingAStudent extends JFrame {
+
     private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
     private JLabel imageOfUbc;
     private JLabel name;
     private JLabel teacherId;
@@ -25,13 +30,6 @@ public class TeacherMenu extends JFrame {
     private JButton addOrDropStudents;
     private JButton seeStats;
     private JButton personalInfo;
-    private JLabel helloMessage;
-    private JButton createOrDeleteTeacher;
-    private JButton createOrDeleteClass;
-    private JLabel needHelp;
-    private JLabel videoTutorials;
-    private JLabel thenicalSupport;
-    private JLabel askUBC;
     private JLabel imageOfUBC2;
     private DataSystem myData;
     private JLabel ubcTitle;
@@ -41,10 +39,23 @@ public class TeacherMenu extends JFrame {
     private JPanel greyUpperPannel;
     private JPanel lowerBluePanel;
     private JLabel lowerTitle;
+    private TableForAddingStudents table = new TableForAddingStudents(new ArrayList<>());
+    private JLabel currentStudents;
+    private JLabel createStudentLabel;
+    private JLabel firstNameLabel;
+    private JLabel lastNameLabel;
+    private JTextField firstName;
+    private JTextField lastName;
+    private JLabel passworldLabel;
+    private JPasswordField passworldField;
+    private JButton submitButton;
+    private JButton backButton;
+    private JPanel panelOfTable;
 
     public static void main(String[] args) {
-        TeacherMenu myTeacher = new TeacherMenu(0);
-        myTeacher.setVisible(true);
+        AddingAStudent myStudent = new AddingAStudent(0);
+        myStudent.setVisible(true);
+
     }
 
     public void readData() {
@@ -57,7 +68,7 @@ public class TeacherMenu extends JFrame {
     }
 
 
-    public TeacherMenu(int id) {
+    public AddingAStudent(int id) {
         readData();
         Teacher currentTeacher = myData.getTeacher(id);
         setBounds(100, 100, 1076, 800);
@@ -74,17 +85,20 @@ public class TeacherMenu extends JFrame {
         ubcTitle = setUpperTitle();
         upperPanel.add(ubcTitle);
 
-        imageOfUbc = getImageOfUbc();
-        upperPanel.add(imageOfUbc);
-
         secondBlueUpperPanel = seconUpperBluePanel();
         contentPane.add(secondBlueUpperPanel);
         secondBlueUpperPanel.setLayout(null);
 
         labelTeacherCenter = labelTeacherCenter();
         secondBlueUpperPanel.add(labelTeacherCenter);
+        firstName = firstName();
+        contentPane.add(firstName);
         constructorpart2(id);
         constructor3();
+        constructor4(id);
+
+
+
 
     }
 
@@ -102,7 +116,7 @@ public class TeacherMenu extends JFrame {
         logout = setLougoutButton();
         greyUpperPannel.add(logout);
 
-        createStudent = setUpCreateStudent(id);
+        createStudent = setUpCreateStudent();
         greyUpperPannel.add(createStudent);
 
         setGradeOrArbscence = getSetGradeOrArbscence();
@@ -116,42 +130,178 @@ public class TeacherMenu extends JFrame {
 
         personalInfo = setPersonalInfo();
         greyUpperPannel.add(personalInfo);
+        passworldLabel = setPassworldLabel();
+        contentPane.add(passworldLabel);
+        passworldField = setLastNameText();
+        contentPane.add(passworldField);
 
-        helloMessage = setHelloMessages(id);
-        contentPane.add(helloMessage);
+
 
 
     }
 
     public void constructor3() {
-        createOrDeleteTeacher = setCreateOrDeleteTeacher();
-        contentPane.add(createOrDeleteTeacher);
-
-        createOrDeleteClass = setCreateOrDeleteClass();
-        contentPane.add(createOrDeleteClass);
-
-        needHelp = setNeedHelp();
-        contentPane.add(needHelp);
-
-        videoTutorials = setVideoTutorials();
-        contentPane.add(videoTutorials);
-
-        thenicalSupport = setThenicalSupport();
-        contentPane.add(thenicalSupport);
-
-        askUBC = setUpAskUBC();
-        contentPane.add(askUBC);
-
         lowerBluePanel = getLowerBluePanel();
         contentPane.add(lowerBluePanel);
-
         lowerTitle = setLowerTitle();
         lowerBluePanel.add(lowerTitle);
-
         imageOfUBC2 = setUpImageOfUbc2();
         lowerBluePanel.add(imageOfUBC2);
+        panelOfTable = setPanelOfTable();
+        contentPane.add(panelOfTable);
+        currentStudents = setCurrentStudents();
+        contentPane.add(currentStudents);
+        createStudentLabel = setCreateStudentLabel();
+        contentPane.add(createStudentLabel);
+        firstNameLabel = setFirstName();
+        contentPane.add(firstNameLabel);
+        lastNameLabel = setLastNameLabel();
+        contentPane.add(lastNameLabel);
+        lastName = setTextFieldLastName();
+        contentPane.add(lastName);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLogout();
+    }
+
+    public void constructor4(int id) {
+        imageOfUbc = getImageOfUbc();
+        upperPanel.add(imageOfUbc);
+        submitButton = setSubmitButton();
+        contentPane.add(submitButton);
+        backButton = backButton(id);
+        contentPane.add(backButton);
+    }
+
+    public JPanel setPanelOfTable() {
+        table = new TableForAddingStudents(myData.getListOfStudents());
+        JTable table2 = new JTable(table);
+        JPanel myPanel = new JPanel();
+        myPanel.setBounds(19,287,467,335);
+        myPanel.add(new JScrollPane(table2));
+        myPanel.setBackground(new Color(240, 240, 240));
+        return myPanel;
+    }
+
+    public JTextField firstName() {
+        JTextField textField = new JTextField();
+        textField.setFont(new Font("Arial", Font.PLAIN, 15));
+        textField.setBounds(733, 322, 157, 34);
+        return textField;
+
+    }
+
+    public JButton backButton(int id) {
+        JButton btnBack = new JButton("Back");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(Color.RED);
+        btnBack.setBounds(962, 626, 100, 29);
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                TeacherMenu currentMenu = new TeacherMenu(id);
+                currentMenu.setVisible(true);
+            }
+        });
+        return btnBack;
+    }
+
+    public JButton setSubmitButton() {
+        JButton btnNewButton = new JButton("Submit");
+        btnNewButton.setBackground(new Color(12, 35, 68));
+        btnNewButton.setForeground(Color.WHITE);
+        btnNewButton.setBounds(757, 538, 116, 34);
+        btnNewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fn = firstName.getText();
+                String ln = lastName.getText();
+                String passworld = String.copyValueOf(passworldField.getPassword());
+                if (fn.isEmpty() | ln.isEmpty() | passworld.isEmpty()) {
+                    JOptionPane.showMessageDialog(AddingAStudent.this,
+                            "One of the fields is/are empty");
+                } else {
+                    int idOfStudent = myData.addStudent(fn,ln,passworld);
+                    JOptionPane.showMessageDialog(AddingAStudent.this,
+                            "Student created with id of " + idOfStudent);
+                            saveData(myData);
+                            table.fireTableDataChanged();
+
+
+                }
+
+            }
+        });
+        return  btnNewButton;
+    }
+
+    public void saveData(DataSystem data) {
+        FileWriter myWriter = new FileWriter();
+        myWriter.setFileDestination("data/tempDataSystem.json");
+        try {
+            myWriter.open();
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not save");
+        }
+        myWriter.write(data);
+        myWriter.close();
+
+
+    }
+
+    public JPasswordField setLastNameText() {
+        JPasswordField thisfield = new JPasswordField();
+        thisfield.setFont(new Font("Arial", Font.PLAIN, 15));
+        thisfield.setColumns(10);
+        thisfield.setBounds(733, 473, 157, 34);
+        return thisfield;
+    }
+
+    public JLabel setPassworldLabel() {
+        JLabel thisLabel = new JLabel("Password");
+        thisLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        thisLabel.setBounds(554, 462, 135, 47);
+        return thisLabel;
+    }
+
+
+    public JTextField setTextFieldLastName() {
+        JTextField thisText =  new JTextField();
+        thisText.setColumns(10);
+        thisText.setFont(new Font("Arial", Font.PLAIN, 15));
+        thisText.setBounds(733, 397, 157, 34);
+        return thisText;
+    }
+
+    public JLabel setLastNameLabel() {
+        JLabel label = new JLabel("Last Name");
+        label.setFont(new Font("Arial", Font.PLAIN, 24));
+        label.setBounds(551, 386, 146, 47);
+        return label;
+    }
+
+    public JLabel setFirstName() {
+        JLabel firstName =  new JLabel("First Name");
+        firstName.setFont(new Font("Arial", Font.PLAIN, 24));
+        firstName.setBounds(554, 316, 116, 47);
+        return firstName;
+    }
+
+    public JLabel setCreateStudentLabel() {
+        JLabel createStudentLabel = new JLabel("Create Student:");
+        createStudentLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        createStudentLabel.setBounds(626, 259, 277, 47);
+        return createStudentLabel;
+    }
+
+    public JLabel setCurrentStudents() {
+        JLabel currentStudents = new JLabel("Current Students");
+        currentStudents.setFont(new Font("Arial", Font.PLAIN, 30));
+        currentStudents.setBounds(124, 232, 282, 45);
+        return currentStudents;
+
     }
 
     public JLabel getImageOfUbc() {
@@ -164,7 +314,8 @@ public class TeacherMenu extends JFrame {
 
     public JLabel setUpName(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
-        JLabel name = new JLabel("Name: " + currentTeacher.getFn() + " " + currentTeacher.getLn());
+        JLabel name = new JLabel("Name: " + currentTeacher.getFn()
+                + " " + currentTeacher.getLn());
         name.setForeground(Color.WHITE);
         name.setFont(new Font("Arial", Font.BOLD, 18));
         name.setBackground(Color.WHITE);
@@ -174,15 +325,15 @@ public class TeacherMenu extends JFrame {
 
     public JLabel setUpTeacherId(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
-        JLabel teacherId  = new JLabel("Teacher id#: " + currentTeacher.getId());
+        JLabel teacherId = new JLabel("Teacher id#: " + currentTeacher.getId());
         teacherId.setForeground(Color.WHITE);
         teacherId.setFont(new Font("Arial", Font.BOLD, 18));
         teacherId.setBackground(Color.WHITE);
         teacherId.setBounds(825, 10, 227, 50);
-        return  teacherId;
+        return teacherId;
     }
 
-    public JButton setUpCreateStudent(int id) {
+    public JButton setUpCreateStudent() {
         JButton createStudent = new JButton("Create Student");
         createStudent.setForeground(new Color(12, 35, 68));
         createStudent.setBackground(SystemColor.controlHighlight);
@@ -190,33 +341,13 @@ public class TeacherMenu extends JFrame {
         createStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddingAStudent thisAdding = new AddingAStudent(id);
-                setVisible(false);
-                thisAdding.setVisible(true);
+                JOptionPane.showMessageDialog(AddingAStudent.this,"You are already here");
             }
         });
+
         return createStudent;
     }
 
-    public JLabel setUpAskUBC() {
-        JLabel askUBC = new JLabel("Ask Me @ UBC");
-        askUBC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        askUBC.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://students.ubc.ca/about-student-services/enrolment-services-advisors"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        askUBC.setForeground(new Color(12, 35, 68));
-        askUBC.setFont(new Font("Arial", Font.PLAIN, 18));
-        askUBC.setBounds(20, 610, 179, 24);
-        return askUBC;
-    }
 
     public JLabel setUpImageOfUbc2() {
         JLabel imageOfUBC2 = new JLabel("");
@@ -251,92 +382,13 @@ public class TeacherMenu extends JFrame {
     }
 
     public JButton setPersonalInfo() {
-        JButton personalInfo =  new JButton("Personal Info");
+        JButton personalInfo = new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
         personalInfo.setBackground(SystemColor.controlHighlight);
         personalInfo.setBounds(261, 0, 121, 34);
-        return  personalInfo;
+        return personalInfo;
     }
 
-    public JLabel setHelloMessages(int id) {
-        Teacher currentTeacher = myData.getTeacher(id);
-        JLabel helloMessage = new JLabel("Hi " + currentTeacher.getFn() + " , Welcome to the Teacher Center");
-        helloMessage.setForeground(new Color(12, 35, 68));
-        helloMessage.setFont(new Font("Arial", Font.PLAIN, 27));
-        helloMessage.setBackground(Color.WHITE);
-        helloMessage.setBounds(10, 248, 654, 51);
-        return helloMessage;
-    }
-
-    public JButton setCreateOrDeleteTeacher() {
-        JButton createOrDelete = new JButton("Create or Delete a Teacher");
-        createOrDelete.setFont(new Font("Arial", Font.PLAIN, 20));
-        createOrDelete.setForeground(SystemColor.window);
-        createOrDelete.setBackground(new Color(12, 35, 68));
-        createOrDelete.setBounds(20, 318, 375, 44);
-        return createOrDelete;
-    }
-
-    public JButton setCreateOrDeleteClass() {
-        JButton setCreateOrDeleteClass =  new JButton("Create or Delete a Class");
-        setCreateOrDeleteClass.setForeground(Color.WHITE);
-        setCreateOrDeleteClass.setFont(new Font("Arial", Font.PLAIN, 20));
-        setCreateOrDeleteClass.setBackground(new Color(12, 35, 68));
-        setCreateOrDeleteClass.setBounds(20, 398, 375, 44);
-        return setCreateOrDeleteClass;
-    }
-
-    public JLabel setNeedHelp() {
-        JLabel myLabel = new JLabel("Need Help:");
-        //Source:https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing
-        myLabel.setForeground(new Color(12, 35, 68));
-        myLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-        myLabel.setBackground(Color.WHITE);
-        myLabel.setBounds(10, 481, 654, 51);
-        return myLabel;
-    }
-
-    public JLabel setVideoTutorials() {
-        JLabel videoTutrials = new JLabel("Video Tutorials");
-        videoTutrials.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        videoTutrials.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.codejava.net/"
-                                    + "java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        videoTutrials.setForeground(new Color(12, 35, 68));
-        videoTutrials.setFont(new Font("Arial", Font.PLAIN, 18));
-        videoTutrials.setBounds(20, 542, 179, 24);
-        return videoTutrials;
-    }
-
-    public JLabel setThenicalSupport() {
-        JLabel mytechnical = new JLabel("Thechnical Support");
-        mytechnical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        mytechnical.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.youtube.com/watch?v=DJ7ixkO2Gac"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        mytechnical.setForeground(new Color(12, 35, 68));
-        mytechnical.setFont(new Font("Arial", Font.PLAIN, 18));
-        mytechnical.setBounds(20, 576, 179, 24);
-        return mytechnical;
-
-    }
 
     public JPanel setUpperPanel() {
         JPanel upperPanel = new JPanel();
@@ -413,7 +465,5 @@ public class TeacherMenu extends JFrame {
             }
         });
     }
-
-
-
 }
+

@@ -3,7 +3,11 @@
         0,
         1,
         2,
-        3
+        3,
+        4,
+        5,
+        6,
+        7
     ],
     "ListOfAllStudents": [
         {
@@ -105,6 +109,46 @@
             "fn": "Rodrigo",
             "numberOfClasses": 5,
             "id": 3
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Rubiano",
+            "password": "loli",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Natalia",
+            "numberOfClasses": 0,
+            "id": 4
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Kadirov",
+            "password": "marriage",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Athena",
+            "numberOfClasses": 0,
+            "id": 5
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Garcia",
+            "password": "loli",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Sofia",
+            "numberOfClasses": 0,
+            "id": 6
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Camilo",
+            "password": "Cubillos",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Juan",
+            "numberOfClasses": 0,
+            "id": 7
         }
     ],
     "counterAcademyClasses": 7,
@@ -121,7 +165,11 @@
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300"
+        "eliminaMartinez300",
+        "loli",
+        "marriage",
+        "loli",
+        "Cubillos"
     ],
     "listOfAllIdClasses": [
         0,
@@ -217,7 +265,7 @@
         4,
         5
     ],
-    "counterStudents": 4,
+    "counterStudents": 8,
     "listOfAllTeachers": [
         {
             "allIdsOfTheCurrentClasses": [

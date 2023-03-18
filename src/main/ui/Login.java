@@ -63,6 +63,7 @@ public class Login extends JFrame {
         contentPane.add(cwlLabel);
         loginToContinueLabel = setLoginToContinueLabel();
         contentPane.add(loginToContinueLabel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 
