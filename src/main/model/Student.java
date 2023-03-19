@@ -284,11 +284,18 @@ public class Student {
         return Collections.unmodifiableList(listOfAbscences);
     }
 
-    //Requires it is not teh correct way to add a class during the ui, apart from teh jason files
+    //Requires it is not the correct way to add a class during the ui, apart from teh jason files
     //Modifies: This
     //Effects: adds a class when reading and writting a jason Class
     public void addClasForReading(AcademyClass s) {
         listOfClasses.add(s);
         numOfClasses++;
     }
+
+    //Effects: set the abscenes of a student for a given clas with the same same
+    public void setAbscenceForAClass(int abscence, String name) {
+        int index  = getIndexOfClass(name);
+        listOfAbscences.set(index, abscence);
+    }
+
 }

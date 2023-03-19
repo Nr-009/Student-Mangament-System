@@ -1,10 +1,8 @@
-package ui;
+package ui.tablesForTheUi;
 
 import model.Student;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableForAddingStudents extends AbstractTableModel {
@@ -12,7 +10,6 @@ public class TableForAddingStudents extends AbstractTableModel {
 
     public TableForAddingStudents(List<Student> allstudents) {
         this.allStudents = allstudents;
-
     }
 
     @Override
@@ -55,16 +52,6 @@ public class TableForAddingStudents extends AbstractTableModel {
                 return "Number Of Classes";
         };
         return "";
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int collumnIndex) {
-        return true;
-    }
-
-    @Override
-    public void setValueAt(Object value, int rowIndex, int colIndex){
-
     }
 
 

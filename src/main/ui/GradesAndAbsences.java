@@ -1,22 +1,28 @@
 package ui;
 
-import jdk.jfr.SettingControl;
-import model.DataSystem;
-import model.FileReader;
-import model.Teacher;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
+import model.*;
+import ui.tablesForTheUi.TableOfClasses;
+import ui.tablesForTheUi.TableOfStudentsInAClass;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 
-public class TeacherMenu extends JFrame {
+public class GradesAndAbsences extends JFrame {
+
     private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
     private JLabel imageOfUbc;
     private JLabel name;
     private JLabel teacherId;
@@ -26,13 +32,6 @@ public class TeacherMenu extends JFrame {
     private JButton addOrDropStudents;
     private JButton seeStats;
     private JButton personalInfo;
-    private JLabel helloMessage;
-    private JButton createOrDeleteTeacher;
-    private JButton createOrDeleteClass;
-    private JLabel needHelp;
-    private JLabel videoTutorials;
-    private JLabel thenicalSupport;
-    private JLabel askUBC;
     private JLabel imageOfUBC2;
     private DataSystem myData;
     private JLabel ubcTitle;
@@ -42,10 +41,15 @@ public class TeacherMenu extends JFrame {
     private JPanel greyUpperPannel;
     private JPanel lowerBluePanel;
     private JLabel lowerTitle;
+    private TableOfStudentsInAClass table;
+    private JLabel currentStudents;
+    private JButton backButton;
+    private JPanel panelOfTable;
 
     public static void main(String[] args) {
-        TeacherMenu myTeacher = new TeacherMenu(0);
-        myTeacher.setVisible(true);
+        GradesAndAbsences myStudent = new GradesAndAbsences(0, 3);
+        myStudent.setVisible(true);
+
     }
 
     public void readData() {
@@ -58,9 +62,9 @@ public class TeacherMenu extends JFrame {
     }
 
 
-    public TeacherMenu(int id) {
+    public GradesAndAbsences(int idOfTeacher, int idOfClass) {
         readData();
-        Teacher currentTeacher = myData.getTeacher(id);
+        Teacher currentTeacher = myData.getTeacher(idOfTeacher);
         setBounds(100, 100, 1076, 800);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,17 +79,18 @@ public class TeacherMenu extends JFrame {
         ubcTitle = setUpperTitle();
         upperPanel.add(ubcTitle);
 
-        imageOfUbc = getImageOfUbc();
-        upperPanel.add(imageOfUbc);
-
         secondBlueUpperPanel = seconUpperBluePanel();
         contentPane.add(secondBlueUpperPanel);
         secondBlueUpperPanel.setLayout(null);
 
         labelTeacherCenter = labelTeacherCenter();
         secondBlueUpperPanel.add(labelTeacherCenter);
-        constructorpart2(id);
-        constructor3(id);
+        constructorpart2(idOfTeacher);
+        constructor3(idOfTeacher, idOfClass);
+        constructor4(idOfTeacher);
+
+
+
 
     }
 
@@ -118,41 +123,106 @@ public class TeacherMenu extends JFrame {
         personalInfo = setPersonalInfo();
         greyUpperPannel.add(personalInfo);
 
-        helloMessage = setHelloMessages(id);
-        contentPane.add(helloMessage);
+
 
 
     }
 
-    public void constructor3(int id) {
-        createOrDeleteTeacher = setCreateOrDeleteTeacher(id);
-        contentPane.add(createOrDeleteTeacher);
-
-        createOrDeleteClass = setCreateOrDeleteClass(id);
-        contentPane.add(createOrDeleteClass);
-
-        needHelp = setNeedHelp();
-        contentPane.add(needHelp);
-
-        videoTutorials = setVideoTutorials();
-        contentPane.add(videoTutorials);
-
-        thenicalSupport = setThenicalSupport();
-        contentPane.add(thenicalSupport);
-
-        askUBC = setUpAskUBC();
-        contentPane.add(askUBC);
-
+    public void constructor3(int id, int idOfTheClass) {
         lowerBluePanel = getLowerBluePanel();
         contentPane.add(lowerBluePanel);
-
         lowerTitle = setLowerTitle();
         lowerBluePanel.add(lowerTitle);
-
         imageOfUBC2 = setUpImageOfUbc2();
         lowerBluePanel.add(imageOfUBC2);
+        panelOfTable = setPanelOfTable(id,idOfTheClass);
+        contentPane.add(panelOfTable);
+        currentStudents = setCurrentStudents(idOfTheClass);
+        contentPane.add(currentStudents);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLogout();
+    }
+
+    public void constructor4(int id) {
+        imageOfUbc = getImageOfUbc();
+        upperPanel.add(imageOfUbc);
+        backButton = backButton(id);
+        contentPane.add(backButton);
+    }
+
+
+    public JPanel setPanelOfTable(int id, int idOfClass) {
+        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
+        table = new TableOfStudentsInAClass(currentClass.getStudents(), currentClass.getName());
+        JPanel myPanel = new JPanel();
+        myPanel.setBounds(57,284,867,331);
+        myPanel.setBackground(new Color(240, 240, 240));
+        JTable table2 = new JTable(table);
+        JScrollPane scrollPane = new JScrollPane(table2);
+        myPanel.add(scrollPane);
+        return myPanel;
+    }
+
+
+
+    public JButton backButton(int id) {
+        JButton btnBack = new JButton("Back");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(Color.RED);
+        btnBack.setBounds(962, 626, 100, 29);
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveData(myData);
+                setVisible(false);
+                TeacherMenu currentMenu = new TeacherMenu(id);
+                currentMenu.setVisible(true);
+            }
+        });
+        return btnBack;
+    }
+
+
+    @SuppressWarnings("methodlength")
+    public void setGradeButton2(JButton l, int idOfTeacher, boolean addStrudent) {
+
+    }
+
+    public boolean teacherTeachesThatClass(int idOfTeacher, int idOfClass) {
+        Teacher currentTeacher = myData.getTeacher(idOfTeacher);
+        for (AcademyClass s: currentTeacher.getAllClasses()) {
+            if (s.getId() == idOfClass) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void saveData(DataSystem data) {
+        FileWriter myWriter = new FileWriter();
+        myWriter.setFileDestination("data/tempDataSystem.json");
+        try {
+            myWriter.open();
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not save");
+        }
+        myWriter.write(data);
+        myWriter.close();
+
+
+    }
+
+
+
+    public JLabel setCurrentStudents(int idOfClass) {
+        String name = myData.getAcademyClass(idOfClass).getName();
+        JLabel classSelected = new JLabel(name);
+        classSelected.setFont(new Font("Arial", Font.PLAIN, 30));
+        classSelected.setBounds(420, 237, 204, 45);
+        return classSelected;
+
     }
 
     public JLabel getImageOfUbc() {
@@ -165,7 +235,8 @@ public class TeacherMenu extends JFrame {
 
     public JLabel setUpName(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
-        JLabel name = new JLabel("Name: " + currentTeacher.getFn() + " " + currentTeacher.getLn());
+        JLabel name = new JLabel("Name: " + currentTeacher.getFn()
+                + " " + currentTeacher.getLn());
         name.setForeground(Color.WHITE);
         name.setFont(new Font("Arial", Font.BOLD, 18));
         name.setBackground(Color.WHITE);
@@ -175,12 +246,12 @@ public class TeacherMenu extends JFrame {
 
     public JLabel setUpTeacherId(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
-        JLabel teacherId  = new JLabel("Teacher id#: " + currentTeacher.getId());
+        JLabel teacherId = new JLabel("Teacher id#: " + currentTeacher.getId());
         teacherId.setForeground(Color.WHITE);
         teacherId.setFont(new Font("Arial", Font.BOLD, 18));
         teacherId.setBackground(Color.WHITE);
         teacherId.setBounds(825, 10, 227, 50);
-        return  teacherId;
+        return teacherId;
     }
 
     public JButton setUpCreateStudent(int id) {
@@ -191,33 +262,16 @@ public class TeacherMenu extends JFrame {
         createStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddingAStudent thisAdding = new AddingAStudent(id);
+                AddingAStudent addingAStudent = new AddingAStudent(id);
+                saveData(myData);
                 setVisible(false);
-                thisAdding.setVisible(true);
+                addingAStudent.setVisible(true);
             }
         });
+
         return createStudent;
     }
 
-    public JLabel setUpAskUBC() {
-        JLabel askUBC = new JLabel("Ask Me @ UBC");
-        askUBC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        askUBC.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://students.ubc.ca/about-student-services/enrolment-services-advisors"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        askUBC.setForeground(new Color(12, 35, 68));
-        askUBC.setFont(new Font("Arial", Font.PLAIN, 18));
-        askUBC.setBounds(20, 610, 179, 24);
-        return askUBC;
-    }
 
     public JLabel setUpImageOfUbc2() {
         JLabel imageOfUBC2 = new JLabel("");
@@ -235,9 +289,10 @@ public class TeacherMenu extends JFrame {
         setGrade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SeetingGrade mygrade = new SeetingGrade(id);
+                SeetingGrade mySetting = new SeetingGrade(id);
+                saveData(myData);
                 setVisible(false);
-                mygrade.setVisible(true);
+                mySetting.setVisible(true);
             }
         });
         return setGrade;
@@ -251,9 +306,10 @@ public class TeacherMenu extends JFrame {
         myButtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SeetingGrade mygrade = new SeetingGrade(id);
+                SeetingGrade mySetting = new SeetingGrade(id);
+                saveData(myData);
                 setVisible(false);
-                mygrade.setVisible(true);
+                mySetting.setVisible(true);
             }
         });
         return myButtton;
@@ -268,108 +324,13 @@ public class TeacherMenu extends JFrame {
     }
 
     public JButton setPersonalInfo() {
-        JButton personalInfo =  new JButton("Personal Info");
+        JButton personalInfo = new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
         personalInfo.setBackground(SystemColor.controlHighlight);
         personalInfo.setBounds(261, 0, 121, 34);
-        return  personalInfo;
+        return personalInfo;
     }
 
-    public JLabel setHelloMessages(int id) {
-        Teacher currentTeacher = myData.getTeacher(id);
-        JLabel helloMessage = new JLabel("Hi " + currentTeacher.getFn() + " , Welcome to the Teacher Center");
-        helloMessage.setForeground(new Color(12, 35, 68));
-        helloMessage.setFont(new Font("Arial", Font.PLAIN, 27));
-        helloMessage.setBackground(Color.WHITE);
-        helloMessage.setBounds(10, 248, 654, 51);
-        return helloMessage;
-    }
-
-    public JButton setCreateOrDeleteTeacher(int id) {
-        JButton createOrDelete = new JButton("Create or Delete a Teacher");
-        createOrDelete.setFont(new Font("Arial", Font.PLAIN, 20));
-        createOrDelete.setForeground(SystemColor.window);
-        createOrDelete.setBackground(new Color(12, 35, 68));
-        createOrDelete.setBounds(20, 318, 375, 44);
-        createOrDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddingDeletingATeacher thisTeacher = new AddingDeletingATeacher(id);
-                setVisible(false);
-                thisTeacher.setVisible(true);
-            }
-        });
-        return createOrDelete;
-    }
-
-    public JButton setCreateOrDeleteClass(int id) {
-        JButton setCreateOrDeleteClass =  new JButton("Create or Delete a Class");
-        setCreateOrDeleteClass.setForeground(Color.WHITE);
-        setCreateOrDeleteClass.setFont(new Font("Arial", Font.PLAIN, 20));
-        setCreateOrDeleteClass.setBackground(new Color(12, 35, 68));
-        setCreateOrDeleteClass.setBounds(20, 398, 375, 44);
-        setCreateOrDeleteClass.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CreateOrDeleteClass thisClass = new CreateOrDeleteClass(id);
-                setVisible(false);
-                thisClass.setVisible(true);
-            }
-        });
-        return setCreateOrDeleteClass;
-    }
-
-    public JLabel setNeedHelp() {
-        JLabel myLabel = new JLabel("Need Help:");
-        //Source:https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing
-        myLabel.setForeground(new Color(12, 35, 68));
-        myLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-        myLabel.setBackground(Color.WHITE);
-        myLabel.setBounds(10, 481, 654, 51);
-        return myLabel;
-    }
-
-    public JLabel setVideoTutorials() {
-        JLabel videoTutrials = new JLabel("Video Tutorials");
-        videoTutrials.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        videoTutrials.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.codejava.net/"
-                                    + "java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        videoTutrials.setForeground(new Color(12, 35, 68));
-        videoTutrials.setFont(new Font("Arial", Font.PLAIN, 18));
-        videoTutrials.setBounds(20, 542, 179, 24);
-        return videoTutrials;
-    }
-
-    public JLabel setThenicalSupport() {
-        JLabel mytechnical = new JLabel("Thechnical Support");
-        mytechnical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        mytechnical.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new URI("https://www.youtube.com/watch?v=DJ7ixkO2Gac"));
-                } catch (Exception e4) {
-                    System.out.println("Exception when oppening the link");
-                }
-            }
-        });
-        mytechnical.setForeground(new Color(12, 35, 68));
-        mytechnical.setFont(new Font("Arial", Font.PLAIN, 18));
-        mytechnical.setBounds(20, 576, 179, 24);
-        return mytechnical;
-
-    }
 
     public JPanel setUpperPanel() {
         JPanel upperPanel = new JPanel();
@@ -446,7 +407,7 @@ public class TeacherMenu extends JFrame {
             }
         });
     }
-
-
-
 }
+
+
+
