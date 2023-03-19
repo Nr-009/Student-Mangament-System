@@ -1,6 +1,5 @@
 package ui;
 
-import jdk.jfr.SettingControl;
 import model.DataSystem;
 import model.FileReader;
 import model.Teacher;
