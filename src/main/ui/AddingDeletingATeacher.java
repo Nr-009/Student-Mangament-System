@@ -10,7 +10,6 @@ import model.DataSystem;
 import model.FileReader;
 import model.FileWriter;
 import model.Teacher;
-import ui.tablesForTheUi.TableForAddingTeachers;
 
 import javax.swing.*;
 import java.awt.*;

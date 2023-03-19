@@ -4,7 +4,6 @@ import model.DataSystem;
 import model.FileReader;
 import model.FileWriter;
 import model.Teacher;
-import ui.tablesForTheUi.TableForAddingStudents;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

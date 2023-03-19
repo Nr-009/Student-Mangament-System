@@ -1,4 +1,4 @@
-package ui.tablesForTheUi;
+package ui;
 
 import model.Student;
 import model.Teacher;

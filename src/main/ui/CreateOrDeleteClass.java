@@ -1,7 +1,6 @@
 package ui;
 
 import model.*;
-import ui.tablesForTheUi.TableForAddingAClass;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -214,6 +213,8 @@ public class CreateOrDeleteClass  extends JFrame {
         return btnBack;
     }
 
+
+    @SuppressWarnings("methodlength")
     public JButton setSubmitButton() {
         JButton btnNewButton = new JButton("Submit");
         btnNewButton.setBackground(new Color(12, 35, 68));

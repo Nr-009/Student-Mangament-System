@@ -6,8 +6,6 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
-import ui.tablesForTheUi.TableOfClasses;
-import ui.tablesForTheUi.TableOfStudentsInAClass;
 
 import javax.swing.*;
 import java.awt.*;
