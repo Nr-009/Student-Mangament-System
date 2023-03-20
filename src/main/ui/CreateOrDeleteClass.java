@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import ui.tables.TableForAddingAClass;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +26,6 @@ public class CreateOrDeleteClass  extends JFrame {
     private JButton createStudent;
     private JButton setGradeOrArbscence;
     private JButton addOrDropStudents;
-    private JButton seeStats;
     private JButton personalInfo;
     private JLabel imageOfUBC2;
     private DataSystem myData;
@@ -123,9 +123,6 @@ public class CreateOrDeleteClass  extends JFrame {
 
         addOrDropStudents = getAddOrDropStudents(id);
         greyUpperPannel.add(addOrDropStudents);
-
-        seeStats = setSeeStats();
-        greyUpperPannel.add(seeStats);
 
         personalInfo = setPersonalInfo();
         greyUpperPannel.add(personalInfo);
@@ -421,14 +418,6 @@ public class CreateOrDeleteClass  extends JFrame {
             }
         });
         return myButtton;
-    }
-
-    public JButton setSeeStats() {
-        JButton seeStats = new JButton("See stats");
-        seeStats.setForeground(new Color(12, 35, 68));
-        seeStats.setBackground(SystemColor.controlHighlight);
-        seeStats.setBounds(506, 0, 129, 34);
-        return seeStats;
     }
 
     public JButton setPersonalInfo() {

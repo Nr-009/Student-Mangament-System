@@ -1,4 +1,4 @@
-package ui;
+package ui.tables;
 
 import model.AcademyClass;
 import model.Student;
@@ -6,12 +6,12 @@ import model.Student;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class TableOfClasses extends AbstractTableModel {
+public class TableForAddingAClass extends AbstractTableModel {
+
     private List<AcademyClass> allclasses;
 
-    public TableOfClasses(List<AcademyClass> allClasses) {
-        this.allclasses = allClasses;
-
+    public TableForAddingAClass(List<AcademyClass> allclasses) {
+        this.allclasses = allclasses;
     }
 
     @Override
@@ -21,40 +21,45 @@ public class TableOfClasses extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
-    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         AcademyClass currentClass = allclasses.get(rowIndex);
+
         switch (columnIndex) {
             case 0:
                 return currentClass.getName();
             case 1:
-                return currentClass.getId();
+                return currentClass.getTeacher().getFn();
             case 2:
-                return currentClass.getNumOfStudents();
-            case 3:
                 return currentClass.getAverageGrade();
+            case 3:
+                return currentClass.getNumOfStudents();
             case 4:
-                return currentClass.getSession();
+                return currentClass.getId();
+            case 5:
+                return currentClass.getTeacher().getId();
         }
         return null;
+
     }
 
     @Override
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Class Name";
+                return "Class";
             case 1:
-                return "Class id";
+                return "Teacher";
             case 2:
-                return "#Students";
-            case 3:
                 return "Average Grade";
+            case 3:
+                return "#Students";
             case 4:
-                return "Session";
+                return "Id";
+            case 5:
+                return "Teacher's id";
         };
         return "";
     }

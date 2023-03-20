@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
+import ui.tables.TableOfClasses;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +29,6 @@ public class SeetingGrade extends JFrame {
     private JButton createStudent;
     private JButton setGradeOrArbscence;
     private JButton addOrDropStudents;
-    private JButton seeStats;
     private JButton personalInfo;
     private JLabel imageOfUBC2;
     private DataSystem myData;
@@ -122,13 +122,8 @@ public class SeetingGrade extends JFrame {
         addOrDropStudents = getAddOrDropStudents();
         greyUpperPannel.add(addOrDropStudents);
 
-        seeStats = setSeeStats();
-        greyUpperPannel.add(seeStats);
-
         personalInfo = setPersonalInfo();
         greyUpperPannel.add(personalInfo);
-
-
 
 
     }
@@ -238,7 +233,10 @@ public class SeetingGrade extends JFrame {
                                 "You are not teaching this class");
                     } else {
                         if (addStrudent) {
-                            System.out.println("Good behaviour");
+                            saveData(myData);
+                            AddOrDropStudents mydrop = new AddOrDropStudents(idOfTeacher, idOfClass);
+                            setVisible(false);
+                            mydrop.setVisible(true);
                         } else {
                             saveData(myData);
                             GradesAndAbsences myGrades = new GradesAndAbsences(idOfTeacher, idOfClass);
@@ -395,13 +393,6 @@ public class SeetingGrade extends JFrame {
         return myButtton;
     }
 
-    public JButton setSeeStats() {
-        JButton seeStats = new JButton("See stats");
-        seeStats.setForeground(new Color(12, 35, 68));
-        seeStats.setBackground(SystemColor.controlHighlight);
-        seeStats.setBounds(506, 0, 129, 34);
-        return seeStats;
-    }
 
     public JButton setPersonalInfo() {
         JButton personalInfo = new JButton("Personal Info");

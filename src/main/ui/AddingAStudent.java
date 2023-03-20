@@ -4,6 +4,7 @@ import model.DataSystem;
 import model.FileReader;
 import model.FileWriter;
 import model.Teacher;
+import ui.tables.TableForAddingStudents;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,7 +29,6 @@ public class AddingAStudent extends JFrame {
     private JButton createStudent;
     private JButton setGradeOrArbscence;
     private JButton addOrDropStudents;
-    private JButton seeStats;
     private JButton personalInfo;
     private JLabel imageOfUBC2;
     private DataSystem myData;
@@ -125,8 +125,6 @@ public class AddingAStudent extends JFrame {
         addOrDropStudents = getAddOrDropStudentsid(id);
         greyUpperPannel.add(addOrDropStudents);
 
-        seeStats = setSeeStats();
-        greyUpperPannel.add(seeStats);
 
         personalInfo = setPersonalInfo();
         greyUpperPannel.add(personalInfo);
@@ -389,13 +387,6 @@ public class AddingAStudent extends JFrame {
         return myButtton;
     }
 
-    public JButton setSeeStats() {
-        JButton seeStats = new JButton("See stats");
-        seeStats.setForeground(new Color(12, 35, 68));
-        seeStats.setBackground(SystemColor.controlHighlight);
-        seeStats.setBounds(506, 0, 129, 34);
-        return seeStats;
-    }
 
     public JButton setPersonalInfo() {
         JButton personalInfo = new JButton("Personal Info");

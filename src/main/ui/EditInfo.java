@@ -6,18 +6,15 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
-import ui.tables.TableOfStudentsInAClass;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class GradesAndAbsences extends JFrame {
+public class EditInfo extends JFrame {
 
     private JPanel contentPane;
 
@@ -41,20 +38,22 @@ public class GradesAndAbsences extends JFrame {
     private JPanel greyUpperPannel;
     private JPanel lowerBluePanel;
     private JLabel lowerTitle;
-    private TableOfStudentsInAClass table;
     private JLabel currentStudents;
     private JButton backButton;
-    private JPanel panelOfTable;
-    private JLabel labelOfClassName;
+    private JLabel labelOfFirstName;
     private JLabel labelOfSession;
-    private JLabel labelOfNumberOfStudnets;
-    private JLabel labelOfAverageGrade;
-    private JLabel labelOfId;
-    private TableModelListener myTableListener;
-    private JTable tablecontainer;
+    private JTextField fnTextField;
+    private JTextField lnTextField;
+    private JTextField passwordTextField;
+    private JTextField newPasswroldTextField;
+    private JLabel idLabel;
+    private JLabel labelOfNumberOfClasses;
+    private JLabel labelOfPassworld;
+    private JLabel labelOfNewPassword;
+    private JButton submitButton;
 
     public static void main(String[] args) {
-        GradesAndAbsences myStudent = new GradesAndAbsences(0, 3);
+        EditInfo myStudent = new EditInfo(0);
         myStudent.setVisible(true);
 
     }
@@ -69,7 +68,7 @@ public class GradesAndAbsences extends JFrame {
     }
 
 
-    public GradesAndAbsences(int idOfTeacher, int idOfClass) {
+    public EditInfo(int idOfTeacher) {
         readData();
         Teacher currentTeacher = myData.getTeacher(idOfTeacher);
         setBounds(100, 100, 1076, 800);
@@ -93,8 +92,8 @@ public class GradesAndAbsences extends JFrame {
         labelTeacherCenter = labelTeacherCenter();
         secondBlueUpperPanel.add(labelTeacherCenter);
         constructorpart2(idOfTeacher);
-        constructor3(idOfTeacher, idOfClass);
-        constructor4(idOfTeacher, idOfClass);
+        constructor3(idOfTeacher);
+        constructor4(idOfTeacher);
 
 
 
@@ -133,108 +132,144 @@ public class GradesAndAbsences extends JFrame {
 
     }
 
-    public void constructor3(int id, int idOfTheClass) {
+    public void constructor3(int id) {
         lowerBluePanel = getLowerBluePanel();
         contentPane.add(lowerBluePanel);
         lowerTitle = setLowerTitle();
         lowerBluePanel.add(lowerTitle);
         imageOfUBC2 = setUpImageOfUbc2();
         lowerBluePanel.add(imageOfUBC2);
-        panelOfTable = setPanelOfTable(id,idOfTheClass);
-        contentPane.add(panelOfTable);
-        currentStudents = setCurrentStudents(idOfTheClass);
+        currentStudents = setCurrentStudents(id);
         contentPane.add(currentStudents);
+        passwordTextField = setPasswordTextField();
+        contentPane.add(passwordTextField);
+        newPasswroldTextField = setNewPasworldTextField();
+        contentPane.add(newPasswroldTextField);
+        submitButton = setSubmitButton();
+        contentPane.add(submitButton);
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLogout();
     }
 
-    public void constructor4(int id, int idOfClass) {
+    public void constructor4(int id) {
         imageOfUbc = getImageOfUbc();
         upperPanel.add(imageOfUbc);
         backButton = backButton(id);
         contentPane.add(backButton);
-        labelOfClassName = classNameLabel(idOfClass);
-        contentPane.add(labelOfClassName);
-        labelOfSession = classSession(idOfClass);
+        labelOfFirstName = firstNameLabel(id);
+        contentPane.add(labelOfFirstName);
+        labelOfSession = lastNameLabel(id);
         contentPane.add(labelOfSession);
-        labelOfNumberOfStudnets = numberOfStudents(idOfClass);
-        contentPane.add(labelOfNumberOfStudnets);
-        labelOfAverageGrade = labelOfAverageGrade(idOfClass);
-        contentPane.add(labelOfAverageGrade);
-        labelOfId = labelOfId(idOfClass);
-        contentPane.add(labelOfId);
-        myTableListener = setupTableModeListener(idOfClass);
-        tablecontainer.getModel().addTableModelListener(myTableListener);
-    }
-
-    public TableModelListener setupTableModeListener(int idOfClass) {
-        TableModelListener myTableListener = new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-
-                labelOfAverageGrade.setText("Average Grade: " + currentClass.getAverageGrade());
-            }
-        };
-        return myTableListener;
-    }
-
-    public JLabel labelOfId(int idOfClas) {
-        AcademyClass currentClas = myData.getAcademyClass(idOfClas);
-        JLabel classId = new JLabel("Id: " + currentClas.getId());
-        classId.setFont(new Font("Arial", Font.PLAIN, 28));
-        classId.setBounds(562, 332, 421, 45);
-        return classId;
+        idLabel = labelOfId(id);
+        contentPane.add(idLabel);
+        labelOfNumberOfClasses = numberOfClasses(id);
+        contentPane.add(labelOfNumberOfClasses);
+        labelOfPassworld = labelOfPassword();
+        contentPane.add(labelOfPassworld);
+        labelOfNewPassword = getLabelOfNewPassword();
+        contentPane.add(labelOfNewPassword);
+        fnTextField = settingfirstName();
+        contentPane.add(fnTextField);
+        lnTextField = settingLastName();
+        contentPane.add(lnTextField);
 
     }
 
-    public JLabel labelOfAverageGrade(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel labelAveraeGrade = new JLabel("Average Grade: " + currentClass.getAverageGrade());
-        labelAveraeGrade.setFont(new Font("Arial", Font.PLAIN, 28));
-        labelAveraeGrade.setBounds(562, 497, 421, 45);
-        return labelAveraeGrade;
+    public JButton setSubmitButton() {
+        JButton btnBack = new JButton("Submit");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(new Color(12, 35, 68));
+        btnBack.setBounds(627, 489, 100, 29);
+        return btnBack;
     }
 
-    public JLabel numberOfStudents(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel labelStudents = new JLabel("#Students: " + currentClass.getNumOfStudents());
-        labelStudents.setFont(new Font("Arial", Font.PLAIN, 28));
-        labelStudents.setBounds(562, 442, 421, 45);
-        return labelStudents;
+    public JPasswordField setNewPasworldTextField() {
+        JPasswordField newPasswroldTextField = new JPasswordField();
+        newPasswroldTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        newPasswroldTextField.setColumns(10);
+        newPasswroldTextField.setBounds(603, 440, 154, 28);
+        return newPasswroldTextField;
     }
 
-    public JLabel classSession(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel classSession = new JLabel("Class Session: " + currentClass.getSession());
-        classSession.setFont(new Font("Arial", Font.PLAIN, 28));
-        classSession.setBounds(562, 387, 421, 45);
-        return classSession;
-    }
-
-    public JLabel classNameLabel(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel className = new JLabel("Class Name: " + currentClass.getName());
-        className.setFont(new Font("Arial", Font.PLAIN, 28));
-        className.setBounds(562, 277, 421, 45);
-        return className;
+    public JTextField setPasswordTextField() {
+        JPasswordField passwordTextField = new JPasswordField();
+        passwordTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        passwordTextField.setColumns(10);
+        passwordTextField.setBounds(603, 391, 154, 28);
+        return passwordTextField;
     }
 
 
-    public JPanel setPanelOfTable(int id, int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        table = new TableOfStudentsInAClass(currentClass.getStudents(), currentClass.getName());
-        JPanel myPanel = new JPanel();
-        myPanel.setBounds(57,284,442,331);
-        myPanel.setBackground(new Color(240, 240, 240));
-        tablecontainer = new JTable(table);
-        JScrollPane scrollPane = new JScrollPane(tablecontainer);
-        scrollPane.setPreferredSize(new Dimension(442, 331));
-        myPanel.add(scrollPane);
-        return myPanel;
+    public JTextField settingLastName() {
+        lnTextField = new JTextField();
+        lnTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lnTextField.setColumns(10);
+        lnTextField.setBounds(603, 347, 154, 28);
+        return lnTextField;
     }
+
+    public JTextField settingfirstName() {
+        JTextField fnTextField = new JTextField();
+        fnTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        fnTextField.setBounds(603, 303, 154, 28);
+        fnTextField.setColumns(10);
+        return fnTextField;
+    }
+
+    public JLabel getLabelOfNewPassword() {
+        JLabel lblNewPassword = new JLabel("New Password:");
+        lblNewPassword.setFont(new Font("Arial", Font.PLAIN, 24));
+        lblNewPassword.setBounds(315, 434, 278, 45);
+        return lblNewPassword;
+    }
+
+    public JLabel labelOfPassword() {
+        JLabel lblCurrentPassworld = new JLabel("Password:");
+        lblCurrentPassworld.setFont(new Font("Arial", Font.PLAIN, 24));
+        lblCurrentPassworld.setBounds(315, 385, 278, 45);
+        return lblCurrentPassworld;
+    }
+
+
+
+    public JLabel numberOfClasses(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel numberOfClassesLabel = new JLabel("#Classes: " + currentTeacher.getNumClasses());
+        numberOfClassesLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        numberOfClassesLabel.setBounds(315, 544, 278, 45);
+        return numberOfClassesLabel;
+
+    }
+
+    public JLabel labelOfId(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel idLabel = new JLabel("Id: " + currentTeacher.getId());
+        idLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        idLabel.setBounds(315, 489, 120, 45);
+        return idLabel;
+    }
+
+
+
+
+    public JLabel lastNameLabel(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel lastName = new JLabel("Last Name: " + currentTeacher.getLn());
+        lastName.setFont(new Font("Arial", Font.PLAIN, 24));
+        lastName.setBounds(315, 336, 287, 45);
+        return lastName;
+    }
+
+    public JLabel firstNameLabel(int id) {
+        Teacher currentTeacher = myData.getTeacher(id);
+        JLabel firstName = new JLabel("First Name: " + currentTeacher.getFn());
+        firstName.setFont(new Font("Arial", Font.PLAIN, 24));
+        firstName.setBounds(315, 292, 278, 45);
+        return firstName;
+    }
+
 
 
 
@@ -256,20 +291,8 @@ public class GradesAndAbsences extends JFrame {
     }
 
 
-    @SuppressWarnings("methodlength")
-    public void setGradeButton2(JButton l, int idOfTeacher, boolean addStrudent) {
 
-    }
 
-    public boolean teacherTeachesThatClass(int idOfTeacher, int idOfClass) {
-        Teacher currentTeacher = myData.getTeacher(idOfTeacher);
-        for (AcademyClass s: currentTeacher.getAllClasses()) {
-            if (s.getId() == idOfClass) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void saveData(DataSystem data) {
         FileWriter myWriter = new FileWriter();
@@ -289,9 +312,9 @@ public class GradesAndAbsences extends JFrame {
 
     public JLabel setCurrentStudents(int idOfClass) {
         String name = myData.getAcademyClass(idOfClass).getName();
-        JLabel classSelected = new JLabel(name);
+        JLabel classSelected = new JLabel("Current Information");
         classSelected.setFont(new Font("Arial", Font.PLAIN, 30));
-        classSelected.setBounds(182, 237, 204, 45);
+        classSelected.setBounds(408, 237, 278, 45);
         return classSelected;
 
     }

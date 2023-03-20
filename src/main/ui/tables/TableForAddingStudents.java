@@ -1,4 +1,4 @@
-package ui;
+package ui.tables;
 
 import model.Student;
 
@@ -49,7 +49,7 @@ public class TableForAddingStudents extends AbstractTableModel {
             case 2:
                 return "Last Name";
             case 3:
-                return "Number Of Classes";
+                return "#Classes";
         };
         return "";
     }

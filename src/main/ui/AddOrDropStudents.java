@@ -6,18 +6,19 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
+import ui.tables.TableForAddingAClass;
+import ui.tables.TableForAddingStudents;
+import ui.tables.TableOfStudentInAClassWithoutEditable;
 import ui.tables.TableOfStudentsInAClass;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class GradesAndAbsences extends JFrame {
+public class AddOrDropStudents extends JFrame {
 
     private JPanel contentPane;
 
@@ -42,19 +43,19 @@ public class GradesAndAbsences extends JFrame {
     private JPanel lowerBluePanel;
     private JLabel lowerTitle;
     private TableOfStudentsInAClass table;
-    private JLabel currentStudents;
     private JButton backButton;
     private JPanel panelOfTable;
-    private JLabel labelOfClassName;
-    private JLabel labelOfSession;
-    private JLabel labelOfNumberOfStudnets;
-    private JLabel labelOfAverageGrade;
-    private JLabel labelOfId;
-    private TableModelListener myTableListener;
-    private JTable tablecontainer;
+    private JTextField idTextField;
+    private TableForAddingStudents table2;
+    private JLabel classStudents;
+    private JLabel allStudentsLabel;
+    private JLabel addOrdropLabel;
+    private JLabel idLabel;
+    private JButton dropButton;
+    private JButton addButtn;
 
     public static void main(String[] args) {
-        GradesAndAbsences myStudent = new GradesAndAbsences(0, 3);
+        AddOrDropStudents myStudent = new AddOrDropStudents(0, 3);
         myStudent.setVisible(true);
 
     }
@@ -69,7 +70,7 @@ public class GradesAndAbsences extends JFrame {
     }
 
 
-    public GradesAndAbsences(int idOfTeacher, int idOfClass) {
+    public AddOrDropStudents(int idOfTeacher, int idOfClass) {
         readData();
         Teacher currentTeacher = myData.getTeacher(idOfTeacher);
         setBounds(100, 100, 1076, 800);
@@ -142,10 +143,9 @@ public class GradesAndAbsences extends JFrame {
         lowerBluePanel.add(imageOfUBC2);
         panelOfTable = setPanelOfTable(id,idOfTheClass);
         contentPane.add(panelOfTable);
-        currentStudents = setCurrentStudents(idOfTheClass);
-        contentPane.add(currentStudents);
 
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLogout();
     }
@@ -155,85 +155,186 @@ public class GradesAndAbsences extends JFrame {
         upperPanel.add(imageOfUbc);
         backButton = backButton(id);
         contentPane.add(backButton);
-        labelOfClassName = classNameLabel(idOfClass);
-        contentPane.add(labelOfClassName);
-        labelOfSession = classSession(idOfClass);
-        contentPane.add(labelOfSession);
-        labelOfNumberOfStudnets = numberOfStudents(idOfClass);
-        contentPane.add(labelOfNumberOfStudnets);
-        labelOfAverageGrade = labelOfAverageGrade(idOfClass);
-        contentPane.add(labelOfAverageGrade);
-        labelOfId = labelOfId(idOfClass);
-        contentPane.add(labelOfId);
-        myTableListener = setupTableModeListener(idOfClass);
-        tablecontainer.getModel().addTableModelListener(myTableListener);
+
+        JPanel allStudnets = setAllStudentTable();
+        contentPane.add(allStudnets);
+
+        classStudents = setClassStudents();
+        contentPane.add(classStudents);
+
+        allStudentsLabel = setallStudentsLabel();
+        contentPane.add(allStudentsLabel);
+
+        addOrdropLabel = addorDropLabel();
+        contentPane.add(addOrdropLabel);
+
+        idTextField = new JTextField();
+        idTextField.setBounds(894, 384, 88, 29);
+        contentPane.add(idTextField);
+        idTextField.setColumns(10);
+
+        idLabel = setIdLabel();
+        contentPane.add(idLabel);
+
+        dropButton = setDropButton(idOfClass);
+        contentPane.add(dropButton);
+
+        JButton addButton = setAddButton(idOfClass);
+        contentPane.add(addButton);
     }
 
-    public TableModelListener setupTableModeListener(int idOfClass) {
-        TableModelListener myTableListener = new TableModelListener() {
+    public JButton setAddButton(int idOfClass) {
+        JButton addButton = new JButton("Add");
+        addButton.setForeground(Color.WHITE);
+        addButton.setBackground(new Color(12, 35, 68));
+        addButton.setBounds(868, 472, 80, 29);
+        setActionAddButton(addButton, idOfClass);
+        return addButton;
+    }
+
+    public void setActionAddButton(JButton s, int idOfClass) {
+        s.addActionListener(new ActionListener() {
             @Override
-            public void tableChanged(TableModelEvent e) {
-                AcademyClass currentClass = myData.getAcademyClass(idOfClass);
+            public void actionPerformed(ActionEvent e) {
+                String id = "";
+                int intIdOfStudent = 0;
+                try {
+                    id = idTextField.getText();
+                    intIdOfStudent = Integer.parseInt(id);
+                    Student currentStudent = myData.getStudent(intIdOfStudent);
+                    AcademyClass currentClas = myData.getAcademyClass(idOfClass);
+                    if (currentClas.hasStudent(intIdOfStudent)) {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "This student is already register for this class");
+                    } else {
+                        currentClas.addStudent(currentStudent);
+                        currentStudent.addClass(currentClas);
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "Student with id of " + id + " added");
+                        saveData(myData);
+                        table.fireTableDataChanged();
+                        table2.fireTableDataChanged();
+                    }
+                } catch (Exception e2) {
+                    if (id.isEmpty()) {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "You need to put and id");
+                    } else {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "You put something that is not a number");
+                    }
 
-                labelOfAverageGrade.setText("Average Grade: " + currentClass.getAverageGrade());
+                }
             }
-        };
-        return myTableListener;
+        });
     }
 
-    public JLabel labelOfId(int idOfClas) {
-        AcademyClass currentClas = myData.getAcademyClass(idOfClas);
-        JLabel classId = new JLabel("Id: " + currentClas.getId());
-        classId.setFont(new Font("Arial", Font.PLAIN, 28));
-        classId.setBounds(562, 332, 421, 45);
-        return classId;
+    public JButton setDropButton(int idOfClass) {
+        JButton drop = new JButton("Drop");
+        setActionDropStudents(drop, idOfClass);
+        drop.setForeground(Color.WHITE);
+        drop.setBackground(new Color(12, 35, 68));
+        drop.setBounds(868, 433, 80, 29);
+        return drop;
 
     }
 
-    public JLabel labelOfAverageGrade(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel labelAveraeGrade = new JLabel("Average Grade: " + currentClass.getAverageGrade());
-        labelAveraeGrade.setFont(new Font("Arial", Font.PLAIN, 28));
-        labelAveraeGrade.setBounds(562, 497, 421, 45);
-        return labelAveraeGrade;
+    public void setActionDropStudents(JButton s, int idOfClass) {
+        s.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id = "";
+                int intIdOfStudent = 0;
+                try {
+                    id = idTextField.getText();
+                    intIdOfStudent = Integer.parseInt(id);
+                    Student currentStudent = myData.getStudent(intIdOfStudent);
+                    AcademyClass currentClas = myData.getAcademyClass(idOfClass);
+                    if (!currentClas.hasStudent(intIdOfStudent)) {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "This student is not register for this class");
+                    } else {
+                        currentClas.deleteStudent(intIdOfStudent);
+                        currentStudent.removeClass(currentClas.getName());
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "Stduent with id of " + id + " dropped");
+                        saveData(myData);
+                        table.fireTableDataChanged();
+                        table2.fireTableDataChanged();
+                    }
+                } catch (Exception e2) {
+                    if (id.isEmpty()) {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "You need to put and id");
+                    } else {
+                        JOptionPane.showMessageDialog(AddOrDropStudents.this,
+                                "You put something that is not a number");
+                    }
+
+                }
+            }
+        });
+
     }
 
-    public JLabel numberOfStudents(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel labelStudents = new JLabel("#Students: " + currentClass.getNumOfStudents());
-        labelStudents.setFont(new Font("Arial", Font.PLAIN, 28));
-        labelStudents.setBounds(562, 442, 421, 45);
-        return labelStudents;
+    public JLabel setIdLabel() {
+        JLabel lblId = new JLabel("Id");
+        lblId.setForeground(new Color(12, 35, 68));
+        lblId.setFont(new Font("Arial", Font.PLAIN, 24));
+        lblId.setBounds(840, 376, 38, 36);
+        return lblId;
     }
 
-    public JLabel classSession(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel classSession = new JLabel("Class Session: " + currentClass.getSession());
-        classSession.setFont(new Font("Arial", Font.PLAIN, 28));
-        classSession.setBounds(562, 387, 421, 45);
-        return classSession;
+    public JLabel addorDropLabel() {
+        JLabel addOrDrop = new JLabel("Add Or Drop");
+        addOrDrop.setForeground(new Color(12, 35, 68));
+        addOrDrop.setFont(new Font("Arial", Font.PLAIN, 26));
+        addOrDrop.setBounds(840, 329, 151, 45);
+        return addOrDrop;
     }
 
-    public JLabel classNameLabel(int idOfClass) {
-        AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        JLabel className = new JLabel("Class Name: " + currentClass.getName());
-        className.setFont(new Font("Arial", Font.PLAIN, 28));
-        className.setBounds(562, 277, 421, 45);
-        return className;
+    public JLabel setallStudentsLabel() {
+        JLabel lblAllStudents = new JLabel("All Students");
+        lblAllStudents.setForeground(new Color(12, 35, 68));
+        lblAllStudents.setFont(new Font("Arial", Font.PLAIN, 26));
+        lblAllStudents.setBounds(449, 237, 195, 45);
+        return lblAllStudents;
+    }
+
+
+    public JLabel setClassStudents() {
+        JLabel classStudents = new JLabel("Class Students");
+        classStudents.setFont(new Font("Arial", Font.PLAIN, 26));
+        classStudents.setForeground(new Color(12, 35, 68));
+        classStudents.setBounds(85, 237, 195, 45);
+        return classStudents;
+    }
+
+    public JPanel setAllStudentTable() {
+        table2 = new TableForAddingStudents(myData.getListOfStudents());
+        JPanel allStudents = new JPanel();
+        allStudents.setBounds(373, 292, 322, 337);
+        allStudents.setBackground(new Color(240, 240, 240));
+        JTable table3 = new JTable(table2);
+        JScrollPane scrollPane = new JScrollPane(table3);
+        scrollPane.setPreferredSize(new Dimension(322, 337));
+        allStudents.add(scrollPane);
+        return allStudents;
     }
 
 
     public JPanel setPanelOfTable(int id, int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
-        table = new TableOfStudentsInAClass(currentClass.getStudents(), currentClass.getName());
-        JPanel myPanel = new JPanel();
-        myPanel.setBounds(57,284,442,331);
-        myPanel.setBackground(new Color(240, 240, 240));
-        tablecontainer = new JTable(table);
-        JScrollPane scrollPane = new JScrollPane(tablecontainer);
-        scrollPane.setPreferredSize(new Dimension(442, 331));
-        myPanel.add(scrollPane);
-        return myPanel;
+        table = new TableOfStudentInAClassWithoutEditable(currentClass.getStudents(), currentClass.getName());
+        JPanel classStudents = new JPanel();
+        classStudents.setBounds(10,292,336,337);
+        classStudents.setBackground(new Color(240, 240, 240));
+        JTable table2 = new JTable(table);
+        JScrollPane scrollPane = new JScrollPane(table2);
+        scrollPane.setPreferredSize(new Dimension(336,337));
+        scrollPane.setSize(table2.WIDTH, table2.HEIGHT);
+        classStudents.add(scrollPane);
+        return classStudents;
     }
 
 
@@ -256,20 +357,8 @@ public class GradesAndAbsences extends JFrame {
     }
 
 
-    @SuppressWarnings("methodlength")
-    public void setGradeButton2(JButton l, int idOfTeacher, boolean addStrudent) {
 
-    }
 
-    public boolean teacherTeachesThatClass(int idOfTeacher, int idOfClass) {
-        Teacher currentTeacher = myData.getTeacher(idOfTeacher);
-        for (AcademyClass s: currentTeacher.getAllClasses()) {
-            if (s.getId() == idOfClass) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void saveData(DataSystem data) {
         FileWriter myWriter = new FileWriter();
@@ -287,14 +376,7 @@ public class GradesAndAbsences extends JFrame {
 
 
 
-    public JLabel setCurrentStudents(int idOfClass) {
-        String name = myData.getAcademyClass(idOfClass).getName();
-        JLabel classSelected = new JLabel(name);
-        classSelected.setFont(new Font("Arial", Font.PLAIN, 30));
-        classSelected.setBounds(182, 237, 204, 45);
-        return classSelected;
 
-    }
 
     public JLabel getImageOfUbc() {
         JLabel imageOfUBC = new JLabel("");
@@ -385,6 +467,7 @@ public class GradesAndAbsences extends JFrame {
         });
         return myButtton;
     }
+
 
 
     public JButton setPersonalInfo() {

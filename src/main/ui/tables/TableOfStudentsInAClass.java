@@ -1,4 +1,4 @@
-package ui;
+package ui.tables;
 
 import model.AcademyClass;
 import model.Student;
