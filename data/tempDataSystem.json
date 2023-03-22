@@ -3,7 +3,11 @@
         0,
         1,
         2,
-        3
+        3,
+        4,
+        5,
+        6,
+        7
     ],
     "ListOfAllStudents": [
         {
@@ -108,23 +112,68 @@
             "fn": "Rodrigo",
             "numberOfClasses": 5,
             "id": 3
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Garcia",
+            "password": "canada",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Daniela",
+            "numberOfClasses": 0,
+            "id": 4
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Japan",
+            "password": "gyunay",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Athena",
+            "numberOfClasses": 0,
+            "id": 5
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Rubiano",
+            "password": "lolicon",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Nicolas",
+            "numberOfClasses": 0,
+            "id": 6
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Rubiano",
+            "password": "lolicon",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Nicolas",
+            "numberOfClasses": 0,
+            "id": 7
         }
     ],
     "counterAcademyClasses": 8,
-    "counterTeacher": 6,
+    "counterTeacher": 8,
     "listOfAllPasswordTeachers": [
-        "fisica12",
+        "fisica13",
         "logic",
         "naturalRecursion",
         "abstraction",
         "circuits",
-        "R"
+        "R",
+        "lolicon"
     ],
     "listOfPasswordStudents": [
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300"
+        "eliminaMartinez300",
+        "canada",
+        "gyunay",
+        "lolicon",
+        "lolicon"
     ],
     "listOfAllIdClasses": [
         0,
@@ -230,17 +279,18 @@
         2,
         3,
         4,
-        5
+        5,
+        6
     ],
-    "counterStudents": 4,
+    "counterStudents": 8,
     "listOfAllTeachers": [
         {
             "allIdsOfTheCurrentClasses": [
                 3,
                 4
             ],
-            "ln": " El Inmortal",
-            "password": "fisica12",
+            "ln": "El inmortal",
+            "password": "fisica13",
             "fn": "Eulogio",
             "id": 0,
             "numClasses": 2
@@ -284,6 +334,14 @@
             "fn": "Anthony",
             "id": 5,
             "numClasses": 1
+        },
+        {
+            "allIdsOfTheCurrentClasses": [],
+            "ln": "Rubiano",
+            "password": "lolicon",
+            "fn": "Nicolas",
+            "id": 6,
+            "numClasses": 0
         }
     ]
 }

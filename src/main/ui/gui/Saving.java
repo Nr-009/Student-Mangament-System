@@ -1,4 +1,4 @@
-package ui;
+package ui.gui;
 
 import model.DataSystem;
 import model.FileReader;
@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.xml.crypto.Data;
 
 public class Saving extends JFrame {
 

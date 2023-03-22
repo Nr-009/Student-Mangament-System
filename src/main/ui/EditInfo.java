@@ -6,6 +6,10 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
+import ui.gui.Saving;
+import ui.medianamente.AddingAStudent;
+import ui.medianamente.SeetingGrade;
+import ui.medianamente.TeacherMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +45,7 @@ public class EditInfo extends JFrame {
     private JLabel currentStudents;
     private JButton backButton;
     private JLabel labelOfFirstName;
-    private JLabel labelOfSession;
+    private JLabel labelOfLastName;
     private JTextField fnTextField;
     private JTextField lnTextField;
     private JTextField passwordTextField;
@@ -145,7 +149,7 @@ public class EditInfo extends JFrame {
         contentPane.add(passwordTextField);
         newPasswroldTextField = setNewPasworldTextField();
         contentPane.add(newPasswroldTextField);
-        submitButton = setSubmitButton();
+        submitButton = setSubmitButton(id);
         contentPane.add(submitButton);
 
 
@@ -160,8 +164,8 @@ public class EditInfo extends JFrame {
         contentPane.add(backButton);
         labelOfFirstName = firstNameLabel(id);
         contentPane.add(labelOfFirstName);
-        labelOfSession = lastNameLabel(id);
-        contentPane.add(labelOfSession);
+        labelOfLastName = lastNameLabel(id);
+        contentPane.add(labelOfLastName);
         idLabel = labelOfId(id);
         contentPane.add(idLabel);
         labelOfNumberOfClasses = numberOfClasses(id);
@@ -177,12 +181,57 @@ public class EditInfo extends JFrame {
 
     }
 
-    public JButton setSubmitButton() {
+    public JButton setSubmitButton(int idOfTeacher) {
         JButton btnBack = new JButton("Submit");
         btnBack.setForeground(Color.WHITE);
         btnBack.setBackground(new Color(12, 35, 68));
         btnBack.setBounds(627, 489, 100, 29);
+        setUpSubmitButton(btnBack, idOfTeacher);
         return btnBack;
+    }
+
+    @SuppressWarnings("methodlength")
+    public void setUpSubmitButton(JButton s, int idOfTeacher) {
+        s.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fn = fnTextField.getText();
+                String ln = lnTextField.getText();
+                String password = passwordTextField.getText();
+                String newPassword = newPasswroldTextField.getText();
+                Teacher currentTeacher = myData.getTeacher(idOfTeacher);
+                if (password.isEmpty() && (fn.isEmpty() | ln.isEmpty() | newPassword.isEmpty())) {
+                    JOptionPane.showMessageDialog(EditInfo.this,
+                            "You need to put the \npassword to make any changes");
+                } else if (!myData.checkLoginTeacher(idOfTeacher, password)) {
+                    JOptionPane.showMessageDialog(EditInfo.this,
+                            "You put an incorrect password");
+                } else {
+                    if (!fn.isEmpty() && !fn.equals(currentTeacher.getFn())) {
+                        JOptionPane.showMessageDialog(EditInfo.this,
+                                "Changing fn for " + fn);
+                        currentTeacher.setFn(fn);
+                        labelOfFirstName.setText("First Name: " + currentTeacher.getFn());
+                        saveData(myData);
+                    }
+                    if (!ln.isEmpty()  && !ln.equals(currentTeacher.getLn())) {
+                        JOptionPane.showMessageDialog(EditInfo.this,
+                                "Changing ln for " + ln);
+                        currentTeacher.setLn(ln);
+                        labelOfLastName.setText("Last Name: " + currentTeacher.getLn());
+                        saveData(myData);
+                    }
+                    if (!newPassword.isEmpty() && !newPassword.equals(currentTeacher.getPassword())) {
+                        JOptionPane.showMessageDialog(EditInfo.this,
+                                "Changed password");
+                        myData.changePasswordTeacher(idOfTeacher, password, newPassword);
+                        saveData(myData);
+                    }
+                    name.setText("Name: " + currentTeacher.getFn()
+                            + " " + currentTeacher.getLn());
+                }
+            }
+        });
     }
 
     public JPasswordField setNewPasworldTextField() {
@@ -415,6 +464,14 @@ public class EditInfo extends JFrame {
         personalInfo.setForeground(new Color(12, 35, 68));
         personalInfo.setBackground(SystemColor.controlHighlight);
         personalInfo.setBounds(261, 0, 121, 34);
+        personalInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(EditInfo.this,
+                        "You are already here");
+            }
+        });
+
         return personalInfo;
     }
 

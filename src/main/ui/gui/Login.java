@@ -1,7 +1,8 @@
-package ui;
+package ui.gui;
 
 import model.DataSystem;
 import model.FileReader;
+import ui.medianamente.TeacherMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Login extends JFrame {
     private JPanel contentPane;

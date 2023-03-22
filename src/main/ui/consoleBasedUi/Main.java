@@ -1,9 +1,4 @@
-package ui;
-
-import model.Student;
-import model.Teacher;
-
-import java.util.Scanner;
+package ui.consoleBasedUi;
 
 public class Main {
 

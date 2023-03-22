@@ -1,4 +1,4 @@
-package ui;
+package ui.consoleBasedUi;
 
 import model.AcademyClass;
 import model.DataSystem;

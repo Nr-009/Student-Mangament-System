@@ -1,6 +1,10 @@
 package ui;
 
 import model.*;
+import ui.gui.Saving;
+import ui.medianamente.AddingAStudent;
+import ui.medianamente.SeetingGrade;
+import ui.medianamente.TeacherMenu;
 import ui.tables.TableForAddingAClass;
 
 import javax.swing.*;

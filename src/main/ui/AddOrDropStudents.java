@@ -6,7 +6,10 @@ import javax.swing.border.EmptyBorder;
 
 
 import model.*;
-import ui.tables.TableForAddingAClass;
+import ui.gui.Saving;
+import ui.medianamente.AddingAStudent;
+import ui.medianamente.SeetingGrade;
+import ui.medianamente.TeacherMenu;
 import ui.tables.TableForAddingStudents;
 import ui.tables.TableOfStudentInAClassWithoutEditable;
 import ui.tables.TableOfStudentsInAClass;
