@@ -1,8 +1,6 @@
 package ui.medianamente;
 
-import model.DataSystem;
 import model.Teacher;
-import ui.CreateOrDeleteClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +13,6 @@ import java.net.URI;
 public class TeacherMenu extends BasicFrameForTeacherSide {
 
     private JLabel helloMessage;
-    private DataSystem myData;
     private JButton createOrDeleteTeacher;
     private JButton createOrDeleteClass;
     private JLabel needHelp;
@@ -69,6 +66,7 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         createOrDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 AddingDeletingATeacher thisTeacher = new AddingDeletingATeacher(id);
                 setVisible(false);
                 thisTeacher.setVisible(true);
@@ -86,6 +84,7 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         setCreateOrDeleteClass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 CreateOrDeleteClass thisClass = new CreateOrDeleteClass(id);
                 setVisible(false);
                 thisClass.setVisible(true);

@@ -135,8 +135,6 @@ public class StartFrame extends JFrame {
         currentlogin.setVisible(true);
     }
 
-    //TODO: logout Buttom
-    //TODO: create Student
 
 
 }

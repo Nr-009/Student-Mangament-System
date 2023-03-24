@@ -17,7 +17,6 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
     private JTextField firstName;
     private JLabel lastNameLabel;
     private JTextField lastName;
-    private DataSystem mydata;
     private JPasswordField passworldField;
     private JLabel passworldLabel;
     private JButton submitButton;
@@ -28,7 +27,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
 
     public AddingAStudent(int id) {
         super(id);
-        mydata = sendData();
+        myData = sendData();
         currentStudents = setCurrentStudents();
         super.contentPane.add(currentStudents);
         createStudentLabel = setCreateStudentLabel();
@@ -156,10 +155,10 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
                     JOptionPane.showMessageDialog(AddingAStudent.this,
                             "One of the fields is/are empty");
                 } else {
-                    int idOfStudent = mydata.addStudent(fn,ln,passworld);
+                    int idOfStudent = myData.addStudent(fn,ln,passworld);
                     JOptionPane.showMessageDialog(AddingAStudent.this,
                             "Student created with id of " + idOfStudent);
-                    saveData(mydata);
+                    saveData(myData);
                     table.fireTableDataChanged();
 
 
@@ -171,7 +170,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
     }
 
     public JPanel setPanelOfTable() {
-        table = new TableForAddingStudents(mydata.getListOfStudents());
+        table = new TableForAddingStudents(myData.getListOfStudents());
         JTable table2 = new JTable(table);
         JPanel myPanel = new JPanel();
         myPanel.setBounds(19,287,467,335);

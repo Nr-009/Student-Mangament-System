@@ -116,7 +116,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         greyUpperPannel.add(addOrDropStudents);
 
 
-        personalInfo = setPersonalInfo();
+        personalInfo = setPersonalInfo(id);
         greyUpperPannel.add(personalInfo);
 
 
@@ -174,6 +174,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         createStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 AddingAStudent thisAdding = new AddingAStudent(id);
                 setVisible(false);
                 thisAdding.setVisible(true);
@@ -200,6 +201,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         setGrade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 SeetingGrade mygrade = new SeetingGrade(id);
                 setVisible(false);
                 mygrade.setVisible(true);
@@ -216,6 +218,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         myButtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 SeetingGrade mygrade = new SeetingGrade(id);
                 setVisible(false);
                 mygrade.setVisible(true);
@@ -224,11 +227,22 @@ public class BasicFrameForTeacherSide extends JFrame {
         return myButtton;
     }
 
-    public JButton setPersonalInfo() {
+    public JButton setPersonalInfo(int id) {
         JButton personalInfo =  new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
         personalInfo.setBackground(SystemColor.controlHighlight);
         personalInfo.setBounds(261, 0, 121, 34);
+        saveData(myData);
+        personalInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveData(myData);
+                EditInfo myedit = new EditInfo(id);
+                setVisible(false);
+                myedit.setVisible(true);
+
+            }
+        });
         return  personalInfo;
     }
 
@@ -301,6 +315,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 Saving newSaving = new Saving();
                 setVisible(false);
                 newSaving.setVisible(true);
@@ -316,6 +331,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveData(myData);
                 setVisible(false);
                 TeacherMenu currentMenu = new TeacherMenu(id);
                 currentMenu.setVisible(true);

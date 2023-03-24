@@ -4,8 +4,6 @@ import javax.swing.JPanel;
 
 
 import model.*;
-import ui.AddOrDropStudents;
-import ui.GradesAndAbsences;
 import ui.tables.TableOfClasses;
 
 import javax.swing.*;
@@ -24,12 +22,11 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
     private TableOfClasses table;
     private JLabel idLabel;
     private JButton gradesButton;
-    private DataSystem mydata;
 
 
     public SeetingGrade(int id) {
         super(id);
-        mydata = sendData();
+        myData = sendData();
         chooseAClass = setChosenClassLabel();
         super.contentPane.add(chooseAClass);
         idLabel = setIdLabel();
@@ -94,7 +91,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
 
 
     public JPanel setPanelOfTable(int id) {
-        Teacher currentTeacher = mydata.getTeacher(id);
+        Teacher currentTeacher = myData.getTeacher(id);
         table = new TableOfClasses(currentTeacher.getAllClasses());
         JPanel myPanel = new JPanel();
         myPanel.setBounds(542,285,510,331);
@@ -114,8 +111,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
                 try {
                     myString = id.getText();
                     int idOfClass = Integer.parseInt(id.getText());
-                    Teacher currentTeacher = mydata.getTeacher(idOfTeacher);
-                    if (!mydata.hasIdOfAcademyClass(idOfClass)) {
+                    Teacher currentTeacher = myData.getTeacher(idOfTeacher);
+                    if (!myData.hasIdOfAcademyClass(idOfClass)) {
                         JOptionPane.showMessageDialog(SeetingGrade.this,
                                 "This class does not exist");
                     } else if (!teacherTeachesThatClass(idOfTeacher, idOfClass)) {
@@ -123,12 +120,12 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
                                 "You are not teaching this class");
                     } else {
                         if (addStrudent) {
-                            saveData(mydata);
+                            saveData(myData);
                             AddOrDropStudents mydrop = new AddOrDropStudents(idOfTeacher, idOfClass);
                             setVisible(false);
                             mydrop.setVisible(true);
                         } else {
-                            saveData(mydata);
+                            saveData(myData);
                             GradesAndAbsences myGrades = new GradesAndAbsences(idOfTeacher, idOfClass);
                             setVisible(false);
                             myGrades.setVisible(true);
@@ -151,7 +148,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
     }
 
     public boolean teacherTeachesThatClass(int idOfTeacher, int idOfClass) {
-        Teacher currentTeacher = mydata.getTeacher(idOfTeacher);
+        Teacher currentTeacher = myData.getTeacher(idOfTeacher);
         for (AcademyClass s: currentTeacher.getAllClasses()) {
             if (s.getId() == idOfClass) {
                 return true;

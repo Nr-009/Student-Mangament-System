@@ -21,15 +21,15 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
     private JButton submitButton;
     private JLabel labelofDeleteTeacher;
     private JTextField texFieldOfId2;
-    private DataSystem mydata;
     private JLabel labelOfId;
     private JButton deleteButton;
     private TableForAddingTeachers table = new TableForAddingTeachers(new ArrayList<>());
     private JPanel panelOfTable;
+    private JButton backButton;
 
     public AddingDeletingATeacher(int id) {
         super(id);
-        mydata = sendData();
+        myData = sendData();
         passwordLabel = setPassworldLabel();
         super.contentPane.add(passwordLabel);
         currentTeachers = setCurrentTeachers();
@@ -63,6 +63,8 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         super.contentPane.add(deleteButton);
         panelOfTable = setPanelOfTable();
         super.contentPane.add(panelOfTable);
+        backButton = backButton(id);
+        super.contentPane.add(backButton);
     }
 
     public static void main(String[] args) {
@@ -144,10 +146,10 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
                     JOptionPane.showMessageDialog(AddingDeletingATeacher.this,
                             "One of the fields is/are empty");
                 } else {
-                    int idOfTeacher = mydata.addTeacher(fn,ln,passworld);
+                    int idOfTeacher = myData.addTeacher(fn,ln,passworld);
                     JOptionPane.showMessageDialog(AddingDeletingATeacher.this,
                             "Teacher created with id of " + idOfTeacher);
-                    saveData(mydata);
+                    saveData(myData);
                     table.fireTableDataChanged();
                 }
 
@@ -188,7 +190,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
     }
 
     public JPanel setPanelOfTable() {
-        table = new TableForAddingTeachers(mydata.getListOfTeacher());
+        table = new TableForAddingTeachers(myData.getListOfTeacher());
         JTable table2 = new JTable(table);
         JPanel myPanel = new JPanel();
         myPanel.setBounds(19,305,462,323);
@@ -219,12 +221,12 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
                 if (id == idRecieved) {
                     JOptionPane.showMessageDialog(AddingDeletingATeacher.this,
                             "You can not delete yourself");
-                } else if (!mydata.hasIDTeacher(id) && id != -11) {
+                } else if (!myData.hasIDTeacher(id) && id != -11) {
                     JOptionPane.showMessageDialog(AddingDeletingATeacher.this,
                             "This id does not exit in the system");
                 } else if (id != -11) {
-                    mydata.removeTeacher(id);
-                    saveData(mydata);
+                    myData.removeTeacher(id);
+                    saveData(myData);
                     table.fireTableDataChanged();
                     JOptionPane.showMessageDialog(AddingDeletingATeacher.this,
                             "Teacher with id " + id + " deleted");
