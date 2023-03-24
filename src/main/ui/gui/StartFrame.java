@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -46,9 +48,21 @@ public class StartFrame extends JFrame {
 
 
     public static void main(String[] args) {
-        StartFrame myframe = new StartFrame();
-        myframe.setVisible(true);
-
+        JFrame myInitialFrame = new JFrame();
+        JLabel myLabel = new JLabel();
+        ImageIcon myImage = new ImageIcon("data/ubcImage.jpg");
+        myLabel.setIcon(myImage);
+        myInitialFrame.add(myLabel);
+        myInitialFrame.setSize(1117, 768);
+        myInitialFrame.setVisible(true);
+        myInitialFrame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                myInitialFrame.setVisible(false);
+                StartFrame myStart = new StartFrame();
+                myStart.setVisible(true);
+            }
+        });
     }
 
     public void setSubmitBotton() {

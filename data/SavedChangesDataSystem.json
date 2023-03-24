@@ -3,7 +3,8 @@
         0,
         1,
         2,
-        3
+        3,
+        4
     ],
     "ListOfAllStudents": [
         {
@@ -105,10 +106,20 @@
             "fn": "Rodrigo",
             "numberOfClasses": 5,
             "id": 3
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Japan",
+            "password": "gyunay",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Athena",
+            "numberOfClasses": 0,
+            "id": 4
         }
     ],
-    "counterAcademyClasses": 7,
-    "counterTeacher": 6,
+    "counterAcademyClasses": 8,
+    "counterTeacher": 7,
     "listOfAllPasswordTeachers": [
         "fisica12",
         "logic",
@@ -121,7 +132,8 @@
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300"
+        "eliminaMartinez300",
+        "gyunay"
     ],
     "listOfAllIdClasses": [
         0,
@@ -217,14 +229,14 @@
         4,
         5
     ],
-    "counterStudents": 4,
+    "counterStudents": 5,
     "listOfAllTeachers": [
         {
             "allIdsOfTheCurrentClasses": [
                 3,
                 4
             ],
-            "ln": " El Inmortal",
+            "ln": "El inmortal",
             "password": "fisica12",
             "fn": "Eulogio",
             "id": 0,

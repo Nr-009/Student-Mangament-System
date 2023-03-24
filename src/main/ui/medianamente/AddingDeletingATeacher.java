@@ -1,6 +1,5 @@
 package ui.medianamente;
 
-import model.DataSystem;
 import ui.tables.TableForAddingTeachers;
 
 import javax.swing.*;
