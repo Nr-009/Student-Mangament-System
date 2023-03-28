@@ -1,3 +1,7 @@
+/*This class represents the login frame in which the user if using the correct info may log in to the school
+management system, seeding the user to either the teacher menu or the student menu
+ */
+
 package ui.gui;
 
 import model.DataSystem;
@@ -45,6 +49,8 @@ public class Login extends JFrame {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the missing labels and panels for the frame
     public void part2OfTheConstructor() {
         username = setUsername();
         contentPane.add(username);
@@ -66,12 +72,16 @@ public class Login extends JFrame {
     }
 
 
+    //Modifies: This
+    //Effects: Sets the visibility of the current frame as false and send teh user to the teacher menu
     public void goToTeachersMenu(int id) {
         this.setVisible(false);
         TeacherMenu currentTeacher = new TeacherMenu(id);
         currentTeacher.setVisible(true);
     }
 
+    //Modifies: This
+    //Effects: Reads the data from the file data/tempDataSystem.json and assign it to the object
     public void readData() {
         myReader = new FileReader("data/tempDataSystem.json");
         try {
@@ -81,6 +91,7 @@ public class Login extends JFrame {
         }
     }
 
+    //Effects: create the text field for the userName
     public JTextField setUsername() {
         JTextField username = new JTextField();
         username.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -89,6 +100,7 @@ public class Login extends JFrame {
         return username;
     }
 
+    //Effects creates the password field for the user password
     public JPasswordField setPassword() {
         JPasswordField password = new JPasswordField();
         password.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -97,6 +109,7 @@ public class Login extends JFrame {
         return password;
     }
 
+    //Effects: creates the login button with the correct position and color
     public JButton setUpLogin() {
         JButton login = new JButton("Login");
         login.setBackground(new Color(0, 0, 128));
@@ -106,6 +119,9 @@ public class Login extends JFrame {
         return login;
     }
 
+    //Modifies: This
+    //Effects: Checks whether the user is entering a valid combination of username and password and sends it
+    //based on it information to the teacher menu or the student menu
     public void setActionLogin() {
         login.addActionListener(new ActionListener() {
             @Override
@@ -131,6 +147,7 @@ public class Login extends JFrame {
         });
     }
 
+    //Effects: creates the UBC upper title Label
     public JLabel setUbcUpperTitle() {
         JLabel ubcUpperTitle = new JLabel("THE UNIVERSITY OF BRITISH COUMBIA");
         ubcUpperTitle.setBounds(184, 37, 637, 69);
@@ -140,6 +157,7 @@ public class Login extends JFrame {
         return ubcUpperTitle;
     }
 
+    //Effects: Sets the image of the logo of ubc in the correct position
     public JLabel setUplogo() {
         JLabel logo = new JLabel("");
         ImageIcon img = new ImageIcon("data/Ubcmodified.png");
@@ -148,6 +166,7 @@ public class Login extends JFrame {
         return logo;
     }
 
+    //Effects: Creates the password label with the correct color and position
     public JLabel setupPasswordLabel() {
         JLabel passworldLabel = new JLabel("Password:");
         passworldLabel.setForeground(new Color(128, 128, 128));
@@ -156,6 +175,7 @@ public class Login extends JFrame {
         return passworldLabel;
     }
 
+    //Effects: Creates the name label with the correct color and position
     public JLabel setloginNameLabel() {
         JLabel loginLabel =  new JLabel("Login Name:");
         loginLabel.setForeground(Color.GRAY);
@@ -164,13 +184,15 @@ public class Login extends JFrame {
         return loginLabel;
     }
 
+    //Effects: Creates the cwl label with the correct color and position
     public JLabel setupcwlLabel() {
         JLabel cwlLabel = new JLabel(" CWL Authentication");
         cwlLabel.setFont(new Font("Times New Roman", Font.PLAIN, 36));
         cwlLabel.setBounds(252, 165, 403, 81);
         return cwlLabel;
     }
-
+    
+    //Effects: Creates the continue label with the correct color and position
     public JLabel setLoginToContinueLabel() {
         JLabel logintoContinue = new JLabel("Login to Continue");
         logintoContinue.setFont(new Font("Times New Roman", Font.PLAIN, 20));

@@ -1,3 +1,5 @@
+/* Teacher main frame when logging in, in which they can choose the button to go to each specific part */
+
 package ui.medianamente;
 
 import model.Teacher;
@@ -47,6 +49,7 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         super.add(askUBC);
     }
 
+    //Effects: Creates a given the label where we welcome the teacher with the given Id and name
     public JLabel setHelloMessages(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel helloMessage = new JLabel("Hi " + currentTeacher.getFn() + " , Welcome to the Teacher Center");
@@ -57,6 +60,9 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         return helloMessage;
     }
 
+    //Modifies: This
+    //Effects: Sets the button of creating or deleting Teachers, so that if click the teacher is redirected to that
+    //specific frame
     public JButton setCreateOrDeleteTeacher(int id) {
         JButton createOrDelete = new JButton("Create or Delete a Teacher");
         createOrDelete.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -75,6 +81,9 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         return createOrDelete;
     }
 
+    //Modifies: This
+    //Effects: Sets the button of Create or deleting a Class, so that if click the teacher is redirected to that
+    //specific frame
     public JButton setCreateOrDeleteClass(int id) {
         JButton setCreateOrDeleteClass =  new JButton("Create or Delete a Class");
         setCreateOrDeleteClass.setForeground(Color.WHITE);
@@ -93,6 +102,7 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         return setCreateOrDeleteClass;
     }
 
+    //Effects: Creates a given Label with  for "Need Help" with the correct color, shape and position
     public JLabel setNeedHelp() {
         JLabel myLabel = new JLabel("Need Help:");
         //Source:https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing
@@ -103,6 +113,8 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         return myLabel;
     }
 
+    //Effects: Creates a given Label with  for "Video Tutorial" with the correct color, shape and position, and
+    //adds a link to it/
     public JLabel setVideoTutorials() {
         JLabel videoTutrials = new JLabel("Video Tutorials");
         videoTutrials.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -124,10 +136,12 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         return videoTutrials;
     }
 
+    //Effects: Creates a given Label with  for "Thenical Support" with the correct color, shape and position, and
+    //adds a link to it/
     public JLabel setThenicalSupport() {
-        JLabel mytechnical = new JLabel("Thechnical Support");
-        mytechnical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        mytechnical.addMouseListener(new MouseAdapter() {
+        JLabel technical = new JLabel("Technical Support");
+        technical.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        technical.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
@@ -138,14 +152,15 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
                 }
             }
         });
-        mytechnical.setForeground(new Color(12, 35, 68));
-        mytechnical.setFont(new Font("Arial", Font.PLAIN, 18));
-        mytechnical.setBounds(20, 576, 179, 24);
-        return mytechnical;
+        technical.setForeground(new Color(12, 35, 68));
+        technical.setFont(new Font("Arial", Font.PLAIN, 18));
+        technical.setBounds(20, 576, 179, 24);
+        return technical;
 
     }
 
-
+    //Effects: Creates a given Label with  for "ask UBC" with the correct color, shape and position, and
+    //adds a link to it/
     public JLabel setUpAskUBC() {
         JLabel askUBC = new JLabel("Ask Me @ UBC");
         askUBC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -1,3 +1,8 @@
+/*This class represent the Saving frame in which a user may choose to save or not teh work they have done
+in the application to be loaded later.
+ */
+
+
 package ui.gui;
 
 import model.DataSystem;
@@ -21,9 +26,6 @@ public class Saving extends JFrame {
     private JRadioButton yesButton;
     private JRadioButton noButton;
     private JButton submitButtom;
-    private DataSystem myData;
-    private static FileReader myReader;
-    private static FileWriter myWritter;
 
     public Saving() {
         setTitle("Selecting Version");
@@ -46,13 +48,15 @@ public class Saving extends JFrame {
 
     }
 
-
+    //Effects: Runs the saving frame
     public static void main(String[] args) {
         Saving myframe = new Saving();
         myframe.setVisible(true);
 
     }
 
+    //Modifies: This,
+    //Effects: Depending on the user option we may save the data in the json file at data/tempDataSystem.json
     public void setSubmitBotton() {
         submitButtom.addActionListener(new ActionListener() {
             @Override
@@ -75,6 +79,7 @@ public class Saving extends JFrame {
     }
 
 
+    //Effects: Creates the JLabel of "do you want to save" wih the correct color and position
     public JLabel setUpVersion() {
         JLabel temp = new JLabel("Do you want to save?");
         temp.setBounds(46, -3, 245, 86);
@@ -84,6 +89,7 @@ public class Saving extends JFrame {
 
     }
 
+    //Effects: creates the submit button in the correct color and position
     public JRadioButton setUpLastBotton() {
         JRadioButton temp = new JRadioButton("Yes");
         temp.setBounds(90, 81, 103, 21);
@@ -93,6 +99,8 @@ public class Saving extends JFrame {
         return temp;
     }
 
+    //Modifies:data/tempDataSystem.json
+    //Effects: It saves the myData Object to the destination
     public void saveData() {
         FileReader myReader = new FileReader("data/tempDataSystem.json");
         DataSystem mySystem = null;
@@ -112,6 +120,7 @@ public class Saving extends JFrame {
         }
     }
 
+    //Effects: It creates the No JRadioButton, with the correct color and position
     public JRadioButton setUpOriginalButtom() {
         JRadioButton temp = new JRadioButton("No");
         temp.setBounds(88, 116, 103, 21);
@@ -121,6 +130,7 @@ public class Saving extends JFrame {
         return temp;
     }
 
+    //Modifies: It creates to submit JButton, with the correct color and position
     public JButton setUpSubmitButtom() {
         JButton temp = new JButton("Submit");
         temp.setBounds(91, 165, 85, 21);

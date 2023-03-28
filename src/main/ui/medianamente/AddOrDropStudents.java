@@ -1,3 +1,6 @@
+/* This class represents the frame o adding or dropping a student in teh teachers menu */
+
+
 package ui.medianamente;
 
 import model.AcademyClass;
@@ -59,6 +62,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         myAddOrDropStudents.setVisible(true);
     }
 
+    //Effects: Creates the valid TextField for the Id
     public JTextField setIdTextField() {
         JTextField t = new JTextField();
         t.setBounds(894, 384, 88, 29);
@@ -66,6 +70,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return t;
     }
 
+    //Effects: Creates the valid Label for "All Students" with the correct color, position and font
     public JLabel setallStudentsLabel() {
         JLabel lblAllStudents = new JLabel("All Students");
         lblAllStudents.setForeground(new Color(12, 35, 68));
@@ -74,6 +79,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return lblAllStudents;
     }
 
+    //Effects: Creates the valid Label for "Class Student" with the correct color, position and font
     public JLabel setClassStudents() {
         JLabel classStudents = new JLabel("Class Students");
         classStudents.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -82,6 +88,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return classStudents;
     }
 
+    //Modifies: This
+    //Effects: Creates the valid JPanel for "Class Student" with the correct color, position and font, and adds the
+    //table of all the students
     public JPanel setPanelOfTable(int id, int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         table = new TableOfStudentInAClassWithoutEditable(currentClass.getStudents(), currentClass.getName());
@@ -96,6 +105,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return classStudents;
     }
 
+    //Modifies: This
+    //Effects: Creates the valid JPanel for "Class Student" with the correct color, position and font, and adds the
+    //table of all the students
     public JPanel setAllStudentTable() {
         table2 = new TableForAddingStudents(myData.getListOfStudents());
         JPanel allStudents = new JPanel();
@@ -108,6 +120,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return allStudents;
     }
 
+    //Effects: Sets the valid JLabel of "Add or Drop" with the correct font, text and position
     public JLabel addorDropLabel() {
         JLabel addOrDrop = new JLabel("Add Or Drop");
         addOrDrop.setForeground(new Color(12, 35, 68));
@@ -116,6 +129,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return addOrDrop;
     }
 
+    //Effects: Sets the valid JLabel of "Id" with the correct font, text and position
     public JLabel setIdLabel() {
         JLabel lblId = new JLabel("Id");
         lblId.setForeground(new Color(12, 35, 68));
@@ -124,6 +138,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         return lblId;
     }
 
+    //Modifies: This
+    //Effects: Sets the for Dropping a class and adds the behavior that if the correct ID is and teh student is drop
+    //from the system
     public JButton setDropButton(int idOfClass) {
         JButton drop = new JButton("Drop");
         setActionDropStudents(drop, idOfClass);
@@ -134,6 +151,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the for Adding a class and adds the behavior that if the correct ID is and the student is added
+    //from the system
     @SuppressWarnings("methodlength")
     public void setActionAddButton(JButton s, int idOfClass) {
         s.addActionListener(new ActionListener() {
@@ -172,6 +192,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         });
     }
 
+    //Modifies: This
+    //Effects: Sets the for Drop a class and adds the behavior that if the correct ID is and the student is added
+    //from the system
     @SuppressWarnings("methodlength")
     public void setActionDropStudents(JButton s, int idOfClass) {
         s.addActionListener(new ActionListener() {
@@ -211,6 +234,9 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the for Drop a class and adds the behavior that if the correct ID is and the student is added
+    //from the system
     public JButton setAddButton(int idOfClass) {
         JButton addButton = new JButton("Add");
         addButton.setForeground(Color.WHITE);

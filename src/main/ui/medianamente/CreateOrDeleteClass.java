@@ -1,3 +1,7 @@
+/* This class represent the adding or deleting a class frame
+ */
+
+
 package ui.medianamente;
 
 import model.*;
@@ -55,6 +59,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
 
     }
 
+    //Modifies: This
+    //Effects: Continues creating the Frame with the missing labels, text-fields and buttons.
     public void constructorPart2(int id) {
         labelofDeleteClass = setLabelofDeleteClass();
         super.contentPane.add(labelofDeleteClass);
@@ -71,9 +77,10 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
     public static void main(String[] args) {
         CreateOrDeleteClass creating = new CreateOrDeleteClass(0);
         creating.setVisible(true);
-
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Session" with the correct faint, color and positions
     public JLabel setSessionLabel() {
         JLabel thisLabel = new JLabel("Sesion");
         thisLabel.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -81,6 +88,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return thisLabel;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Current Classes" with the correct faint, color and positions
     public JLabel setCurrentStudents() {
         JLabel currentClasses = new JLabel("Current Classes");
         currentClasses.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -88,6 +97,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return currentClasses;
     }
 
+    //Modifies: This
+    //Effects: Create JPanel and put the correct table
     public JPanel setPanelOfTable() {
         table = new TableForAddingAClass(myData.getListOfClasses());
         JTable table2 = new JTable(table);
@@ -98,6 +109,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return myPanel;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Create Class" with the correct faint, color and positions
     public JLabel setCreateStudentLabel() {
         JLabel createStudentLabel = new JLabel("Create Class");
         createStudentLabel.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -105,6 +118,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return createStudentLabel;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Name" with the correct faint, color and positions
     public JLabel setFirstName() {
         JLabel firstName = new JLabel("Name");
         firstName.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -112,6 +127,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return firstName;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Id of Teacher" with the correct faint, color and positions
     public JLabel setLastNameLabel() {
         JLabel lblIdOfTeacher = new JLabel("Id of Teacher");
         lblIdOfTeacher.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -119,6 +136,7 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return lblIdOfTeacher;
     }
 
+    //Effects: Creates Text Field with the First Name with the correct position and font
     public JTextField firstName() {
         JTextField textField = new JTextField();
         textField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -126,6 +144,7 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return textField;
     }
 
+    //Effects: Creates Text Field with the Last Name with the correct position and font
     public JTextField setTextFieldLastName() {
         JTextField thisText = new JTextField();
         thisText.setColumns(10);
@@ -134,6 +153,7 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return thisText;
     }
 
+    //Effects: Creates Text Field with the Session with the correct position and font
     public JTextField setSessionText() {
         JTextField thisfield = new JTextField();
         thisfield.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -142,6 +162,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return thisfield;
     }
 
+    //Modifies: This
+    //Effects: Sets the submit button  and adds the correct behaviour for creating a class and adding to the system.
     @SuppressWarnings("methodlength")
     public JButton setSubmitButton() {
         JButton btnNewButton = new JButton("Submit");
@@ -191,6 +213,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return btnNewButton;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Delete Teacher" with the correct faint, color and positions
     public JLabel setLabelofDeleteClass() {
         JLabel deleteTeacherLabel = new JLabel("Delete Class");
         deleteTeacherLabel.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -198,6 +222,7 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return deleteTeacherLabel;
     }
 
+    //Effects: Creates Text Field with the Id with the correct position and font
     public JTextField setTextFieldOfId() {
         JTextField texFieldOfId = new JTextField();
         texFieldOfId.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -206,6 +231,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return texFieldOfId;
     }
 
+    //Modifies: This
+    //Effects: Creates the JLabel of "Id" with the correct faint, color and positions
     public JLabel setLabelId() {
         JLabel idLabel = new JLabel("Id");
         idLabel.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -213,6 +240,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return idLabel;
     }
 
+    //Modifies: This
+    //Effects: Creates the delete button and sets the behavior for deleting A class
     public JButton setDeleteButton(int idRecieved) {
         JButton btndeleteTeacherButton = new JButton("Delete");
         btndeleteTeacherButton.setForeground(Color.WHITE);
@@ -222,6 +251,8 @@ public class CreateOrDeleteClass extends BasicFrameForTeacherSide {
         return btndeleteTeacherButton;
     }
 
+    //Modifies: This
+    //Effects: Creates the delete button and sets the behavior for deleting A class
     @SuppressWarnings("methodlength")
     public void setButtonOfDeletePart2(JButton button, int idTeacher) {
         button.addActionListener(new ActionListener() {

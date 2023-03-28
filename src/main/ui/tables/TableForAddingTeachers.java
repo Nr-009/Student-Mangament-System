@@ -1,6 +1,10 @@
+/* This class represents a table with when adding or deleting Teachers, the columns it has are : Id,
+first name, last name, number of classes
+ */
+
+
 package ui.tables;
 
-import model.Student;
 import model.Teacher;
 
 import javax.swing.table.AbstractTableModel;
@@ -13,16 +17,24 @@ public class TableForAddingTeachers extends AbstractTableModel {
         this.allTeachers = allTeachers;
     }
 
+    //Modifies: This
+    //Effects: Sets the number of rows as the same of the teachers
     @Override
     public int getRowCount() {
         return allTeachers.size();
     }
 
+    //Modifies: This
+    //Effects: sets the number of columns to be 4
     @Override
     public int getColumnCount() {
         return 4;
     }
 
+
+
+    //Modifies: This
+    //Effects: Sets the name of the columns for the table
     @Override
     public String getColumnName(int column) {
         switch (column) {
@@ -40,6 +52,8 @@ public class TableForAddingTeachers extends AbstractTableModel {
     }
 
 
+    //Modifies: This
+    //Effects: sets the value for each row based on teh current Teacher
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Teacher teacher = allTeachers.get(rowIndex);

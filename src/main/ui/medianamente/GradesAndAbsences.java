@@ -1,3 +1,5 @@
+/* Sets the grades and absences frame where the teacher can set the grades and absences for a given */
+
 package ui.medianamente;
 
 import javax.swing.JPanel;
@@ -55,6 +57,8 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
 
     }
 
+    //Modifies: This
+    //Modifies: Changes the Average Grade label any time we modify the table
     public TableModelListener setupTableModeListener(int idOfClass) {
         TableModelListener myTableListener = new TableModelListener() {
             @Override
@@ -67,6 +71,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return myTableListener;
     }
 
+    //Modifies: Creates the Current Class label with the correct color, position and font
     public JLabel setCurrentClass(int idOfClass) {
         String name = myData.getAcademyClass(idOfClass).getName();
         JLabel classSelected = new JLabel(name);
@@ -75,6 +80,8 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return classSelected;
     }
 
+    //Modifies: This
+    //Effects: Creates the panel with the table with all the students in the class of with the grades and absences
     public JPanel setPanelOfTable(int id, int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         table = new TableOfStudentsInAClass(currentClass.getStudents(), currentClass.getName());
@@ -88,6 +95,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return myPanel;
     }
 
+    //Modifies: Creates the Current class name label with the correct color, position and font
     public JLabel classNameLabel(int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         JLabel className = new JLabel("Class Name: " + currentClass.getName());
@@ -96,6 +104,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return className;
     }
 
+    //Modifies: Creates the Current label id with the correct color, position and font
     public JLabel labelOfId(int idOfClas) {
         AcademyClass currentClas = myData.getAcademyClass(idOfClas);
         JLabel classId = new JLabel("Id: " + currentClas.getId());
@@ -104,6 +113,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return classId;
     }
 
+    //Modifies: Creates the Current class session with the correct color, position and font
     public JLabel classSession(int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         JLabel classSession = new JLabel("Class Session: " + currentClass.getSession());
@@ -112,6 +122,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return classSession;
     }
 
+    //Modifies: Creates the Current number of Students with the correct color, position and font
     public JLabel numberOfStudents(int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         JLabel labelStudents = new JLabel("#Students: " + currentClass.getNumOfStudents());
@@ -120,6 +131,7 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         return labelStudents;
     }
 
+    //Modifies: Creates the Current average Grade with the correct color, position and font
     public JLabel labelOfAverageGrade(int idOfClass) {
         AcademyClass currentClass = myData.getAcademyClass(idOfClass);
         JLabel labelAveraeGrade = new JLabel("Average Grade: " + currentClass.getAverageGrade());
@@ -127,12 +139,6 @@ public class GradesAndAbsences extends BasicFrameForTeacherSide {
         labelAveraeGrade.setBounds(562, 497, 421, 45);
         return labelAveraeGrade;
     }
-
-
-
-
-
-
 
 }
 

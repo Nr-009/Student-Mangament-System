@@ -1,3 +1,6 @@
+/* This class represents teh frame for adding or deleting a teacher.
+ */
+
 package ui.medianamente;
 
 import ui.tables.TableForAddingTeachers;
@@ -43,12 +46,14 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         super.contentPane.add(firstName);
         lastName = setTextFieldLastName();
         super.contentPane.add(lastName);
-        passworldField = setLastNameText();
+        passworldField = setPaasswordTextField();
         super.contentPane.add(passworldField);
         constructorPart2(id);
     }
 
 
+    //Modifies: This
+    //Effects: Sets the frame with all the missing buttons, frames, and labels
     public void constructorPart2(int id) {
         submitButton = setSubmitButton();
         super.contentPane.add(submitButton);
@@ -71,7 +76,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         myMain.setVisible(true);
     }
 
-
+    //Effects: Creates a label of "Current Teacher" with the correct color, position and font
     public JLabel setCurrentTeachers() {
         JLabel currentStudents = new JLabel("Current Teacher");
         currentStudents.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -79,6 +84,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return currentStudents;
     }
 
+    //Effects: Creates a label of "Create Teacher" with the correct color, position and font
     public JLabel setCreateTeacherLabel() {
         JLabel createStudentLabel = new JLabel("Create Teacher");
         createStudentLabel.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -86,6 +92,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return createStudentLabel;
     }
 
+    //Effects: Creates a label of "First Name" with the correct color, position and font
     public JLabel setFirstName() {
         JLabel firstName =  new JLabel("First Name");
         firstName.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -93,6 +100,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return firstName;
     }
 
+    //Effects: Creates a label of "Last Name" with the correct color, position and font
     public JLabel setLastNameLabel() {
         JLabel label = new JLabel("Last Name");
         label.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -100,6 +108,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return label;
     }
 
+    //Effects: Creates a label of "Password" with the correct color, position and font
     public JLabel setPassworldLabel() {
         JLabel thisLabel = new JLabel("Password");
         thisLabel.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -107,6 +116,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return thisLabel;
     }
 
+    //Effects: Creates a Textfield of first name with the correct color, position and font
     public JTextField firstName() {
         JTextField textField = new JTextField();
         textField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -114,6 +124,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return textField;
     }
 
+    //Effects: Creates a Textfield of last name with the correct color, position and font
     public JTextField setTextFieldLastName() {
         JTextField thisText =  new JTextField();
         thisText.setColumns(10);
@@ -122,7 +133,8 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return thisText;
     }
 
-    public JPasswordField setLastNameText() {
+    //Effects: Creates a Password field with the correct color, position and font
+    public JPasswordField setPaasswordTextField() {
         JPasswordField thisfield = new JPasswordField();
         thisfield.setFont(new Font("Arial", Font.PLAIN, 15));
         thisfield.setColumns(10);
@@ -130,6 +142,9 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return thisfield;
     }
 
+    //Modifies: This
+    //Effects: Creates the submit button and sets the behaviour to in case
+    // of putting the valid fields creating a teacher
     public JButton setSubmitButton() {
         JButton btnNewButton = new JButton("Submit");
         btnNewButton.setBackground(new Color(12, 35, 68));
@@ -157,6 +172,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return  btnNewButton;
     }
 
+    //Effects: Creates a id Text field with the correct color, position and font
     public JTextField setTextFieldOfId() {
         JTextField texFieldOfId = new JTextField();
         texFieldOfId.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -165,6 +181,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return texFieldOfId;
     }
 
+    //Effects: Creates a JLabel  of "Delete a teacher" with the correct color, position and font
     public JLabel setLabelofDeleteTeacher() {
         JLabel deleteTeacherLabel = new JLabel("Delete Teacher");
         deleteTeacherLabel.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -172,6 +189,7 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return deleteTeacherLabel;
     }
 
+    //Effects: Creates a JLabel  of "Id" with the correct color, position and font
     public JLabel setLabelId() {
         JLabel idLabel = new JLabel("Id");
         idLabel.setFont(new Font("Arial", Font.PLAIN, 21));
@@ -179,6 +197,9 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return idLabel;
     }
 
+    //Modifies: This
+    //Effects: Creates a JButton for deleting a teacher and adds the respective behaviour so that if the valid is
+    // inserted the teacher is deleted of the database
     public JButton setDeleteButton(int idRecieved) {
         JButton btndeleteTeacherButton = new JButton("Delete");
         btndeleteTeacherButton.setForeground(Color.WHITE);
@@ -188,6 +209,8 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return btndeleteTeacherButton;
     }
 
+    //Modifies: This
+    //Effects: Creates the table for seeing all the teachers currently in the system
     public JPanel setPanelOfTable() {
         table = new TableForAddingTeachers(myData.getListOfTeacher());
         JTable table2 = new JTable(table);
@@ -198,6 +221,9 @@ public class AddingDeletingATeacher  extends BasicFrameForTeacherSide {
         return myPanel;
     }
 
+    //Modifies: This
+    //Effects: Sets the behaviour for the delete button so that if the correct id is inserted the teacher is deleted
+    //from the database
     @SuppressWarnings("methodlength")
     public void setButtonOfDeletePart2(JButton button, int idRecieved) {
         button.addActionListener(new ActionListener() {

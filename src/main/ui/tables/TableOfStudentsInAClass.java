@@ -1,9 +1,11 @@
+/* This class represents a table for setting the grades and absences of a student in a given Class. It has columns of:
+Id of the student, name of the student, grade of the students, and  #Number of absences.
+
+ */
+
 package ui.tables;
 
-import model.AcademyClass;
 import model.Student;
-
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
@@ -18,16 +20,22 @@ public class TableOfStudentsInAClass extends AbstractTableModel {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the number of rows to be the same as the number of students
     @Override
     public int getRowCount() {
         return allStudents.size();
     }
 
+    //Modifies: This
+    //Effects: Sets the number of columns to be 4
     @Override
     public int getColumnCount() {
         return 4;
     }
 
+    //Modifies: This
+    //Effects: Sets the value for each row and collumn based on the current student
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Student currentStudent = allStudents.get(rowIndex);
@@ -44,6 +52,8 @@ public class TableOfStudentsInAClass extends AbstractTableModel {
         return null;
     }
 
+    //Modifies: This
+    //Effects: Sets the name for all columns
     @Override
     public String getColumnName(int column) {
         switch (column) {
@@ -60,6 +70,8 @@ public class TableOfStudentsInAClass extends AbstractTableModel {
         return "";
     }
 
+    //Modifies: This
+    //Effects: Modifies the table so that the user can change the number of absences and grades
     @Override
     public void setValueAt(Object input, int rowIndex, int columnIndex) {
         Student currentStudent = allStudents.get(rowIndex);
@@ -76,10 +88,12 @@ public class TableOfStudentsInAClass extends AbstractTableModel {
                     break;
             }
         } catch (Exception e2) {
-            System.out.println("The user try to input something different than a number");
+            int x = 0;
         }
     }
 
+    //Modifies: This
+    //Effects: Makes the column for the absences and grades to be editable
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if (columnIndex == 2 | columnIndex == 3) {

@@ -1,3 +1,5 @@
+/* This frame represents the frame where a teacher can edit their info*/
+
 package ui.medianamente;
 
 import model.Teacher;
@@ -43,6 +45,8 @@ public class EditInfo extends BasicFrameForTeacherSide {
         constructorPart2(id);
     }
 
+    //Modifies: This
+    //Effects: Continues constructing the frame by adding the missing labels, panels, and buttons
     public void constructorPart2(int id) {
         super.contentPane.add(labelOfLastName);
         labelOfPassworld = labelOfPassword();
@@ -64,6 +68,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         myMain.setVisible(true);
     }
 
+    //Modifies:  Creates the text-field for the first name with the correct font, position and color
     public JTextField settingfirstName() {
         JTextField fnTextField = new JTextField();
         fnTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -72,6 +77,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return fnTextField;
     }
 
+    //Modifies:  Creates the text-field for the last name with the correct font, position and color
     public JTextField settingLastName() {
         lnTextField = new JTextField();
         lnTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -80,6 +86,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return lnTextField;
     }
 
+    //Modifies:  Creates the text-field for the password with the correct font, position and color
     public JTextField setPasswordTextField() {
         JPasswordField passwordTextField = new JPasswordField();
         passwordTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -88,6 +95,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return passwordTextField;
     }
 
+    //Modifies: Creates the text-field for the  new password with the correct font, position and color
     public JPasswordField setNewPasworldTextField() {
         JPasswordField newPasswroldTextField = new JPasswordField();
         newPasswroldTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -96,7 +104,9 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return newPasswroldTextField;
     }
 
-
+    //Modifies: This
+    //Effects: Creates the submit button with the correct position and color. Also, adds the behavior to
+    // edit the info of the current teacher
     public JButton setSubmitButton(int idOfTeacher) {
         JButton btnBack = new JButton("Submit");
         btnBack.setForeground(Color.WHITE);
@@ -106,6 +116,8 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return btnBack;
     }
 
+    //Modifies: This
+    //Effects: Also, adds the behavior to edit the info of the current teacher
     @SuppressWarnings("methodlength")
     public void setUpSubmitButton(JButton s, int idOfTeacher) {
         s.addActionListener(new ActionListener() {
@@ -150,6 +162,8 @@ public class EditInfo extends BasicFrameForTeacherSide {
         });
     }
 
+    //Effects: Creates the JLabel for the first Name of with the teachers first name with correct color, position and
+    // font
     public JLabel firstNameLabel(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel firstName = new JLabel("First Name: " + currentTeacher.getFn());
@@ -158,6 +172,8 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return firstName;
     }
 
+    //Effects: Creates the JLabel for the last Name of with the teachers last name with correct color, position and
+    // font
     public JLabel lastNameLabel(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel lastName = new JLabel("Last Name: " + currentTeacher.getLn());
@@ -166,6 +182,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return lastName;
     }
 
+    //Effects: Creates the JLabel for the Password with the correct color, position and font
     public JLabel labelOfPassword() {
         JLabel lblCurrentPassworld = new JLabel("Password:");
         lblCurrentPassworld.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -173,6 +190,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return lblCurrentPassworld;
     }
 
+    //Effects: Creates the JLabel for the new Password with the correct color, position and font
     public JLabel getLabelOfNewPassword() {
         JLabel lblNewPassword = new JLabel("New Password:");
         lblNewPassword.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -180,6 +198,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return lblNewPassword;
     }
 
+    //Effects: Creates the JLabel for the id of with the teachers' id with correct color, position and font
     public JLabel labelOfId(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel idLabel = new JLabel("Id: " + currentTeacher.getId());
@@ -188,6 +207,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return idLabel;
     }
 
+    //Effects: Creates the JLabel for the number of classes teacher has with the correct color, position and font
     public JLabel numberOfClasses(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel numberOfClassesLabel = new JLabel("#Classes: " + currentTeacher.getNumClasses());
@@ -196,6 +216,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return numberOfClassesLabel;
     }
 
+    //Effects: Creates the JLabel for the current Information with the correct color, font and position
     public JLabel setCurrentStudents(int idOfClass) {
         String name = myData.getAcademyClass(idOfClass).getName();
         JLabel classSelected = new JLabel("Current Information");
@@ -204,6 +225,8 @@ public class EditInfo extends BasicFrameForTeacherSide {
         return classSelected;
     }
 
+    //Modifies: This
+    //Effects: Sets the button for personal info to show a message instead of sending you to create another frame
     @Override
     public JButton setPersonalInfo(int id) {
         JButton personalInfo =  new JButton("Personal Info");

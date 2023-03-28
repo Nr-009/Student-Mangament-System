@@ -1,3 +1,6 @@
+/* It is a middle frame where you can choose whether to set a grade or add student
+*/
+
 package ui.medianamente;
 
 import javax.swing.JPanel;
@@ -15,7 +18,6 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
 
     private JLabel chooseAClass;
     private JTextField id;
-    private JLabel firstNameLabel;
     private JButton backButton;
     private JButton addButton;
     private JPanel panelOfTable;
@@ -49,6 +51,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         mygrade.setVisible(true);
     }
 
+    //Effects: Creates label id and sets for faint, position and color
     public JLabel setIdLabel() {
         JLabel id =  new JLabel("id");
         id.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -56,6 +59,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return id;
     }
 
+    //Effects: Creates label "Choose a class" and sets for faint, position and color
     public JLabel setChosenClassLabel() {
         JLabel chosenClass = new JLabel("Choose a Class");
         chosenClass.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -63,6 +67,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return chosenClass;
     }
 
+    //Effects: Creates Text Field "Choose a class" and sets for faint, position and color
     public JTextField idTextField() {
         JTextField id = new JTextField();
         id.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -70,6 +75,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return id;
     }
 
+    //Modifies: This
+    //Effects: Creates a JButton to send the to the grades frame
     public JButton setgradesButton(int idOfTeacher) {
         JButton btnNewButton = new JButton("Grades");
         btnNewButton.setBackground(new Color(12, 35, 68));
@@ -79,7 +86,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return  btnNewButton;
     }
 
-
+    //Modifies: This
+    //Effects: Creates a JButton to send the to the add or drop student
     public JButton setaddButton(int idOfTeacher) {
         JButton addStudent = new JButton("Add Student");
         addStudent.setForeground(Color.WHITE);
@@ -90,6 +98,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
     }
 
 
+    //Modifies: This
+    //Effects: Sets the table with the Panel
     public JPanel setPanelOfTable(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         table = new TableOfClasses(currentTeacher.getAllClasses());
@@ -102,6 +112,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return myPanel;
     }
 
+    //Modifies: This
+    //Effects: If the input is correct it sends the user to the grades' student frame
     @SuppressWarnings("methodlength")
     public void setGradeButton2(JButton l, int idOfTeacher, boolean addStrudent) {
         l.addActionListener(new ActionListener() {
@@ -147,6 +159,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
 
     }
 
+    //Effects: produces true if the given teacher is teaching that class
     public boolean teacherTeachesThatClass(int idOfTeacher, int idOfClass) {
         Teacher currentTeacher = myData.getTeacher(idOfTeacher);
         for (AcademyClass s: currentTeacher.getAllClasses()) {
@@ -157,6 +170,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return false;
     }
 
+    //Modifies: This
+    //Effects: Sets the button addGradesOrAbsences so that you can not change frame but rather are shown a message
     @Override
     public JButton getSetGradeOrArbscence(int id) {
         JButton setGrade = new JButton("Set grade");
@@ -173,6 +188,8 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
         return setGrade;
     }
 
+    //Modifies: This
+    //Effects: Sets the button getAddOrDropStudents so that you can not change frame but rather are shown a message
     @Override
     public JButton getAddOrDropStudents(int id) {
         JButton myButtton = new JButton("Add students");

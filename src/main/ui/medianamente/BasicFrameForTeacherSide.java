@@ -1,3 +1,7 @@
+/*This class represent the model that all the classes in the Teacher menu inherit from, with the UBC images,
+buttons and frames with colors
+ */
+
 package ui.medianamente;
 
 import model.DataSystem;
@@ -39,6 +43,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         myBasicFrame.setVisible(true);
     }
 
+    //Modifies: This
+    //Effects:  Reads the current data in the data/tempDataSystem.json destination and puts into the field
     public void readData() {
         try {
             FileReader myReader = new FileReader("data/tempDataSystem.json");
@@ -48,6 +54,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         }
     }
 
+    //Modifies: This
+    //Effects:  Reads the current data in the data/tempDataSystem.json destination and sends it the method that calls it
     public DataSystem sendData() {
         try {
             FileReader myReader = new FileReader("data/tempDataSystem.json");
@@ -92,6 +100,8 @@ public class BasicFrameForTeacherSide extends JFrame {
 
     }
 
+    //Modifies: This
+    //Effects: Continues adding the labels, frames and buttons that are missing
     public void constructorpart2(int id) {
         name = setUpName(id);
         secondBlueUpperPanel.add(name);
@@ -120,10 +130,10 @@ public class BasicFrameForTeacherSide extends JFrame {
         greyUpperPannel.add(personalInfo);
 
 
-
-
     }
 
+    //Modifies: This
+    //Effects: Continues adding the labels, frames and buttons that are missing
     public void constructor3(int id) {
 
         lowerBluePanel = getLowerBluePanel();
@@ -138,6 +148,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         setLogout();
     }
 
+    //Effects: Creates a label with the upper image of the UBC logo
     public JLabel getImageOfUbc() {
         JLabel imageOfUBC = new JLabel("");
         ImageIcon currentUBClogo = new ImageIcon("data/Ubcmodified.png");
@@ -146,6 +157,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return imageOfUBC;
     }
 
+    //Effects: Creates a label with the Name of the current Teacher
     public JLabel setUpName(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel name = new JLabel("Name: " + currentTeacher.getFn() + " " + currentTeacher.getLn());
@@ -156,6 +168,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return name;
     }
 
+    //Effects: Creates a label with the id of the current Teacher
     public JLabel setUpTeacherId(int id) {
         Teacher currentTeacher = myData.getTeacher(id);
         JLabel teacherId  = new JLabel("Teacher id#: " + currentTeacher.getId());
@@ -166,6 +179,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return  teacherId;
     }
 
+    //Modifies: This
+    //Effects: Creates the Button for sending the teacher for the create Students Frame
     public JButton setUpCreateStudent(int id) {
         JButton createStudent = new JButton("Create Student");
         createStudent.setForeground(new Color(12, 35, 68));
@@ -183,8 +198,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return createStudent;
     }
 
-
-
+    //Modifies: This
+    //Effects: Creates a label with the lower image of the UBC logo
     public JLabel setUpImageOfUbc2() {
         JLabel imageOfUBC2 = new JLabel("");
         ImageIcon ubc = new ImageIcon("data/Ubcmodified.png");
@@ -193,6 +208,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return imageOfUBC2;
     }
 
+    //Modifies: This
+    //Effects: Creates the Button for sending the teacher for the set absence or grade frame
     public JButton getSetGradeOrArbscence(int id) {
         JButton setGrade = new JButton("Set grade");
         setGrade.setForeground(new Color(12, 35, 68));
@@ -210,6 +227,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return setGrade;
     }
 
+    //Modifies: This
+    //Effects: Creates the Button for sending the teacher for the add or drop student frame
     public JButton getAddOrDropStudents(int id) {
         JButton myButtton = new JButton("Add students");
         myButtton.setForeground(new Color(12, 35, 68));
@@ -227,6 +246,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return myButtton;
     }
 
+    //Modifies: This
+    //Effects: Creates the Button for sending the teacher for the set personal info
     public JButton setPersonalInfo(int id) {
         JButton personalInfo =  new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
@@ -246,6 +267,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return  personalInfo;
     }
 
+    //Effects: Creates an upper panel with the blue color
     public JPanel setUpperPanel() {
         JPanel upperPanel = new JPanel();
         upperPanel.setBackground(new Color(12, 35, 68));
@@ -253,6 +275,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return upperPanel;
     }
 
+    //Effects: Sets the label for the title of UBC in the upper pannel
     public JLabel setUpperTitle() {
         JLabel myLabel = new JLabel("The University Of British Columbia");
         myLabel.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -262,6 +285,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return myLabel;
     }
 
+    //Effects: Creates an upper panel with the second blue color
     public JPanel seconUpperBluePanel() {
         JPanel myPannel = new JPanel();
         myPannel.setBackground(new Color(51, 102, 153));
@@ -269,6 +293,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return myPannel;
     }
 
+    //Effects: Creates the Label for the Teacher Service Center
     public JLabel labelTeacherCenter() {
         JLabel currentPanel = new JLabel("Teacher Service Center");
         currentPanel.setForeground(Color.WHITE);
@@ -278,6 +303,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return currentPanel;
     }
 
+    //Effects: Creates the upper grey panel
     public JPanel setGreyUpperPanel() {
         JPanel currentPanel = new JPanel();
         currentPanel.setBackground(SystemColor.controlHighlight);
@@ -286,6 +312,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return currentPanel;
     }
 
+    //Effects: Creates a Button for logout in the with the correct label, position and font
     public JButton setLougoutButton() {
         JButton currentBotton = new JButton("Logout");
         currentBotton.setBackground(Color.RED);
@@ -294,6 +321,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return currentBotton;
     }
 
+    //Effects: Creates lower blue panel of the frame
     public JPanel getLowerBluePanel() {
         JPanel myPannel = new JPanel();
         myPannel.setLayout(null);
@@ -302,6 +330,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         return myPannel;
     }
 
+    //Effects: Creates the Label with the lower title of UBC with the correct color and position
     public JLabel setLowerTitle() {
         JLabel currentLabel = new JLabel("The University Of British Columbia");
         currentLabel.setForeground(Color.WHITE);
@@ -311,6 +340,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return currentLabel;
     }
 
+    //Modifies: This
+    //Effects: Changes the frame to the saving frame
     public void setLogout() {
         logout.addActionListener(new ActionListener() {
             @Override
@@ -323,6 +354,7 @@ public class BasicFrameForTeacherSide extends JFrame {
         });
     }
 
+    //Effects: Creatyes a back button and redirects the user back to the teacher menu
     public JButton backButton(int id) {
         JButton btnBack = new JButton("Back");
         btnBack.setForeground(Color.WHITE);
@@ -340,6 +372,8 @@ public class BasicFrameForTeacherSide extends JFrame {
         return btnBack;
     }
 
+    //Modifies:data/tempDataSystem.json
+    //Effects: Saves the data on the given file
     public void saveData(DataSystem data) {
         FileWriter myWriter = new FileWriter();
         myWriter.setFileDestination("data/tempDataSystem.json");

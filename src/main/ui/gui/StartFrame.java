@@ -1,3 +1,7 @@
+/* The start frame represent the first frame the user sees in the GUI, it first displays the image(visual element)
+ and then after clicking the image it prompts the user to choose which saved version do they want use in their program.
+*/
+
 package ui.gui;
 
 import model.DataSystem;
@@ -46,7 +50,7 @@ public class StartFrame extends JFrame {
 
     }
 
-
+    //Effects: Shows and image and the after click runs the start Frame
     public static void main(String[] args) {
         JFrame myInitialFrame = new JFrame();
         JLabel myLabel = new JLabel();
@@ -65,6 +69,8 @@ public class StartFrame extends JFrame {
         });
     }
 
+    //Modifies: This, tempDataSystem.json
+    //Effects: Sets the submit button for the frame so that we can know which of the two saved version should we read
     public void setSubmitBotton() {
         submitButtom.addActionListener(new ActionListener() {
             @Override
@@ -87,6 +93,7 @@ public class StartFrame extends JFrame {
         );
     }
 
+    //Effects: Creates the version label, with the correct color and position
     public JLabel setUpVersion() {
         JLabel temp = new JLabel("Version");
         temp.setForeground(new Color(0, 0, 128));
@@ -96,6 +103,7 @@ public class StartFrame extends JFrame {
 
     }
 
+    //Effects: Creates a JRadioButton for last version, with the correct color and position
     public JRadioButton setUpLastBotton() {
         JRadioButton temp = new JRadioButton("Last");
         temp.setBackground(new Color(255, 255, 255));
@@ -105,6 +113,7 @@ public class StartFrame extends JFrame {
         return temp;
     }
 
+    //Effects: Creates a JRadioButton for the original version, with the correct color and position
     public JRadioButton setUpOriginalButtom() {
         JRadioButton temp = new JRadioButton("Original");
         temp.setForeground(new Color(0, 0, 128));
@@ -114,6 +123,7 @@ public class StartFrame extends JFrame {
         return temp;
     }
 
+    //Effects: Creates a Jbutton of submit, with the correct color and position
     public JButton setUpSubmitButtom() {
         JButton temp = new JButton("Submit");
         temp.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -124,6 +134,8 @@ public class StartFrame extends JFrame {
     }
 
 
+    //Modifies: This, tempDataSystem.json
+    //Effects: Set the myData field with the correct information chosen by rhe user
     public void settingUpTheData(String s) {
         myReader = new FileReader(s);
         try {
@@ -143,6 +155,8 @@ public class StartFrame extends JFrame {
         }
     }
 
+    //Modifies: This
+    //Effects: Send the user To the login frame
     public void continueToLogin() {
         this.setVisible(false);
         Login currentlogin = new Login();

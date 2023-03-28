@@ -1,7 +1,9 @@
+/* This table represents the frame where a teacher can add a student to the system
+ */
+
 package ui.medianamente;
 
 
-import model.DataSystem;
 import ui.tables.TableForAddingStudents;
 
 import javax.swing.*;
@@ -42,6 +44,8 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
 
     }
 
+    //Modifies: This
+    //Effects: Continues constructing the frame  by adding missing text-fields and labels
     public void constructor2(int id) {
         lastName = setTextFieldLastName();
         super.contentPane.add(lastName);
@@ -62,6 +66,8 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         myMain.setVisible(true);
     }
 
+    //Modifies: This
+    //Effects: Sets the button of adding Student to not change frame but rather show a message
     @Override
     public JButton setUpCreateStudent(int id) {
         JButton createStudent = new JButton("Create Student");
@@ -78,6 +84,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return createStudent;
     }
 
+    //Effects: Creates the label of the "current Student" with the correct color, font and position
     public JLabel setCurrentStudents() {
         JLabel currentStudents = new JLabel("Current Students");
         currentStudents.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -87,7 +94,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
     }
 
 
-
+    //Effects: Creates the label of the "Create Student" with the correct color, font and position
     public JLabel setCreateStudentLabel() {
         JLabel createStudentLabel = new JLabel("Create Student:");
         createStudentLabel.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -95,6 +102,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return createStudentLabel;
     }
 
+    //Effects: Creates the label of the "First Name" with the correct color, font and position
     public JLabel setFirstName() {
         JLabel firstName =  new JLabel("First Name");
         firstName.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -102,6 +110,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return firstName;
     }
 
+    //Effects: Creates the Text Field of the "First Name" with the correct color, font and position
     public JTextField firstName() {
         JTextField textField = new JTextField();
         textField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -110,6 +119,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
 
     }
 
+    //Effects: Creates the Label of the "Last Name" with the correct color, font and position
     public JLabel setLastNameLabel() {
         JLabel label = new JLabel("Last Name");
         label.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -117,6 +127,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return label;
     }
 
+    //Effects: Creates the Text field of the "Last Name" with the correct color, font and position
     public JTextField setTextFieldLastName() {
         JTextField thisText =  new JTextField();
         thisText.setColumns(10);
@@ -125,6 +136,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return thisText;
     }
 
+    //Effects: Creates the PasswordField with the correct color, font and position
     public JPasswordField setLastNameText() {
         JPasswordField thisfield = new JPasswordField();
         thisfield.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -133,6 +145,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return thisfield;
     }
 
+    //Effects: Creates the Label of the "Password" with the correct color, font and position
     public JLabel setPassworldLabel() {
         JLabel thisLabel = new JLabel("Password");
         thisLabel.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -140,6 +153,9 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return thisLabel;
     }
 
+    //Modifies: This
+    //Effects: Creates teh submit button with the correct color and font. Adds the behaviour
+    //of adding a student in case of putting valid information
     public JButton setSubmitButton() {
         JButton btnNewButton = new JButton("Submit");
         btnNewButton.setBackground(new Color(12, 35, 68));
@@ -169,6 +185,8 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
         return  btnNewButton;
     }
 
+    //Modifies: Creates the table with teh list of all students
+    //Effects: Sets the JPanel in the correct position and adds the table to it
     public JPanel setPanelOfTable() {
         table = new TableForAddingStudents(myData.getListOfStudents());
         JTable table2 = new JTable(table);

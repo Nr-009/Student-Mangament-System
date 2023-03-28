@@ -1,7 +1,11 @@
+/* This class represents the table of all the classes that the teacher is currently teaching. It has collumns of:
+Class name, class id, #Students, Average grade, session
+ */
+
+
 package ui.tables;
 
 import model.AcademyClass;
-import model.Student;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -14,16 +18,22 @@ public class TableOfClasses extends AbstractTableModel {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the number of rows to be the same of the number of classes
     @Override
     public int getRowCount() {
         return allclasses.size();
     }
 
+    //Modifies: This
+    //Effects: Sets the number of columns to 5
     @Override
     public int getColumnCount() {
         return 5;
     }
 
+    //Modifies: This
+    //Effects: Sets the value for each row based on the current Student
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         AcademyClass currentClass = allclasses.get(rowIndex);
@@ -42,6 +52,8 @@ public class TableOfClasses extends AbstractTableModel {
         return null;
     }
 
+    //Modifies: This
+    //Effects: sets the names of all table
     @Override
     public String getColumnName(int column) {
         switch (column) {

@@ -1,3 +1,7 @@
+/* This class represent the table in teh frame for adding students and has columns of Student ID, Student fn,
+Student ln, number of classes of teh student
+ */
+
 package ui.tables;
 
 import model.Student;
@@ -12,16 +16,23 @@ public class TableForAddingStudents extends AbstractTableModel {
         this.allStudents = allstudents;
     }
 
+    //Modifies: This
+    //Effects: Sets the table to have the same rows as the number of students
     @Override
     public int getRowCount() {
         return allStudents.size();
     }
 
+    //Modifies: This
+    //Effects: Sets the columns to be 4
     @Override
     public int getColumnCount() {
         return 4;
     }
 
+
+    //Modifies: This
+    //Effects: Sets the value at each row based on the specific student
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Student student = allStudents.get(rowIndex);
@@ -39,6 +50,8 @@ public class TableForAddingStudents extends AbstractTableModel {
 
     }
 
+    //Modifies: This
+    //Effects: Sets the name of the collumns
     @Override
     public String getColumnName(int column) {
         switch (column) {
