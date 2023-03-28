@@ -1,4 +1,8 @@
-package ui.consoleBasedUi;
+/* Class that sets the basic data from which we can create the original base jason file located in
+data/BaseDataSystem.json and that is used both the GUI and the console based application */
+
+
+package ui.consoleui;
 
 import model.AcademyClass;
 import model.DataSystem;

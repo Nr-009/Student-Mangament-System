@@ -1,3 +1,7 @@
+/* Data System in which we represent the place we all information is stored, so it has fields for id, classes
+, students, teachers and password. Each time you create a student, teacher or class its is the one that assigns the id
+to avoid id repetition.*/
+
 package model;
 
 import org.json.JSONArray;

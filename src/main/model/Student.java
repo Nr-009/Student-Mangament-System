@@ -2,9 +2,7 @@
 This class represents the student in the Academy, they have a first name, last name, a password and id to login.
 They also have a list of classes, a list of grades and absences, which all teh things they should keep track of.
 Apart from that the class in general has three static list which represents the ids, password and all the references
-for the students
-
- */
+for the students */
 
 package model;
 

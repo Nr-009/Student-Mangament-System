@@ -1,4 +1,7 @@
-package ui.consoleBasedUi;
+/* Management system in which the user can interact to add, delete students, classes or teachers. See grades,
+* set grades and absences, which is divided with section */
+
+package ui.consoleui;
 
 import model.AcademyClass;
 import model.DataSystem;
