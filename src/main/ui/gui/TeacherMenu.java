@@ -1,6 +1,6 @@
 /* Teacher main frame when logging in, in which they can choose the button to go to each specific part */
 
-package ui.medianamente;
+package ui.gui;
 
 import model.Teacher;
 

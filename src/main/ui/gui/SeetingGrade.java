@@ -1,7 +1,7 @@
 /* It is a middle frame where you can choose whether to set a grade or add student
 */
 
-package ui.medianamente;
+package ui.gui;
 
 import javax.swing.JPanel;
 

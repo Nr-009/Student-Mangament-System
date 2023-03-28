@@ -2,7 +2,7 @@
  */
 
 
-package ui.medianamente;
+package ui.gui;
 
 import model.*;
 import ui.tables.TableForAddingAClass;

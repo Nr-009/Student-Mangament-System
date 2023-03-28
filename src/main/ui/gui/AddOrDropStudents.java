@@ -1,7 +1,7 @@
 /* This class represents the frame o adding or dropping a student in teh teachers menu */
 
 
-package ui.medianamente;
+package ui.gui;
 
 import model.AcademyClass;
 import model.Student;

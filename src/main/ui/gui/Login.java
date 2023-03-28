@@ -6,7 +6,6 @@ package ui.gui;
 
 import model.DataSystem;
 import model.FileReader;
-import ui.medianamente.TeacherMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

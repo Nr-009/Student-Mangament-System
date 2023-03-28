@@ -1,6 +1,6 @@
 /* Sets the grades and absences frame where the teacher can set the grades and absences for a given */
 
-package ui.medianamente;
+package ui.gui;
 
 import javax.swing.JPanel;
 

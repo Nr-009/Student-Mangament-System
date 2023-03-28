@@ -1,6 +1,6 @@
 /* This frame represents the frame where a teacher can edit their info*/
 
-package ui.medianamente;
+package ui.gui;
 
 import model.Teacher;
 

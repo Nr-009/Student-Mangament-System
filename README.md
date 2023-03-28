@@ -20,3 +20,16 @@ this starting academies have a **reliable**, **free** and **easy** system to tra
 - As a student I want to be able to load the previous changes of my registration 
 
 <img alt="Photo of the Academy" height="250" src="https://greekreporter.com/wp-content/uploads/2018/11/knowledge-e1542040512810.jpg" width="500"/>
+
+# Instructions for Grader  
+
+- In the package gui run the class StartFrame, click on the image and select last version
+- In the login enter the login Name: 0 and password: fisica12.  
+- In the teacher menu click on the blue button creating or delete Classes
+- To add a class just put the fields on Create Class, the id 0 to assign it to your current user 
+in ID of teacher. After submit you may see the class has been added in the table 
+- You may also delete your classes by putting the id of the class show on the table, though you can only delete the
+classes that are shown to have teacher id of 0. This restriction is due to only being able to delete classes you teach.
+- The visual component was the image you had to click first when starting the application
+- To save the user story you press the logout button and say yes to save
+- To load the last changes you have to when starting again  Startframe, choose last version

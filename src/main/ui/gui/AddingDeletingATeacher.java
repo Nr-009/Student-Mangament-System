@@ -1,7 +1,7 @@
 /* This class represents teh frame for adding or deleting a teacher.
  */
 
-package ui.medianamente;
+package ui.gui;
 
 import ui.tables.TableForAddingTeachers;
 

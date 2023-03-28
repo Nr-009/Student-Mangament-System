@@ -1,7 +1,7 @@
 /* This table represents the frame where a teacher can add a student to the system
  */
 
-package ui.medianamente;
+package ui.gui;
 
 
 import ui.tables.TableForAddingStudents;

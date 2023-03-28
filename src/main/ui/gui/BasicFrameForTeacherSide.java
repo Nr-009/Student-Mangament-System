@@ -2,13 +2,12 @@
 buttons and frames with colors
  */
 
-package ui.medianamente;
+package ui.gui;
 
 import model.DataSystem;
 import model.FileReader;
 import model.FileWriter;
 import model.Teacher;
-import ui.gui.Saving;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

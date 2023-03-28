@@ -67,7 +67,7 @@
             "password": "chess",
             "listOfGrades": [
                 89,
-                20,
+                100,
                 20
             ],
             "ListOfAllIdOfClasses": [
@@ -118,7 +118,7 @@
             "id": 4
         }
     ],
-    "counterAcademyClasses": 8,
+    "counterAcademyClasses": 10,
     "counterTeacher": 7,
     "listOfAllPasswordTeachers": [
         "fisica12",
