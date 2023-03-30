@@ -32,4 +32,15 @@ in ID of teacher. After submit you may see the class has been added in the table
 classes that are shown to have teacher id of 0. This restriction is due to only being able to delete classes you teach.
 - The visual component was the image you had to click first when starting the application
 - To save the user story you press the logout button and say yes to save
-- To load the last changes you have to when starting again  Startframe, choose last version
+- To load the last changes you have to when starting again  Startframe, choose last version.  
+
+### Phase 4: Task2:
+- User started with Saved DataSystem Thu Mar 30 13:14:10 PDT 2023
+- Teacher with id 0 logged in Thu Mar 30 13:14:17 PDT 2023
+- Student: Athena Kadirov,id: 4 created Thu Mar 30 13:14:40 PDT 2023
+- Teacher Liliana Avila, id :7 created Thu Mar 30 13:14:56 PDT 2023
+- Teacher: Gregor Gregor ,id: 2 deleted Thu Mar 30 13:15:08 PDT 2023
+- AcademyClass: CPSC310 ,id: 8 created Thu Mar 30 13:15:49 PDT 2023
+- Teacher with id 0 logged in Thu Mar 30 13:16:12 PDT 2023
+- Teacher Nicolas  El Inmortal, id :0 changed his fn Thu Mar 30 13:16:13 PDT 2023
+- Teacher Nicolas Mickelsen, id :0 changed his ln Thu Mar 30 13:16:13 PDT 2023

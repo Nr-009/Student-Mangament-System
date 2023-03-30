@@ -3,7 +3,8 @@
         0,
         1,
         2,
-        3
+        3,
+        4
     ],
     "ListOfAllStudents": [
         {
@@ -96,23 +97,34 @@
             "fn": "Rodrigo",
             "numberOfClasses": 4,
             "id": 3
+        },
+        {
+            "listOfAbsences": [],
+            "ln": "Kadirov",
+            "password": "gyunay",
+            "listOfGrades": [],
+            "ListOfAllIdOfClasses": [],
+            "fn": "Athena",
+            "numberOfClasses": 0,
+            "id": 4
         }
     ],
-    "counterAcademyClasses": 8,
-    "counterTeacher": 7,
+    "counterAcademyClasses": 9,
+    "counterTeacher": 8,
     "listOfAllPasswordTeachers": [
         "fisica12",
-        "naturalRecursion",
         "abstraction",
         "circuits",
         "R",
+        "movii",
         "movii"
     ],
     "listOfPasswordStudents": [
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300"
+        "eliminaMartinez300",
+        "gyunay"
     ],
     "listOfAllIdClasses": [
         0,
@@ -121,12 +133,13 @@
         3,
         5,
         6,
-        7
+        7,
+        8
     ],
     "listOfAllClasses": [
         {
             "numOfStudents": 1,
-            "IdTeacher": 2,
+            "IdTeacher": -1,
             "IdsOfAllStudents": [0],
             "session": "2022W",
             "name": "CPSC110",
@@ -194,32 +207,32 @@
             "session": "2023S",
             "name": "IA",
             "id": 7
+        },
+        {
+            "numOfStudents": 0,
+            "IdTeacher": 0,
+            "IdsOfAllStudents": [],
+            "session": "2023S",
+            "name": "CPSC310",
+            "id": 8
         }
     ],
     "listOfAllIdTeacher": [
         0,
-        2,
         3,
         4,
         5,
-        6
+        6,
+        7
     ],
-    "counterStudents": 4,
+    "counterStudents": 5,
     "listOfAllTeachers": [
         {
             "allIdsOfTheCurrentClasses": [3],
-            "ln": " El Inmortal",
+            "ln": "Mickelsen",
             "password": "fisica12",
-            "fn": "Eulogio",
+            "fn": "Nicolas",
             "id": 0,
-            "numClasses": 1
-        },
-        {
-            "allIdsOfTheCurrentClasses": [0],
-            "ln": "Kiczales",
-            "password": "naturalRecursion",
-            "fn": "Gregor",
-            "id": 2,
             "numClasses": 1
         },
         {
@@ -252,6 +265,14 @@
             "password": "movii",
             "fn": "Liliana",
             "id": 6,
+            "numClasses": 0
+        },
+        {
+            "allIdsOfTheCurrentClasses": [],
+            "ln": "Avila",
+            "password": "movii",
+            "fn": "Liliana",
+            "id": 7,
             "numClasses": 0
         }
     ]
