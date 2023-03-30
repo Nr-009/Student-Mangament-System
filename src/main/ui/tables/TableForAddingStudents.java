@@ -21,6 +21,7 @@ public class TableForAddingStudents extends AbstractTableModel {
     @Override
     public int getRowCount() {
         return allStudents.size();
+
     }
 
     //Modifies: This

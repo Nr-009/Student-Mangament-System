@@ -43,4 +43,15 @@ classes that are shown to have teacher id of 0. This restriction is due to only 
 - AcademyClass: CPSC310 ,id: 8 created Thu Mar 30 13:15:49 PDT 2023
 - Teacher with id 0 logged in Thu Mar 30 13:16:12 PDT 2023
 - Teacher Nicolas  El Inmortal, id :0 changed his fn Thu Mar 30 13:16:13 PDT 2023
-- Teacher Nicolas Mickelsen, id :0 changed his ln Thu Mar 30 13:16:13 PDT 2023
+- Teacher Nicolas Mickelsen, id :0 changed his ln Thu Mar 30 13:16:13 PDT 2023.  
+
+### "Phase 4: Task 3":
+-The main problem in the structure of the project is the tightly coupled relationship the classes Academy Class, 
+Student, and Teacher have. There are unnecessary bidirectional relationships, which both occupy excessive space and
+make the performance slow as they require constant traversal, deletion, and addition of objects in their respective 
+list. We could solve that by having each one, have either a set or a map that uses mainly the id and not the object. 
+For instance, when needing to add a class, we would just depend on DataSystem to add the id of the student to the set 
+of Id in the AcademyClass and also to add the Id of the AcademyClass into the Map of id to grades in the student. 
+This would eliminate the bidirectional relationships and increase the cohesion of the DataSystem class, because right 
+now, DataSystem is mostly working as the place to store the data rather than actually being the supposed connector of 
+all the classes of the system.  
