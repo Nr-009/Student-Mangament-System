@@ -4,6 +4,7 @@
 package ui.gui;
 
 import model.AcademyClass;
+import model.DataSystem;
 import model.Student;
 import ui.tables.TableForAddingStudents;
 import ui.tables.TableOfStudentInAClassWithoutEditable;
@@ -29,6 +30,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
     private JTextField idTextFields;
     private JPanel allStudnets;
     private JButton backButton;
+    private JLabel className;
 
 
 
@@ -55,6 +57,8 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         super.contentPane.add(idTextFields);
         backButton = backButton(0);
         super.contentPane.add(backButton);
+        className = setClassName(id);
+        super.contentPane.add(className);
     }
 
     public static void main(String[] args) {
@@ -65,7 +69,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
     //Effects: Creates the valid TextField for the Id
     public JTextField setIdTextField() {
         JTextField t = new JTextField();
-        t.setBounds(894, 384, 88, 29);
+        t.setBounds(871, 410, 88, 29);
         t.setColumns(10);
         return t;
     }
@@ -125,7 +129,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         JLabel addOrDrop = new JLabel("Add Or Drop");
         addOrDrop.setForeground(new Color(12, 35, 68));
         addOrDrop.setFont(new Font("Arial", Font.PLAIN, 26));
-        addOrDrop.setBounds(840, 329, 151, 45);
+        addOrDrop.setBounds(808, 347, 151, 45);
         return addOrDrop;
     }
 
@@ -134,7 +138,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         JLabel lblId = new JLabel("Id");
         lblId.setForeground(new Color(12, 35, 68));
         lblId.setFont(new Font("Arial", Font.PLAIN, 24));
-        lblId.setBounds(840, 376, 38, 36);
+        lblId.setBounds(818, 402, 38, 36);
         return lblId;
     }
 
@@ -146,7 +150,7 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         setActionDropStudents(drop, idOfClass);
         drop.setForeground(Color.WHITE);
         drop.setBackground(new Color(12, 35, 68));
-        drop.setBounds(868, 433, 80, 29);
+        drop.setBounds(845, 498, 80, 29);
         return drop;
 
     }
@@ -241,10 +245,24 @@ public class AddOrDropStudents extends BasicFrameForTeacherSide {
         JButton addButton = new JButton("Add");
         addButton.setForeground(Color.WHITE);
         addButton.setBackground(new Color(12, 35, 68));
-        addButton.setBounds(868, 472, 80, 29);
+        addButton.setBounds(845, 459, 80, 29);
         setActionAddButton(addButton, idOfClass);
         return addButton;
     }
+
+    //Effects: returns the correct label for the className
+    public JLabel setClassName(int id) {
+        AcademyClass myCurrentClass = myData.getAcademyClass(id);
+        String name = myCurrentClass.getName();
+        JLabel lblClassName = new JLabel(name);
+        lblClassName.setHorizontalAlignment(SwingConstants.CENTER);
+        lblClassName.setForeground(new Color(12, 35, 68));
+        lblClassName.setFont(new Font("Arial", Font.PLAIN, 30));
+        lblClassName.setBounds(716, 292, 336, 45);
+        return lblClassName;
+
+    }
+
 
 
 }

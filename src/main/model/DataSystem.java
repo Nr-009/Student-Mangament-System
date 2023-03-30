@@ -73,6 +73,9 @@ public class DataSystem {
         if (hasIdStudent(id)) {
             int index = listOfIdStudents.indexOf(id);
             if (password.equals(listOfPasswordStudents.get(index))) {
+                Event currentEvent = new Event("Student with id " + id + " loggedIn");
+                EventLog currentLog = EventLog.getInstance();
+                currentLog.logEvent(currentEvent);
                 return true;
             }
         }
@@ -155,8 +158,13 @@ public class DataSystem {
             s.removeClass(currentClass.getName());
         }
         int index = listOfAllIdClasses.indexOf(currentClass.getId());
+        String name = currentClass.getName();
         listOfAllIdClasses.remove(index);
         listOfAllClasses.remove(index);
+        Event currentEvent = new Event("AcademyClass: " + name + " ,id:" + id
+                + " deleted from the System");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         return true;
 
 
@@ -222,6 +230,10 @@ public class DataSystem {
         if (hasIDTeacher(id)) {
             int index = listOfAllIdTeacher.indexOf(id);
             if (password.equals(listOfAllPasswordTeachers.get(index))) {
+                Event currentEvent = new Event("Teacher with id " + id
+                        + " logged in");
+                EventLog currentLog = EventLog.getInstance();
+                currentLog.logEvent(currentEvent);
                 return true;
             }
         }
@@ -258,9 +270,14 @@ public class DataSystem {
             }
         }
         int index = listOfAllIdTeacher.indexOf(id);
+        String name = currentTeacher.getFn() + " " + currentTeacher.getFn();
         listOfAllIdTeacher.remove(index);
         listOfAllTeachers.remove(index);
         listOfAllPasswordTeachers.remove(index);
+        Event currentEvent = new Event("Teacher: " + name + " ,id: " + id
+                + " deleted");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         return true;
     }
 

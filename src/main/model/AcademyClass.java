@@ -10,9 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AcademyClass {
     private String name;
@@ -31,7 +29,20 @@ public class AcademyClass {
         this.name = name;
         this.teacher = t;
         this.sesion = session;
+        Event currentEvent = new Event("AcademyClass: " + name + " ,id: " + id
+                + " created");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
 
+    }
+
+    //Effects: Constructs a class with a given name and session. It initializes the list of Students as empty
+    // and the teacher as null
+    public AcademyClass(int id,String name, String session) {
+        this.id = id;
+        this.name = name;
+        this.teacher = null;
+        this.sesion = session;
     }
 
     //Effects: returns the current name
@@ -65,10 +76,31 @@ public class AcademyClass {
             this.teacher = null;
         } else {
             this.teacher = t;
+            Event addingATeacher = new Event("Teacher: " + t.getFn() + " " + t.getLn() + " ,id: " + t.getId()
+                    + " set for" +  "AcademyClass: " + name + " ,id: " + this.id);
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(addingATeacher);
             return true;
+
         }
         return true;
     }
+
+
+    //Modifies: This
+    //Effects: Sets the teacher for the given class
+    public boolean setTeacherReadingFile(Teacher t) {
+        if (t == null) {
+            this.teacher = null;
+        } else {
+            this.teacher = t;
+            return true;
+
+        }
+        return true;
+    }
+
+
 
     //Effects: returns the teacher of teh given class
     public Teacher getTeacher() {
@@ -106,6 +138,11 @@ public class AcademyClass {
             int index = getIndexStudent(id);
             Student newStudent = students.get(index);
             newStudent.setGradeForClass(this.name, grade);
+            Event settingAGrade = new Event("Student: " + newStudent.getFn() + " " + newStudent.getLn()
+                    + ", id: " + id + " has new grade of "
+                    + grade + " for" + "AcademyClass: " + name + " ,id: " + this.id);
+            EventLog myEvent = EventLog.getInstance();
+            myEvent.logEvent(settingAGrade);
             return true;
         } else {
             return false;
@@ -116,6 +153,10 @@ public class AcademyClass {
 
     //Effects: returns the session of the given class
     public void setSession(String s) {
+        Event currentEvent = new Event("AcademyClass: " + name + " ,id: " + id
+                + " set the session to " + s);
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         this.sesion = s;
 
     }
@@ -126,8 +167,23 @@ public class AcademyClass {
     }
 
 
-    //Effects:If the student is not null and the id is not inside it adds the given student
+    //Effects:If the student is not null and the id is not inside it adds the given student and logs the event
     public boolean addStudent(Student s) {
+        if (s != null && !hasStudent(s.getID())) {
+            students.add(s);
+            numOfStudents++;
+            Event addingAStudent = new Event("Student: " + s.getFn() + " " + s.getLn()
+                    + ", id: " + s.getID() + " added to " + "AcademyClass: " + name + " ,id: " + id);
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(addingAStudent);
+            return true;
+        }
+        return false;
+
+    }
+
+    //Effects:If the student is not null and the id is not inside it adds the given student
+    public boolean addStudentReadingFile(Student s) {
         if (s != null && !hasStudent(s.getID())) {
             students.add(s);
             numOfStudents++;
@@ -136,6 +192,7 @@ public class AcademyClass {
         return false;
 
     }
+
 
     //Effects: returns the given number of students
     public int getNumOfStudents() {
@@ -159,8 +216,13 @@ public class AcademyClass {
     public boolean deleteStudent(int id) {
         if (hasStudent(id)) {
             int index = getIndexStudent(id);
+            Student s = students.get(index);
             students.remove(index);
             numOfStudents--;
+            Event removeAStudent = new Event("Student: " + s.getFn() + " " + s.getLn()
+                    + ", id: " + s.getID() + " removed from " + "AcademyClass: " + name + " ,id: " + this.id);
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(removeAStudent);
             return true;
         } else {
             return false;

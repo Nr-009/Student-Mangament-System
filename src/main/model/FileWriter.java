@@ -33,7 +33,6 @@ public class FileWriter {
     //Effects: Instantiates the writer to be used, throws no File exception if destination not found
     public void  open() throws FileNotFoundException {
         myWritter =  new PrintWriter(fileDestination);
-
     }
 
     //Modifies: This
@@ -48,6 +47,11 @@ public class FileWriter {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
         myWritter.print(currentJason.toString(SPACE));
+        if (fileDestination.equals("data/SavedChangesDataSystem.json")) {
+            Event myEvent = new Event("User saved the changes");
+            EventLog myLog = EventLog.getInstance();
+            myLog.logEvent(myEvent);
+        }
     }
 
     //Modifies: This
@@ -72,6 +76,11 @@ public class FileWriter {
         JSONObject currentJason = new JSONObject();
         currentJason = s.toJson();
         myWritter.print(currentJason.toString(SPACE));
+        if (fileDestination == "data/SavedChangesDataSystem.json") {
+            Event currentEvent = new Event("User saved changes");
+            EventLog eventlog = EventLog.getInstance();
+            eventlog.logEvent(currentEvent);
+        }
     }
 
 

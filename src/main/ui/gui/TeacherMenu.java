@@ -47,6 +47,7 @@ public class TeacherMenu extends BasicFrameForTeacherSide {
         super.add(thenicalSupport);
         askUBC = setUpAskUBC();
         super.add(askUBC);
+
     }
 
     //Effects: Creates a given the label where we welcome the teacher with the given Id and name

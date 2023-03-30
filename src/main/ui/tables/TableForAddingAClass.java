@@ -32,6 +32,7 @@ public class TableForAddingAClass extends AbstractTableModel {
         return 6;
     }
 
+    @SuppressWarnings("methodlength")
     //Modifies: This
     //Effects: Sets the value for each row and collumn in the class
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -41,7 +42,12 @@ public class TableForAddingAClass extends AbstractTableModel {
             case 0:
                 return currentClass.getName();
             case 1:
-                return currentClass.getTeacher().getFn();
+                if (currentClass.getTeacher() == null) {
+                    return "No teacher";
+                } else {
+                    return currentClass.getTeacher().getFn();
+                }
+
             case 2:
                 return currentClass.getAverageGrade();
             case 3:
@@ -49,7 +55,11 @@ public class TableForAddingAClass extends AbstractTableModel {
             case 4:
                 return currentClass.getId();
             case 5:
-                return currentClass.getTeacher().getId();
+                if (currentClass.getTeacher() == null) {
+                    return "No id";
+                } else {
+                    return currentClass.getTeacher().getFn();
+                }
         }
         return null;
 

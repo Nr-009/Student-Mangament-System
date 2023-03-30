@@ -82,7 +82,7 @@ public class FileReader {
         int idOfTeacher = s.getInt("IdTeacher");
         List<Integer> isOfAllStudents = toListOfInt(s.getJSONArray("IdsOfAllStudents"));
         String session = s.getString("session");
-        AcademyClass currentClass = new AcademyClass(id,name,null,session);
+        AcademyClass currentClass = new AcademyClass(id,name,session);
         currentClass.setIdOfTeacher(idOfTeacher);
         currentClass.setAllIdStudent(isOfAllStudents);
         return  currentClass;
@@ -102,7 +102,7 @@ public class FileReader {
         int id = s.getInt("id");
         String password = s.getString("password");
         List<Integer> allIdsOfTheCurrentClass = toListOfInt(s.getJSONArray("allIdsOfTheCurrentClasses"));
-        Teacher currentTeacher = new Teacher(fn,ln,id,password);
+        Teacher currentTeacher = new Teacher(fn,ln,id,password, false);
         currentTeacher.setAllClassesIds(allIdsOfTheCurrentClass);
         return currentTeacher;
     }
@@ -110,6 +110,14 @@ public class FileReader {
     //Effects: Returns a Data system based on the file given
     public DataSystem readDataSystem() throws IOException {
         String data = readFile(destination);
+        EventLog eventlog = EventLog.getInstance();
+        if (destination == "data/SavedChangesDataSystem.json") {
+            Event currentEvent = new Event("User started with Saved DataSystem");
+            eventlog.logEvent(currentEvent);
+        } else if (destination == "data/BaseDataSystem.json") {
+            Event currentEvent = new Event("User started with Original DataSystem");
+            eventlog.logEvent(currentEvent);
+        }
         JSONObject dataObject = new JSONObject(data);
         return parseToDataSystem(dataObject);
 
@@ -169,13 +177,13 @@ public class FileReader {
     // it exits
     private void setReferencesAcademyClass(AcademyClass academyClass, DataSystem dataSystem) {
         for (int studentsId: academyClass.getAllIdStudent()) {
-            academyClass.addStudent(dataSystem.getStudent(studentsId));
+            academyClass.addStudentReadingFile(dataSystem.getStudent(studentsId));
         }
         List<Integer> newListOfIds = new ArrayList<>();
         if (academyClass.getIdOfTeacher() == -1) {
-            academyClass.setTeacher(null);
+            academyClass.setTeacherReadingFile(null);
         } else {
-            academyClass.setTeacher(dataSystem.getTeacher(academyClass.getIdOfTeacher()));
+            academyClass.setTeacherReadingFile(dataSystem.getTeacher(academyClass.getIdOfTeacher()));
         }
         academyClass.setIdOfTeacher(-1);
         academyClass.setAllIdStudent(newListOfIds);
@@ -185,7 +193,7 @@ public class FileReader {
     //Effects: matches all the references of the teacher to the given classes
     private void setReferencesTeacher(Teacher teacher, DataSystem dataSystem) {
         for (int classId: teacher.getAllClassesIds()) {
-            teacher.addClass(dataSystem.getAcademyClass(classId));
+            teacher.addClassReadingFile(dataSystem.getAcademyClass(classId));
         }
         List<Integer> newListOfIds = new ArrayList<>();
         teacher.setAllClassesIds(newListOfIds);

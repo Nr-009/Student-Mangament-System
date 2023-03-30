@@ -4,20 +4,17 @@ buttons and frames with colors
 
 package ui.gui;
 
-import model.DataSystem;
-import model.FileReader;
-import model.FileWriter;
-import model.Teacher;
+import model.*;
+import model.Event;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class BasicFrameForTeacherSide extends JFrame {
+public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     protected JPanel contentPane;
     protected JLabel imageOfUbc;
     protected JLabel name;
@@ -143,9 +140,13 @@ public class BasicFrameForTeacherSide extends JFrame {
 
         imageOfUBC2 = setUpImageOfUbc2();
         lowerBluePanel.add(imageOfUBC2);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLogout();
+        addWindowListener(this);
+
     }
+
+
+
 
     //Effects: Creates a label with the upper image of the UBC logo
     public JLabel getImageOfUbc() {
@@ -387,8 +388,44 @@ public class BasicFrameForTeacherSide extends JFrame {
 
     }
 
+    @Override
+    public void windowOpened(WindowEvent e) {
 
+    }
 
+    @Override
+    public void windowClosing(WindowEvent e) {
+        EventLog myevent = EventLog.getInstance();
+        for (Event event: myevent) {
+            System.out.println(event.getDescription() + " " + event.getDate().toString());
+        }
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }
 
 

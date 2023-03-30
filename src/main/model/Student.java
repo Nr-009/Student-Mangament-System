@@ -31,6 +31,9 @@ public class Student {
         this.fn = fn;
         this.ln = ln;
         this.password = password;
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id + " created");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
     }
 
     //Effects: returns the id of the student
@@ -42,6 +45,10 @@ public class Student {
     //Effects: changes the address of the given student
     public void setAddress(String s) {
         this.address = s;
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                + " set his address to " + s);
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
     }
 
     //Effects: returns the address of the given student
@@ -53,6 +60,10 @@ public class Student {
     //Effects: changes the given last name
     public void setLn(String ln) {
         this.ln = ln;
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                + " changed his last name");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
     }
 
     //Effects: returns the last name of the current Student
@@ -65,11 +76,16 @@ public class Student {
     //Effects: changes the first name of the student
     public void setFn(String fn) {
         this.fn = fn;
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                + " changed his first name");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
     }
 
     //Effects: returns the first name of the current student
     public String getFn() {
         return this.fn;
+
     }
 
     //Effects: returns the current Password
@@ -79,6 +95,9 @@ public class Student {
 
     public void setPassword(String s) {
         this.password = s;
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id + " changed his password");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
     }
 
 
@@ -92,6 +111,10 @@ public class Student {
             listOfGrades.add(0);
             listOfAbscences.add(0);
             numOfClasses++;
+            Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                    + " added the class with id of " + s.getId());
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(currentEvent);
             return true;
         }
         return false;
@@ -115,7 +138,13 @@ public class Student {
     public boolean setGradeForClass(String s, int grade) {
         if (hasClass(s) && grade <= 100 && grade >= 0) {
             int index = getIndexOfClass(s);
+            AcademyClass currentClass = this.listOfClasses.get(index);
             listOfGrades.set(index, grade);
+            Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                    + " has now a grade of " + grade + " in AcademyClass: " + currentClass.getName()
+                    + ", id:" + currentClass.getId());
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(currentEvent);
             return true;
         }
         return false;
@@ -165,9 +194,14 @@ public class Student {
     public boolean removeClass(String s) {
         if (hasClass(s)) {
             int index = getIndexOfClass(s);
+            int idOfClass = listOfClasses.get(index).getId();
             listOfAbscences.remove(index);
             listOfClasses.remove(index);
             listOfGrades.remove(index);
+            Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                    + "has dropped out class with id " + idOfClass);
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(currentEvent);
             numOfClasses--;
             return true;
 
@@ -290,9 +324,15 @@ public class Student {
         numOfClasses++;
     }
 
-    //Effects: set the abscenes of a student for a given clas with the same same
+    //Effects: set the abscenes of a student for a given clas with the same name
     public void setAbscenceForAClass(int abscence, String name) {
         int index  = getIndexOfClass(name);
+        AcademyClass curentClass = listOfClasses.get(index);
+        Event currentEvent = new Event("Student: " + fn + " " + ln + ",id: " + id
+                + "has now " + abscence + " absences for AcademyClass: " + curentClass.getName() + " ,id: "
+                + curentClass.getId());
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         listOfAbscences.set(index, abscence);
     }
 

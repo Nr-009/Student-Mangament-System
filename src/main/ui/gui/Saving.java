@@ -5,22 +5,22 @@ in the application to be loaded later.
 
 package ui.gui;
 
-import model.DataSystem;
-import model.FileReader;
-import model.FileWriter;
+import model.*;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class Saving extends JFrame {
+public class Saving extends JFrame implements WindowListener {
 
     private JLabel version;
     private JRadioButton yesButton;
@@ -29,7 +29,6 @@ public class Saving extends JFrame {
 
     public Saving() {
         setTitle("Selecting Version");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 292, 274);
         JPanel contentPane = new JPanel();
         contentPane.setBackground(SystemColor.window);
@@ -45,6 +44,7 @@ public class Saving extends JFrame {
         submitButtom = setUpSubmitButtom();
         contentPane.add(submitButtom);
         setSubmitBotton();
+        addWindowListener(this);
 
     }
 
@@ -141,5 +141,45 @@ public class Saving extends JFrame {
     }
 
 
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        System.out.println("");
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        EventLog myLog = EventLog.getInstance();
+        for (Event event : myLog) {
+            System.out.println(event.getDescription() + " " + event.getDate().toString());
+        }
+        System.exit(0);
+
+    }
 }
 

@@ -20,10 +20,24 @@ public class Teacher  {
     private int numClasses;
     private List<Integer> allIdsOfTheCurrentClasses = new ArrayList<>();
 
-    //Effects:If the id is not present,
-    //Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
-    //null values, and id of 626.
+    //Effects: Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
+    //null values and logs the event
     public Teacher(String fn, String ln, int id, String password) {
+        this.fn = fn;
+        this.ln = ln;
+        this.id = id;
+        this.password = password;
+        numClasses = 0;
+        Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id
+                + " created");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
+
+    }
+
+    //Effects: Creates a teacher with a given fn, ln, id, and password, otherwise produces a teacher with
+    //null values.
+    public Teacher(String fn, String ln, int id, String password, boolean m) {
         this.fn = fn;
         this.ln = ln;
         this.id = id;
@@ -32,10 +46,14 @@ public class Teacher  {
 
     }
 
+
     //Modifies: This
     //Effects: changes the last name of the current Teacher
     public void setFn(String fn) {
         this.fn = fn;
+        Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id + " changed his fn");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
 
     }
 
@@ -48,6 +66,9 @@ public class Teacher  {
     //Modifies: This
     //Effects: sets the last name for the given Teacher
     public void setLn(String ln) {
+        Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id + " changed his ln");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         this.ln = ln;
 
     }
@@ -74,6 +95,9 @@ public class Teacher  {
     //Effects: Changes the current Password for the teacher
     public boolean setPassword(String newP) {
         this.password = newP;
+        Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id + " changed his password");
+        EventLog currentLog = EventLog.getInstance();
+        currentLog.logEvent(currentEvent);
         return true;
     }
 
@@ -89,8 +113,23 @@ public class Teacher  {
     }
 
     //Effects: if the class is not there and the class
-    // adds it to the classes the teacher is teaching
+    // adds it to the classes the teacher is teaching and logs the event
     public void addClass(AcademyClass s) {
+        if (!allClasses.contains(s)) {
+            if (s != null) {
+                allClasses.add(s);
+                numClasses++;
+                Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id
+                        + " added a class with id " + s.getId());
+                EventLog currentLog = EventLog.getInstance();
+                currentLog.logEvent(currentEvent);
+            }
+        }
+    }
+
+    //Effects: if the class is not there and the class
+    // adds it to the classes the teacher is teaching and logs the event
+    public void addClassReadingFile(AcademyClass s) {
         if (!allClasses.contains(s)) {
             if (s != null) {
                 allClasses.add(s);
@@ -98,6 +137,9 @@ public class Teacher  {
             }
         }
     }
+
+
+
 
     //Effects: returns the number of classes the teacher has
     public int getNumClasses() {
@@ -108,8 +150,14 @@ public class Teacher  {
     public boolean removeClass(String s) {
         if (isTeacherTeaching(s)) {
             int index = indexOfClass(s);
+            String nameOfClass = allClasses.get(index).getName();
             allClasses.remove(index);
             numClasses--;
+            Event currentEvent = new Event("Teacher " + fn + " " + ln + ", id :" + id
+                    + " deleted a class with id "
+                    + nameOfClass);
+            EventLog currentLog = EventLog.getInstance();
+            currentLog.logEvent(currentEvent);
             return true;
         } else {
             return false;
