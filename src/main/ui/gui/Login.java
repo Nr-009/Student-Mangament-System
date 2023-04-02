@@ -59,7 +59,7 @@ public class Login extends JFrame {
         setActionLogin();
         contentPane.add(login);
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(12, 35, 68));
+        panel.setBackground(new Color(0, 11, 63));
         panel.setBounds(0, 0, 844, 155);
         contentPane.add(panel);
         panel.setLayout(null);
@@ -68,6 +68,11 @@ public class Login extends JFrame {
         loginToContinueLabel = setLoginToContinueLabel();
         contentPane.add(loginToContinueLabel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        Login myLogin = new Login();
+        myLogin.setVisible(true);
     }
 
 
@@ -159,7 +164,7 @@ public class Login extends JFrame {
     //Effects: Sets the image of the logo of ubc in the correct position
     public JLabel setUplogo() {
         JLabel logo = new JLabel("");
-        ImageIcon img = new ImageIcon("data/Ubcmodified.png");
+        ImageIcon img = new ImageIcon("data/ubclogo.png");
         logo.setIcon(img);
         logo.setBounds(24, 10, 126, 124);
         return logo;

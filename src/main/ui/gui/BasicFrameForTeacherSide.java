@@ -151,7 +151,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     //Effects: Creates a label with the upper image of the UBC logo
     public JLabel getImageOfUbc() {
         JLabel imageOfUBC = new JLabel("");
-        ImageIcon currentUBClogo = new ImageIcon("data/Ubcmodified.png");
+        ImageIcon currentUBClogo = new ImageIcon("data/ubclogo.png");
         imageOfUBC.setIcon(currentUBClogo);
         imageOfUBC.setBounds(0, 0, 103, 107);
         return imageOfUBC;
@@ -184,7 +184,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     public JButton setUpCreateStudent(int id) {
         JButton createStudent = new JButton("Create Student");
         createStudent.setForeground(new Color(12, 35, 68));
-        createStudent.setBackground(SystemColor.controlHighlight);
+        createStudent.setBackground(new Color(230,230,230));
         createStudent.setBounds(0, 0, 121, 34);
         createStudent.addActionListener(new ActionListener() {
             @Override
@@ -202,7 +202,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     //Effects: Creates a label with the lower image of the UBC logo
     public JLabel setUpImageOfUbc2() {
         JLabel imageOfUBC2 = new JLabel("");
-        ImageIcon ubc = new ImageIcon("data/Ubcmodified.png");
+        ImageIcon ubc = new ImageIcon("data/ubclogo.png");
         imageOfUBC2.setIcon(ubc);
         imageOfUBC2.setBounds(0, 0, 103, 107);
         return imageOfUBC2;
@@ -213,7 +213,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     public JButton getSetGradeOrArbscence(int id) {
         JButton setGrade = new JButton("Set grade");
         setGrade.setForeground(new Color(12, 35, 68));
-        setGrade.setBackground(SystemColor.controlHighlight);
+        setGrade.setBackground(new Color(230,230,230));
         setGrade.setBounds(119, 0, 150, 34);
         setGrade.addActionListener(new ActionListener() {
             @Override
@@ -232,7 +232,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     public JButton getAddOrDropStudents(int id) {
         JButton myButtton = new JButton("Add students");
         myButtton.setForeground(new Color(12, 35, 68));
-        myButtton.setBackground(SystemColor.controlHighlight);
+        myButtton.setBackground(new Color(230,230,230));
         myButtton.setBounds(381, 0, 129, 34);
         myButtton.addActionListener(new ActionListener() {
             @Override
@@ -251,7 +251,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     public JButton setPersonalInfo(int id) {
         JButton personalInfo =  new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
-        personalInfo.setBackground(SystemColor.controlHighlight);
+        personalInfo.setBackground(new Color(230,230,230));
         personalInfo.setBounds(261, 0, 121, 34);
         saveData(myData);
         personalInfo.addActionListener(new ActionListener() {
@@ -270,7 +270,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     //Effects: Creates an upper panel with the blue color
     public JPanel setUpperPanel() {
         JPanel upperPanel = new JPanel();
-        upperPanel.setBackground(new Color(12, 35, 68));
+        upperPanel.setBackground(new Color(0, 11, 63));
         upperPanel.setBounds(0, 0, 1062, 107);
         return upperPanel;
     }
@@ -288,7 +288,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     //Effects: Creates an upper panel with the second blue color
     public JPanel seconUpperBluePanel() {
         JPanel myPannel = new JPanel();
-        myPannel.setBackground(new Color(51, 102, 153));
+        myPannel.setBackground(new Color(44, 84, 153));
         myPannel.setBounds(0, 104, 1062, 69);
         return myPannel;
     }
@@ -306,7 +306,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     //Effects: Creates the upper grey panel
     public JPanel setGreyUpperPanel() {
         JPanel currentPanel = new JPanel();
-        currentPanel.setBackground(SystemColor.controlHighlight);
+        currentPanel.setBackground(new Color(230,230,230));
         currentPanel.setBounds(0, 171, 1062, 56);
 
         return currentPanel;
@@ -325,7 +325,7 @@ public class BasicFrameForTeacherSide extends JFrame implements WindowListener {
     public JPanel getLowerBluePanel() {
         JPanel myPannel = new JPanel();
         myPannel.setLayout(null);
-        myPannel.setBackground(new Color(12, 35, 68));
+        myPannel.setBackground(new Color(0, 11, 63));
         myPannel.setBounds(0, 656, 1062, 107);
         return myPannel;
     }

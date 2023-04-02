@@ -231,7 +231,7 @@ public class EditInfo extends BasicFrameForTeacherSide {
     public JButton setPersonalInfo(int id) {
         JButton personalInfo =  new JButton("Personal Info");
         personalInfo.setForeground(new Color(12, 35, 68));
-        personalInfo.setBackground(SystemColor.controlHighlight);
+        personalInfo.setBackground(new Color(230,230,230));
         personalInfo.setBounds(261, 0, 121, 34);
         personalInfo.addActionListener(new ActionListener() {
             @Override

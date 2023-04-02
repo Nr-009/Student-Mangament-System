@@ -176,7 +176,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
     public JButton getSetGradeOrArbscence(int id) {
         JButton setGrade = new JButton("Set grade");
         setGrade.setForeground(new Color(12, 35, 68));
-        setGrade.setBackground(SystemColor.controlHighlight);
+        setGrade.setBackground(new Color(230,230,230));
         setGrade.setBounds(119, 0, 150, 34);
         setGrade.addActionListener(new ActionListener() {
             @Override
@@ -194,7 +194,7 @@ public class SeetingGrade extends BasicFrameForTeacherSide {
     public JButton getAddOrDropStudents(int id) {
         JButton myButtton = new JButton("Add students");
         myButtton.setForeground(new Color(12, 35, 68));
-        myButtton.setBackground(SystemColor.controlHighlight);
+        myButtton.setBackground(new Color(230,230,230));
         myButtton.setBounds(381, 0, 129, 34);
         myButtton.addActionListener(new ActionListener() {
             @Override

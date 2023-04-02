@@ -72,7 +72,7 @@ public class AddingAStudent extends BasicFrameForTeacherSide {
     public JButton setUpCreateStudent(int id) {
         JButton createStudent = new JButton("Create Student");
         createStudent.setForeground(new Color(12, 35, 68));
-        createStudent.setBackground(SystemColor.controlHighlight);
+        createStudent.setBackground(new Color(230,230,230));
         createStudent.setBounds(0, 0, 121, 34);
         createStudent.addActionListener(new ActionListener() {
             @Override
