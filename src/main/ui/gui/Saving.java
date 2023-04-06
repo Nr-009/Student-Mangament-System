@@ -42,8 +42,8 @@ public class Saving extends JFrame implements WindowListener {
         noButton = setUpOriginalButtom();
         contentPane.add(noButton);
         submitButtom = setUpSubmitButtom();
-        contentPane.add(submitButtom);
         setSubmitBotton();
+        contentPane.add(submitButtom);
         addWindowListener(this);
 
     }
@@ -65,9 +65,9 @@ public class Saving extends JFrame implements WindowListener {
                     JOptionPane.showMessageDialog(Saving.this,
                             "You can not select both options");
                 } else if (yesButton.isSelected()) {
+                    saveData();
                     JOptionPane.showMessageDialog(Saving.this, "Saving, \n "
                             + "Thank you for using the application");
-                    saveData();
                     System.exit(0);
                 } else if (noButton.isSelected()) {
                     JOptionPane.showMessageDialog(Saving.this,

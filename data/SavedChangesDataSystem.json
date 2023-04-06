@@ -3,7 +3,9 @@
         0,
         1,
         2,
-        3
+        3,
+        4,
+        5
     ],
     "ListOfAllStudents": [
         {
@@ -34,6 +36,7 @@
         {
             "listOfAbsences": [
                 2,
+                2,
                 1,
                 0
             ],
@@ -41,35 +44,40 @@
             "password": "Pokemon",
             "listOfGrades": [
                 77,
+                90,
                 88,
                 99
             ],
             "ListOfAllIdOfClasses": [
                 2,
+                4,
                 5,
                 6
             ],
             "fn": "Cralos",
-            "numberOfClasses": 3,
+            "numberOfClasses": 4,
             "id": 1
         },
         {
             "listOfAbsences": [
                 0,
-                1
+                1,
+                2
             ],
             "ln": "Kadirov",
             "password": "chess",
             "listOfGrades": [
                 89,
-                100
+                100,
+                20
             ],
             "ListOfAllIdOfClasses": [
                 2,
-                3
+                3,
+                4
             ],
             "fn": "Gyunay",
-            "numberOfClasses": 2,
+            "numberOfClasses": 3,
             "id": 2
         },
         {
@@ -77,57 +85,130 @@
                 3,
                 1,
                 1,
-                2
+                1,
+                2,
+                7
             ],
             "ln": "Gonzales",
             "password": "eliminaMartinez300",
             "listOfGrades": [
                 18,
                 87,
+                88,
                 90,
-                78
+                78,
+                57
             ],
             "ListOfAllIdOfClasses": [
                 1,
                 2,
+                4,
                 5,
-                6
+                6,
+                3
             ],
             "fn": "Rodrigo",
-            "numberOfClasses": 4,
+            "numberOfClasses": 6,
             "id": 3
+        },
+        {
+            "listOfAbsences": [
+                1,
+                10,
+                1,
+                2,
+                3,
+                10
+            ],
+            "ln": "Avila",
+            "password": "movii",
+            "listOfGrades": [
+                70,
+                92,
+                96,
+                100,
+                80,
+                20
+            ],
+            "ListOfAllIdOfClasses": [
+                9,
+                10,
+                4,
+                5,
+                6,
+                3
+            ],
+            "fn": "Liliana",
+            "numberOfClasses": 6,
+            "id": 4
+        },
+        {
+            "listOfAbsences": [
+                2,
+                1,
+                1,
+                2,
+                3
+            ],
+            "ln": "Rubiano",
+            "password": "prisma",
+            "listOfGrades": [
+                80,
+                78,
+                49,
+                98,
+                100
+            ],
+            "ListOfAllIdOfClasses": [
+                9,
+                10,
+                0,
+                3,
+                4
+            ],
+            "fn": "Andres",
+            "numberOfClasses": 5,
+            "id": 5
         }
     ],
-    "counterAcademyClasses": 8,
+    "counterAcademyClasses": 11,
     "counterTeacher": 7,
     "listOfAllPasswordTeachers": [
         "fisica12",
+        "logic",
         "naturalRecursion",
         "abstraction",
         "circuits",
         "R",
-        "movii"
+        "distribution"
     ],
     "listOfPasswordStudents": [
         "lol",
         "Pokemon",
         "chess",
-        "eliminaMartinez300"
+        "eliminaMartinez300",
+        "movii",
+        "prisma"
     ],
     "listOfAllIdClasses": [
         0,
         1,
         2,
         3,
+        4,
         5,
         6,
-        7
+        9,
+        10
     ],
     "listOfAllClasses": [
         {
-            "numOfStudents": 1,
+            "numOfStudents": 2,
             "IdTeacher": 2,
-            "IdsOfAllStudents": [0],
+            "IdsOfAllStudents": [
+                0,
+                5
+            ],
             "session": "2022W",
             "name": "CPSC110",
             "id": 0
@@ -157,61 +238,108 @@
             "id": 2
         },
         {
-            "numOfStudents": 1,
+            "numOfStudents": 4,
             "IdTeacher": 0,
-            "IdsOfAllStudents": [2],
+            "IdsOfAllStudents": [
+                2,
+                5,
+                4,
+                3
+            ],
             "session": "2022W",
             "name": "MATH100",
             "id": 3
         },
         {
-            "numOfStudents": 3,
+            "numOfStudents": 5,
+            "IdTeacher": 0,
+            "IdsOfAllStudents": [
+                2,
+                1,
+                3,
+                5,
+                4
+            ],
+            "session": "2022W",
+            "name": "MATH101",
+            "id": 4
+        },
+        {
+            "numOfStudents": 4,
             "IdTeacher": 5,
             "IdsOfAllStudents": [
                 0,
                 1,
-                3
+                3,
+                4
             ],
             "session": "2022W",
             "name": "DSCI100",
             "id": 5
         },
         {
-            "numOfStudents": 2,
-            "IdTeacher": -1,
+            "numOfStudents": 3,
+            "IdTeacher": 1,
             "IdsOfAllStudents": [
                 1,
-                3
+                3,
+                4
             ],
             "session": "2022W",
             "name": "PHIL100",
             "id": 6
         },
         {
-            "numOfStudents": 0,
-            "IdTeacher": 0,
-            "IdsOfAllStudents": [],
+            "numOfStudents": 2,
+            "IdTeacher": 6,
+            "IdsOfAllStudents": [
+                4,
+                5
+            ],
             "session": "2023S",
-            "name": "IA",
-            "id": 7
+            "name": "STAT251",
+            "id": 9
+        },
+        {
+            "numOfStudents": 2,
+            "IdTeacher": 6,
+            "IdsOfAllStudents": [
+                4,
+                5
+            ],
+            "session": "2023S",
+            "name": "STAT201",
+            "id": 10
         }
     ],
     "listOfAllIdTeacher": [
         0,
+        1,
         2,
         3,
         4,
         5,
         6
     ],
-    "counterStudents": 4,
+    "counterStudents": 6,
     "listOfAllTeachers": [
         {
-            "allIdsOfTheCurrentClasses": [3],
+            "allIdsOfTheCurrentClasses": [
+                3,
+                4
+            ],
             "ln": " El Inmortal",
             "password": "fisica12",
             "fn": "Eulogio",
             "id": 0,
+            "numClasses": 2
+        },
+        {
+            "allIdsOfTheCurrentClasses": [6],
+            "ln": "Ichikawa",
+            "password": "logic",
+            "fn": "Jhonathan",
+            "id": 1,
             "numClasses": 1
         },
         {
@@ -247,12 +375,15 @@
             "numClasses": 1
         },
         {
-            "allIdsOfTheCurrentClasses": [],
-            "ln": "Avila",
-            "password": "movii",
-            "fn": "Liliana",
+            "allIdsOfTheCurrentClasses": [
+                9,
+                10
+            ],
+            "ln": "Wijendra",
+            "password": "distribution",
+            "fn": "Lasantha",
             "id": 6,
-            "numClasses": 0
+            "numClasses": 2
         }
     ]
 }
