@@ -1,7 +1,5 @@
 /* This Class represent a fileReader that reads JSON files and creates the object based on the given file.
 The object could be either a DataSystem, Student, Teacher or AcademyClass, depending on the method use
-The structure of FileReader and writer is based on teh repo:
-https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
  */
 
 
